@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SBMS | Login</title>
+    <style>
+        :root {
+            --bg: #f3f6fb;
+            --panel: #ffffff;
+            --panel-soft: #f8fafc;
+            --line: #e2e8f0;
+            --primary: #0f766e;
+            --primary-strong: #0b4f4b;
+            --primary-dark: #083a36;
+            --accent: #f59e0b;
+            --text: #0f172a;
+            --muted: #475569;
+            --success: #16a34a;
+            --danger: #dc2626;
+            --shadow: 0 24px 60px rgba(15, 23, 42, 0.12);
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, #eefaf6 0%, #f8fafc 40%, #fefae8 100%);
+            color: var(--text);
+        }
+
+        .auth-shell {
+            width: min(1100px, 92vw);
+            min-height: 700px;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .brand-panel {
+            padding: 56px 48px;
+            background: linear-gradient(135deg, rgba(11, 79, 75, 0.97), rgba(7, 51, 49, 0.96));
+            border-right: 1px solid rgba(255, 255, 255, 0.15);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: #f8fafc;
+        }
+
+        .brand-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 78px;
+            height: 78px;
+            border-radius: 22px;
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.9), rgba(253, 186, 116, 0.7));
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+            box-shadow: 0 18px 36px rgba(245, 158, 11, 0.28);
+        }
+
+        h1 {
+            margin: 24px 0 16px;
+            font-size: clamp(2.2rem, 4vw, 3.3rem);
+            line-height: 1.1;
+            letter-spacing: -0.04em;
+        }
+
+        .brand-panel p {
+            margin: 0 0 28px;
+            max-width: 520px;
+            color: rgba(240, 253, 250, 0.82);
+            font-size: 1.08rem;
+            line-height: 1.7;
+        }
+
+        .brand-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .hero-slider {
+            position: relative;
+            width: 100%;
+            height: 240px;
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: 0 18px 35px rgba(15, 23, 42, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            margin-bottom: 18px;
+        }
+
+        .slide {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 0.7s ease;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide-meta {
+            margin-bottom: 20px;
+            display: grid;
+            gap: 10px;
+        }
+
+        .slide-meta span {
+            color: #fbbf24;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            font-weight: 700;
+        }
+
+        .slide-meta h3 {
+            margin: 0;
+            font-size: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            gap: 16px;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 14px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #f8fafc;
+            font-weight: 600;
+        }
+
+        .feature-list li::before {
+            content: "✓";
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            color: white;
+            font-size: 0.82rem;
+            background: linear-gradient(135deg, var(--success), #22c55e);
+        }
+
+        .auth-panel {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 32px;
+            background: #ffffff;
+        }
+
+        .auth-card {
+            width: min(440px, 100%);
+        }
+
+        .auth-switch {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            padding: 8px;
+            background: #f8fafc;
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            margin-bottom: 22px;
+        }
+
+        .mode-btn {
+            border: none;
+            background: transparent;
+            color: var(--muted);
+            font-weight: 700;
+            font-size: 0.96rem;
+            padding: 12px 10px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .mode-btn.active {
+            background: linear-gradient(135deg, var(--primary), var(--primary-strong));
+            color: white;
+            box-shadow: 0 10px 20px rgba(15, 118, 110, 0.18);
+        }
+
+        .auth-form-panel {
+            display: none;
+        }
+
+        .auth-form-panel.active {
+            display: block;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 26px;
+            gap: 12px;
+        }
+
+        .card-title {
+            font-size: 1.9rem;
+            margin: 0;
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: #e0e7ff;
+            color: var(--primary-dark);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .auth-form {
+            display: grid;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .field-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        label {
+            display: grid;
+            gap: 8px;
+            font-size: 0.87rem;
+            font-weight: 600;
+            color: var(--muted);
+        }
+
+        input {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            background: var(--panel-soft);
+            color: var(--text);
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        input:focus {
+            border-color: rgba(29, 78, 216, 0.55);
+            box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.14);
+            background: #ffffff;
+        }
+
+        .primary-btn {
+            margin-top: 6px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-strong));
+            color: white;
+            padding: 14px 18px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 12px 22px rgba(15, 118, 110, 0.2);
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .secondary-link {
+            display: block;
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.92rem;
+            margin-top: 10px;
+        }
+
+        .secondary-link a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .alert {
+            padding: 12px 14px;
+            border-radius: 12px;
+            border: 1px solid rgba(220, 38, 38, 0.2);
+            background: rgba(254, 242, 242, 0.9);
+            color: var(--danger);
+            font-size: 0.92rem;
+            font-weight: 600;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            color: var(--muted);
+            margin: 22px 0 10px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: var(--line);
+        }
+
+        @media (max-width: 840px) {
+            .auth-shell {
+                grid-template-columns: 1fr;
+            }
+
+            .brand-panel {
+                border-right: none;
+                border-bottom: 1px solid var(--line);
+                padding: 30px 24px;
+            }
+
+            .auth-panel {
+                padding: 28px 20px 36px;
+            }
+
+            .field-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-shell">
+        <div class="brand-panel">
+            <div class="brand-header">
+                <div class="brand-badge">SBMS</div>
+                <span class="pill">Malawi Growth</span>
+            </div>
+
+            <h1>Smart Business Management Suite</h1>
+            <p>Organize operations, track performance, and grow your business with a clean and reliable command center built for modern Malawi enterprises.</p>
+
+            <div class="hero-slider" aria-live="polite">
+                <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80');"></div>
+                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1200&q=80');"></div>
+                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80');"></div>
+                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=80');"></div>
+            </div>
+
+            <div class="slide-meta">
+                <span id="slide-tag">Lilongwe commerce</span>
+                <h3 id="slide-title">Powering local business growth</h3>
+            </div>
+
+            <ul class="feature-list">
+                <li>Unified sales and customer management</li>
+                <li>Daily operations and reporting at a glance</li>
+                <li>Secure access for teams and managers</li>
+            </ul>
+        </div>
+
+        <div class="auth-panel">
+            <div class="auth-card">
+                <div class="auth-switch" aria-label="Authentication mode switch">
+                    <button type="button" class="mode-btn active" data-target="login">Log in</button>
+                    <button type="button" class="mode-btn" data-target="register">Create account</button>
+                </div>
+
+                <div class="auth-form-panel active" id="login-panel">
+                    <div class="card-header">
+                        <h2 class="card-title">Welcome back</h2>
+                        <span class="pill">Secure</span>
+                    </div>
+
+                    {% if error %}
+                        <div class="alert">{{ error }}</div>
+                    {% endif %}
+
+                    <form class="auth-form" method="post" action="{% url 'dashboard:login' %}">
+                        {% csrf_token %}
+                        <label>
+                            Username
+                            <input type="text" name="username" placeholder="Enter your username" required>
+                        </label>
+                        <label>
+                            Password
+                            <input type="password" name="password" placeholder="Enter your password" required>
+                        </label>
+                        <button type="submit" class="primary-btn">Log in</button>
+                    </form>
+                </div>
+
+                <div class="auth-form-panel" id="register-panel">
+                    <div class="card-header">
+                        <h2 class="card-title">Create account</h2>
+                        <span class="pill">New</span>
+                    </div>
+
+                    {% if register_error %}
+                        <div class="alert">{{ register_error }}</div>
+                    {% endif %}
+
+                    <form class="auth-form" method="post" action="{% url 'dashboard:register' %}">
+                        {% csrf_token %}
+                        <div class="field-row">
+                            <label>
+                                First name
+                                <input type="text" name="first_name" placeholder="First name" required>
+                            </label>
+                            <label>
+                                Last name
+                                <input type="text" name="last_name" placeholder="Last name" required>
+                            </label>
+                        </div>
+                        <label>
+                            Email address
+                            <input type="email" name="email" placeholder="name@example.com" required>
+                        </label>
+                        <label>
+                            Username
+                            <input type="text" name="username" placeholder="Choose a username" required>
+                        </label>
+                        <div class="field-row">
+                            <label>
+                                Password
+                                <input type="password" name="password1" placeholder="Password" required>
+                            </label>
+                            <label>
+                                Confirm password
+                                <input type="password" name="password2" placeholder="Repeat password" required>
+                            </label>
+                        </div>
+                        <button type="submit" class="primary-btn">Create account</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const modeButtons = document.querySelectorAll('.mode-btn');
+        const panels = document.querySelectorAll('.auth-form-panel');
+
+        modeButtons.forEach((btn) => {
+            btn.addEventListener('click', () => {
+                const target = btn.dataset.target;
+                modeButtons.forEach((button) => button.classList.toggle('active', button === btn));
+                panels.forEach((panel) => {
+                    panel.classList.toggle('active', panel.id === `${target}-panel`);
+                });
+            });
+        });
+
+        const slideData = [
+            { tag: 'Lilongwe commerce', title: 'Powering local business growth' },
+            { tag: 'Blantyre market', title: 'Fast-moving retail and trade' },
+            { tag: 'Agribusiness', title: 'Smarter operations from field to sale' },
+            { tag: 'Hospitality', title: 'Better guest experiences, better results' },
+        ];
+
+        const slides = document.querySelectorAll('.slide');
+        const slideTag = document.getElementById('slide-tag');
+        const slideTitle = document.getElementById('slide-title');
+
+        let currentSlide = 0;
+        setInterval(() => {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+
+            const meta = slideData[currentSlide];
+            if (meta) {
+                slideTag.textContent = meta.tag;
+                slideTitle.textContent = meta.title;
+            }
+        }, 3500);
+    </script>
+</body>
+</html>

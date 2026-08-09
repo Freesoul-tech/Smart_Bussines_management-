@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SBMS | Smart Business Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0b1121;
+      --surface: rgba(15, 23, 42, 0.88);
+      --surface-soft: rgba(15, 23, 42, 0.72);
+      --text: #f8fafc;
+      --muted: #cbd5e1;
+      --primary: #6366f1;
+      --accent: #7dd3fc;
+      --border: rgba(148, 163, 184, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(circle at top, rgba(99, 102, 241, 0.18), transparent 28%),
+        linear-gradient(180deg, #0b1121 0%, #020617 100%);
+      color: var(--text);
+    }
+
+    .page {
+      width: min(1180px, 94vw);
+      margin: 0 auto;
+      padding: 36px 0;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 40px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .topbar nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 600;
+      margin-left: 24px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 38px;
+      align-items: center;
+      min-height: 72vh;
+    }
+
+    .hero-copy {
+      max-width: 620px;
+    }
+
+    .hero-copy .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.78rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+
+    .hero-copy h1 {
+      margin: 0;
+      font-size: clamp(3rem, 5vw, 5.2rem);
+      line-height: 0.98;
+    }
+
+    .hero-copy p {
+      margin: 22px 0 0;
+      max-width: 560px;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.85;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 14px;
+      padding: 16px 26px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), #38bdf8);
+      color: white;
+      box-shadow: 0 22px 60px rgba(99, 102, 241, 0.22);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .hero-actions .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .hero-visual {
+      position: relative;
+      border-radius: 34px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(15, 23, 42, 0.7);
+      box-shadow: 0 30px 80px rgba(15, 23, 42, 0.24);
+    }
+
+    .hero-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.24), transparent 26%),
+        radial-gradient(circle at bottom right, rgba(99, 102, 241, 0.2), transparent 30%);
+      pointer-events: none;
+    }
+
+    .hero-visual img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      aspect-ratio: 4 / 3;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    .feature-card {
+      display: grid;
+      gap: 14px;
+      padding: 18px 20px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+
+    .feature-card strong {
+      display: block;
+      font-size: 1.05rem;
+      color: white;
+    }
+
+    .feature-card span {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .section-footer {
+      margin-top: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 24px;
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .section-footer span {
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .section-footer a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    @media (max-width: 980px) {
+      .hero { grid-template-columns: 1fr; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .section-footer { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 640px) {
+      .page { padding: 20px 0; }
+      .topbar { flex-direction: column; align-items: flex-start; }
+      .topbar nav a { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="topbar">
+      <div class="brand">SBMS</div>
+      <nav>
+        <a href="/login/">Sign In</a>
+        <a href="/register/">Try Free</a>
+      </nav>
+    </div>
+
+    <div class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow">Smart Business Management System</div>
+        <h1>Run your business with total clarity</h1>
+        <p>One unified platform for inventory, sales, customers, suppliers, expenses, and analytics — built to help modern businesses scale with confidence.</p>
+
+        <div class="hero-actions">
+          <a href="/register/" class="btn btn-primary">Start Free Trial</a>
+          <a href="/login/" class="btn btn-secondary">Sign In →</a>
+        </div>
+
+        <div class="feature-grid">
+          <div class="feature-card">
+            <strong>Unified operations</strong>
+            <span>Manage sales, inventory, customers, and suppliers from one clean dashboard.</span>
+          </div>
+          <div class="feature-card">
+            <strong>Live performance</strong>
+            <span>Track revenue, bookings, and product flow in real time with built-in dashboards.</span>
+          </div>
+          <div class="feature-card">
+            <strong>Fast onboarding</strong>
+            <span>Launch quickly with business-specific setup and tailored workflows.</span>
+          </div>
+          <div class="feature-card">
+            <strong>Secure access</strong>
+            <span>Protect your team and data with user roles, authentication, and audit readiness.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80" alt="Dashboard visual" />
+      </div>
+    </div>
+
+    <div class="section-footer">
+      <span>Built for small companies, retail teams, hospitality, and service operators.</span>
+      <a href="/login/">Explore the dashboard</a>
+    </div>
+  </div>
+</body>
+</html>
