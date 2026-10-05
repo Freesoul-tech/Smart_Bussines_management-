@@ -1,0 +1,147 @@
+{% extends "layouts/dashboard_layout.html" %} {% load static %} {% block title
+%} {% if editing %}Edit Payment | SBMS{% else %}Add Payment | SBMS{% endif %} {%
+endblock %} {% block page_css %}
+<link rel="stylesheet" href="{% static 'css/payments.css' %}" />
+{% endblock %} {% block dashboard_content %}
+<div class="payment-form-page">
+  <header class="payment-page-header">
+    <div class="payment-header-text">
+      <span class="page-label">PAYMENTS</span>
+      <h1>{% if editing %}Edit Payment{% else %}Add Payment{% endif %}</h1>
+
+      {% if business %}
+      <p class="business-name">{{ business.name }}</p>
+      {% endif %}
+    </div>
+
+    <a href="{% url 'payment_list' %}" class="back-button">
+      ← Back to Payments
+    </a>
+  </header>
+
+  <section class="payment-form-card">
+    <div class="payment-form-card-header">
+      <div>
+        <span class="section-label">PAYMENT INFORMATION</span>
+
+        <h2>
+          {% if editing %}Update Payment{% else %}Record a Payment{% endif %}
+        </h2>
+
+        <p>
+          {% if editing %}Update the payment information below.{% else %}Record
+          a payment received from a customer.{% endif %}
+        </p>
+      </div>
+    </div>
+
+    {% if form.non_field_errors %}
+    <div class="form-error-box">
+      {% for error in form.non_field_errors %}
+      <p>{{ error }}</p>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <form method="post" class="payment-form">
+      {% csrf_token %}
+
+      <div class="form-group">
+        <label for="{{ form.reservation.id_for_label }}">Reservation</label>
+        {{ form.reservation }} {% if form.reservation.errors %}
+        <div class="field-error">
+          {% for error in form.reservation.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        <small>Select the reservation this payment belongs to.</small>
+      </div>
+
+      <div class="form-group">
+        <label for="{{ form.amount.id_for_label }}">Amount</label>
+
+        <div class="amount-input-wrapper">
+          <span class="currency-prefix">MK</span>
+          {{ form.amount }}
+        </div>
+
+        {% if form.amount.errors %}
+        <div class="field-error">
+          {% for error in form.amount.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="{{ form.payment_method.id_for_label }}"
+            >Payment Method</label
+          >
+          {{ form.payment_method }} {% if form.payment_method.errors %}
+          <div class="field-error">
+            {% for error in form.payment_method.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+
+        <div class="form-group">
+          <label for="{{ form.status.id_for_label }}">Payment Status</label>
+          {{ form.status }} {% if form.status.errors %}
+          <div class="field-error">
+            {% for error in form.status.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="{{ form.reference.id_for_label }}">
+          Payment Reference
+          <span class="optional-label">Optional</span>
+        </label>
+        {{ form.reference }} {% if form.reference.errors %}
+        <div class="field-error">
+          {% for error in form.reference.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        <small>Optional transaction, receipt, or reference number.</small>
+      </div>
+
+      <div class="form-group">
+        <label for="{{ form.notes.id_for_label }}">
+          Notes
+          <span class="optional-label">Optional</span>
+        </label>
+        {{ form.notes }} {% if form.notes.errors %}
+        <div class="field-error">
+          {% for error in form.notes.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        <small>Add any additional information about this payment.</small>
+      </div>
+
+      <div class="form-actions">
+        <a href="{% url 'payment_list' %}" class="cancel-button">Cancel</a>
+
+        <button type="submit" class="save-payment-button">
+          {% if editing %}Save Changes{% else %}Save Payment{% endif %}
+        </button>
+      </div>
+    </form>
+  </section>
+</div>
+{% endblock %}

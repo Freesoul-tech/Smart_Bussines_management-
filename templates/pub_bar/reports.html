@@ -1,0 +1,5 @@
+{% extends "layouts/dashboard_layout.html" %}
+{% block title %}Pub / Bar Reports | SBMS{% endblock %}
+{% block dashboard_content %}
+<div class="employee-page"><div class="employee-header"><div><p class="page-label">PUB / BAR REPORTS</p><h1>Sales Reports</h1><p class="business-name">{{ business.name }}</p></div></div><div class="summary-section"><div class="summary-card"><p class="summary-label">Sales</p><h3>{{ sales_total }}</h3><p class="summary-note">Completed order value</p></div><div class="summary-card"><p class="summary-label">Revenue</p><h3>{{ paid_total }}</h3><p class="summary-note">Paid orders</p></div><div class="summary-card"><p class="summary-label">Drinks</p><h3>{{ product_count }}</h3><p class="summary-note">Products tracked</p></div></div></div>
+{% endblock %}

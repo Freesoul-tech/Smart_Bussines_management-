@@ -1,0 +1,210 @@
+﻿
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ page_title }} | SBMS{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/customers_form.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="customer-form-page">
+
+    <!-- PAGE HEADER -->
+
+    <header class="customer-form-header">
+
+        <div class="customer-form-header-content">
+
+            <p class="customer-form-eyebrow">
+                CUSTOMERS
+            </p>
+
+            <h1>
+                {{ page_title }}
+            </h1>
+
+            <p class="customer-form-description">
+                {% if editing %}Update the customer's information below.{% else %}Add a customer to your business.{% endif %}
+            </p>
+
+        </div>
+
+        <div class="customer-form-header-action">
+
+            <a
+                href="{% url 'customers:customer_list' %}"
+                class="customer-back-button"
+            >
+                Back to Customers
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- FORM CARD -->
+
+    <section class="customer-form-card">
+
+
+        <!-- CARD HEADER -->
+
+        <div class="customer-form-card-header">
+
+            <p class="customer-form-card-eyebrow">
+                CUSTOMER INFORMATION
+            </p>
+
+            <h2>
+                    {{ page_title }}
+            </h2>
+
+            <p>
+                Keep the customer's contact information up to date.
+            </p>
+
+        </div>
+
+
+        <!-- FORM -->
+
+        <form
+            method="post"
+            class="customer-form"
+        >
+
+            {% csrf_token %}
+
+
+            <!-- FORM ERRORS -->
+
+            {{ form.non_field_errors }}
+
+
+            <!-- FORM FIELDS -->
+
+            <div class="customer-form-grid">
+
+
+                <!-- NAME -->
+
+                <div class="customer-form-group">
+
+                    <label for="{{ form.name.id_for_label }}">
+                        Customer Name
+                    </label>
+
+                    {{ form.name }}
+
+                    {{ form.name.errors }}
+
+                </div>
+
+
+                <!-- PHONE -->
+
+                <div class="customer-form-group">
+
+                    <label for="{{ form.phone.id_for_label }}">
+                        Phone
+                    </label>
+
+                    {{ form.phone }}
+
+                    {{ form.phone.errors }}
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="customer-form-group">
+
+                    <label for="{{ form.email.id_for_label }}">
+                        Email
+                    </label>
+
+                    {{ form.email }}
+
+                    {{ form.email.errors }}
+
+                </div>
+
+
+                <!-- ADDRESS -->
+
+                <div class="customer-form-group">
+
+                    <label for="{{ form.address.id_for_label }}">
+                        Address
+                    </label>
+
+                    {{ form.address }}
+
+                    {{ form.address.errors }}
+
+                </div>
+
+
+                <!-- NOTES -->
+
+                <div class="customer-form-group customer-form-full-width">
+
+                    <label for="{{ form.notes.id_for_label }}">
+                        Notes
+                    </label>
+
+                    {{ form.notes }}
+
+                    {{ form.notes.errors }}
+
+                    <small class="customer-form-help">
+                        Add any additional information about this customer.
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- FORM ACTIONS -->
+
+            <div class="customer-form-actions">
+
+                {% if customer %}
+                <a
+                    href="{% url 'customers:customer_detail' customer.id %}"
+                    class="customer-cancel-button"
+                >
+                    Cancel
+                </a>
+                {% else %}
+                <a
+                    href="{% url 'customers:customer_list' %}"
+                    class="customer-cancel-button"
+                >
+                    Cancel
+                </a>
+                {% endif %}
+
+                <button
+                    type="submit"
+                    class="customer-save-button"
+                >
+                    {% if editing %}Save Changes{% else %}Save Customer{% endif %}
+                </button>
+
+            </div>
+
+        </form>
+
+    </section>
+
+</div>
+
+{% endblock %}
+

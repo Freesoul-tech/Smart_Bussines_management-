@@ -1,0 +1,187 @@
+{% extends "base.html" %} {% load static %} {% block title %} PDF Preview | SBMS
+{% endblock %} {% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/reports.css' %}" />
+{% endblock %} {% block content %}
+
+<div class="reports-page">
+  <header class="reports-header">
+    <div class="reports-header-content">
+      <p class="page-eyebrow">PDF PREVIEW</p>
+
+      <h1>Business Report</h1>
+
+      <p class="page-description">
+        Review your report before saving it as a PDF.
+      </p>
+    </div>
+
+    <div class="reports-header-actions">
+      <a
+        href="{% url 'report_dashboard' %}?period={{ period }}"
+        class="secondary-button"
+      >
+        Back to Reports
+      </a>
+
+      <a
+        href="{% url 'export_report_pdf' %}?period={{ period }}"
+        class="primary-button"
+      >
+        Save PDF
+      </a>
+    </div>
+  </header>
+
+  <section class="report-section">
+    <div class="section-heading">
+      <div>
+        <p class="panel-eyebrow">{{ period_label }}</p>
+
+        <h2>{{ business.name }}</h2>
+      </div>
+    </div>
+
+    <!-- FINANCIAL SUMMARY -->
+
+    <div class="financial-grid">
+      <div class="financial-card revenue-card">
+        <div class="financial-card-label">Total Revenue</div>
+
+        <div class="financial-card-value">
+          MWK {{ data.total_revenue|floatformat:2 }}
+        </div>
+      </div>
+
+      <div class="financial-card paid-card">
+        <div class="financial-card-label">Total Paid</div>
+
+        <div class="financial-card-value">
+          MWK {{ data.total_paid|floatformat:2 }}
+        </div>
+      </div>
+
+      <div class="financial-card outstanding-card">
+        <div class="financial-card-label">Outstanding</div>
+
+        <div class="financial-card-value">
+          MWK {{ data.outstanding_balance|floatformat:2 }}
+        </div>
+      </div>
+
+      <div class="financial-card refunded-card">
+        <div class="financial-card-label">Refunded</div>
+
+        <div class="financial-card-value">
+          MWK {{ data.total_refunded|floatformat:2 }}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUSINESS ACTIVITY -->
+
+  <section class="report-section">
+    <div class="section-heading">
+      <div>
+        <p class="panel-eyebrow">BUSINESS ACTIVITY</p>
+
+        <h2>Activity Summary</h2>
+      </div>
+    </div>
+
+    <div class="activity-grid">
+      <div class="activity-card">
+        <div class="activity-label">Total Reservations</div>
+
+        <strong> {{ data.total_reservations }} </strong>
+      </div>
+
+      <div class="activity-card">
+        <div class="activity-label">Total Customers</div>
+
+        <strong> {{ data.total_customers }} </strong>
+      </div>
+
+      <div class="activity-card">
+        <div class="activity-label">Total Payments</div>
+
+        <strong> {{ data.total_payments }} </strong>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESERVATION STATUS -->
+
+  <section class="report-section">
+    <div class="section-heading">
+      <div>
+        <p class="panel-eyebrow">RESERVATIONS</p>
+
+        <h2>Reservation Status</h2>
+      </div>
+    </div>
+
+    <div class="reservation-status-grid">
+      <div class="status-report-card">
+        <span>Pending</span>
+        <strong>{{ data.pending_reservations }}</strong>
+      </div>
+
+      <div class="status-report-card">
+        <span>Confirmed</span>
+        <strong>{{ data.confirmed_reservations }}</strong>
+      </div>
+
+      <div class="status-report-card">
+        <span>Checked In</span>
+        <strong>{{ data.checked_in_reservations }}</strong>
+      </div>
+
+      <div class="status-report-card">
+        <span>Checked Out</span>
+        <strong>{{ data.checked_out_reservations }}</strong>
+      </div>
+
+      <div class="status-report-card">
+        <span>Cancelled</span>
+        <strong>{{ data.cancelled_reservations }}</strong>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAYMENT METHODS -->
+
+  <section class="report-section">
+    <div class="section-heading">
+      <div>
+        <p class="panel-eyebrow">PAYMENTS</p>
+
+        <h2>Payment Methods</h2>
+      </div>
+    </div>
+
+    <div class="activity-grid">
+      <div class="activity-card">
+        <div class="activity-label">Cash</div>
+        <strong> MWK {{ data.cash_payments|floatformat:2 }} </strong>
+      </div>
+
+      <div class="activity-card">
+        <div class="activity-label">Card</div>
+        <strong> MWK {{ data.card_payments|floatformat:2 }} </strong>
+      </div>
+
+      <div class="activity-card">
+        <div class="activity-label">Mobile Money</div>
+        <strong> MWK {{ data.mobile_money_payments|floatformat:2 }} </strong>
+      </div>
+
+      <div class="activity-card">
+        <div class="activity-label">Bank Transfer</div>
+        <strong> MWK {{ data.bank_transfer_payments|floatformat:2 }} </strong>
+      </div>
+    </div>
+  </section>
+</div>
+
+{% endblock %}

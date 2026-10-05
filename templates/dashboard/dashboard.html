@@ -1,0 +1,228 @@
+{% extends "layouts/dashboard_layout.html" %} {% block dashboard_content %}
+
+<div class="sbms-dashboard-home-page">
+  <!-- =================================================
+                 WELCOME
+            ================================================== -->
+
+  <section class="dashboard-welcome">
+    <p class="dashboard-eyebrow">DASHBOARD</p>
+
+    <h2>Good day, {{ request.user.username }}</h2>
+
+    <p class="welcome-description">Here's an overview of your business.</p>
+  </section>
+
+  <!-- =================================================
+                 SUMMARY CARDS
+            ================================================== -->
+
+  <section class="summary-section">
+    <!-- CUSTOMERS -->
+
+    <div class="summary-card">
+      <p class="summary-label">Customers</p>
+
+      <h3>{{ total_customers }}</h3>
+
+      <p class="summary-note">Total customers</p>
+    </div>
+
+    <!-- EMPLOYEES -->
+
+    <div class="summary-card">
+      <p class="summary-label">Employees</p>
+
+      <h3>{{ total_employees }}</h3>
+
+      <p class="summary-note">{{ active_employees }} active</p>
+    </div>
+
+    <!-- RESERVATIONS -->
+
+    {% if is_accommodation %}
+
+    <div class="summary-card">
+      <p class="summary-label">Reservations</p>
+
+      <h3>{{ total_reservations }}</h3>
+
+      <p class="summary-note">{{ active_reservations }} active</p>
+    </div>
+
+    <!-- OCCUPANCY -->
+
+    <div class="summary-card">
+      <p class="summary-label">Occupancy</p>
+
+      <h3>{{ occupancy_rate }}%</h3>
+
+      <p class="summary-note">
+        {{ occupied_rooms }} of {{ total_rooms }} rooms
+      </p>
+    </div>
+
+    {% else %}
+
+    <!-- PAYMENTS -->
+
+    <div class="summary-card">
+      <p class="summary-label">Revenue</p>
+
+      <h3>{{ total_paid }}</h3>
+
+      <p class="summary-note">Total paid</p>
+    </div>
+
+    <!-- CUSTOMERS / ACTIVITY -->
+
+    <div class="summary-card">
+      <p class="summary-label">Activity</p>
+
+      <h3>{{ total_customers }}</h3>
+
+      <p class="summary-note">Customers recorded</p>
+    </div>
+
+    {% endif %}
+  </section>
+
+  <!-- =================================================
+                 DASHBOARD PANELS
+            ================================================== -->
+
+  <section class="dashboard-panels">
+    <!-- =================================================
+                     ANALYTICS
+                ================================================== -->
+
+    <div class="dashboard-panel analytics-panel">
+      <div class="panel-header">
+        <div>
+          <p class="panel-label">OVERVIEW</p>
+
+          <h3>Business analytics</h3>
+        </div>
+      </div>
+
+      {% if is_accommodation %}
+
+      <div class="analytics-placeholder">
+        <div class="analytics-stat">
+          <span> Available Rooms </span>
+
+          <strong> {{ available_rooms }} </strong>
+        </div>
+
+        <div class="analytics-stat">
+          <span> Occupied Rooms </span>
+
+          <strong> {{ occupied_rooms }} </strong>
+        </div>
+
+        <div class="analytics-stat">
+          <span> Reserved Rooms </span>
+
+          <strong> {{ reserved_rooms }} </strong>
+        </div>
+
+        <div class="analytics-stat">
+          <span> Maintenance </span>
+
+          <strong> {{ maintenance_rooms }} </strong>
+        </div>
+      </div>
+
+      {% else %}
+
+      <div class="analytics-placeholder">
+        <p>
+          Business activity and analytics will appear here as transactions are
+          recorded.
+        </p>
+      </div>
+
+      {% endif %}
+    </div>
+
+    <div class="dashboard-panel activity-panel">
+      <div class="panel-header">
+        <div>
+          <p class="panel-label">ACTIVITY</p>
+
+          <h3>Recent activity</h3>
+        </div>
+      </div>
+
+      {% if is_accommodation and recent_reservations %}
+
+      <div class="activity-list">
+        {% for reservation in recent_reservations %}
+
+        <div class="activity-item">
+          <div class="activity-content">
+            <strong> {{ reservation.customer_name }} </strong>
+
+            <span> Room {{ reservation.room.room_number }} </span>
+          </div>
+
+          <div class="activity-meta">
+            <span> {{ reservation.status|title }} </span>
+
+            <small> {{ reservation.check_in }} </small>
+          </div>
+        </div>
+
+        {% endfor %}
+      </div>
+
+      {% elif recent_payments %}
+
+      <div class="activity-list">
+        {% for payment in recent_payments %}
+
+        <div class="activity-item">
+          <div class="activity-content">
+            <strong> Payment </strong>
+
+            <span> {{ payment.amount }} </span>
+          </div>
+
+          <div class="activity-meta">
+            <span> {{ payment.status|title }} </span>
+          </div>
+        </div>
+
+        {% endfor %}
+      </div>
+
+      {% else %}
+
+      <div class="activity-placeholder">
+        <p>No recent activity.</p>
+      </div>
+
+      {% endif %}
+    </div>
+  </section>
+
+  <!-- =================================================
+                 REPORT SECTION
+            ================================================== -->
+
+  <section class="report-section">
+    <div class="report-card">
+      <div>
+        <p class="panel-label">REPORTS</p>
+
+        <p>View your business performance and export reports as PDF.</p>
+      </div>
+
+      <a href="{% url 'report_dashboard' %}" class="report-button">
+        View Reports
+      </a>
+    </div>
+  </section>
+</div>
+
+{% endblock %}

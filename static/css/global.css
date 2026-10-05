@@ -1,0 +1,438 @@
+﻿/* =========================================
+   SBMS - GLOBAL STYLES
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-color: #f5f7fb;
+    --surface-color: #ffffff;
+    --surface-secondary: #f8fafc;
+
+    --text-color: #1f2937;
+    --text-secondary: #6b7280;
+    --text-muted: #9ca3af;
+
+    --border-color: #e5e7eb;
+
+    --primary-color: #2563eb;
+    --primary-hover: #1d4ed8;
+
+    --success-color: #16a34a;
+    --danger-color: #dc2626;
+
+    --shadow-color: rgba(0, 0, 0, 0.06);
+}
+
+/* =========================================
+   DARK THEME VARIABLES
+========================================= */
+
+html[data-theme="dark"] {
+    --bg-color: #111827;
+    --surface-color: #1f2937;
+    --surface-secondary: #273449;
+
+    --text-color: #f9fafb;
+    --text-secondary: #d1d5db;
+    --text-muted: #9ca3af;
+
+    --border-color: #374151;
+
+    --primary-color: #60a5fa;
+    --primary-hover: #93c5fd;
+
+    --success-color: #4ade80;
+    --danger-color: #f87171;
+
+    --shadow-color: rgba(0, 0, 0, 0.35);
+}
+
+/* =========================================
+   HTML
+========================================= */
+
+html {
+    min-height: 100%;
+    background: var(--bg-color);
+}
+
+/* =========================================
+   BODY
+========================================= */
+
+body {
+    min-height: 100vh;
+
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.6;
+
+    color: var(--text-color);
+    background: var(--bg-color);
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    transition:
+        background-color 0.25s ease,
+        color 0.25s ease;
+}
+
+/* =========================================
+   LINKS
+========================================= */
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* =========================================
+   FORMS
+========================================= */
+
+button,
+input,
+textarea,
+select {
+    font-family: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+/* =========================================
+   IMAGES
+========================================= */
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* =========================================
+   GLOBAL TRANSITIONS
+========================================= */
+
+html,
+body,
+* {
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease;
+}
+
+/* =========================================================
+   SBMS DARK MODE
+========================================================= */
+
+/* Page background */
+
+html[data-theme="dark"],
+html[data-theme="dark"] body {
+    background: var(--bg-color);
+    color: var(--text-color);
+}
+
+/* Main containers */
+
+html[data-theme="dark"] main,
+html[data-theme="dark"] section,
+html[data-theme="dark"] article,
+html[data-theme="dark"] .page,
+html[data-theme="dark"] .content,
+html[data-theme="dark"] .main-content,
+html[data-theme="dark"] .page-content {
+    color: var(--text-color);
+}
+
+/* =========================================
+   TEXT
+========================================= */
+
+html[data-theme="dark"] h1,
+html[data-theme="dark"] h2,
+html[data-theme="dark"] h3,
+html[data-theme="dark"] h4,
+html[data-theme="dark"] h5,
+html[data-theme="dark"] h6 {
+    color: var(--text-color) !important;
+}
+
+html[data-theme="dark"] p,
+html[data-theme="dark"] span,
+html[data-theme="dark"] label,
+html[data-theme="dark"] small,
+html[data-theme="dark"] li {
+    color: var(--text-secondary);
+}
+
+html[data-theme="dark"] strong,
+html[data-theme="dark"] b {
+    color: var(--text-color);
+}
+
+/* =========================================
+   LINKS
+========================================= */
+
+html[data-theme="dark"] a {
+    color: var(--text-secondary);
+}
+
+html[data-theme="dark"] a:hover {
+    color: var(--text-color);
+}
+
+/* =========================================
+   CARDS / PANELS
+========================================= */
+
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .panel,
+html[data-theme="dark"] .content-card,
+html[data-theme="dark"] .form-card,
+html[data-theme="dark"] .table-card,
+html[data-theme="dark"] .summary-card,
+html[data-theme="dark"] .stats-card,
+html[data-theme="dark"] .dashboard-card,
+html[data-theme="dark"] .settings-card,
+html[data-theme="dark"] .employee-form-card,
+html[data-theme="dark"] .payment-card,
+html[data-theme="dark"] .room-card,
+html[data-theme="dark"] .modal-content,
+html[data-theme="dark"] .dropdown-menu {
+    background: var(--surface-color) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* =========================================
+   FORMS
+========================================= */
+
+html[data-theme="dark"] input,
+html[data-theme="dark"] select,
+html[data-theme="dark"] textarea {
+    background: var(--surface-secondary) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+html[data-theme="dark"] input::placeholder,
+html[data-theme="dark"] textarea::placeholder {
+    color: var(--text-muted) !important;
+}
+
+html[data-theme="dark"] option {
+    background: var(--surface-color);
+    color: var(--text-color);
+}
+
+/* =========================================
+   TABLES
+========================================= */
+
+html[data-theme="dark"] table {
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+html[data-theme="dark"] thead,
+html[data-theme="dark"] th {
+    background: var(--surface-secondary) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+html[data-theme="dark"] tbody,
+html[data-theme="dark"] tr {
+    border-color: var(--border-color) !important;
+}
+
+html[data-theme="dark"] td {
+    background: var(--surface-color) !important;
+    color: var(--text-secondary) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* =========================================
+   BORDERS
+========================================= */
+
+html[data-theme="dark"] hr {
+    border-color: var(--border-color);
+}
+
+/* =========================================
+   LIGHT BACKGROUND CLASSES
+========================================= */
+
+html[data-theme="dark"] .bg-white,
+html[data-theme="dark"] .bg-light,
+html[data-theme="dark"] .background-white,
+html[data-theme="dark"] .white-bg {
+    background: var(--surface-color) !important;
+}
+
+/* =========================================
+   SECONDARY BACKGROUND CLASSES
+========================================= */
+
+html[data-theme="dark"] .bg-gray,
+html[data-theme="dark"] .bg-grey,
+html[data-theme="dark"] .bg-light-gray,
+html[data-theme="dark"] .light-panel {
+    background: var(--surface-secondary) !important;
+    color: var(--text-color) !important;
+}
+
+/* =========================================
+   NAVIGATION
+========================================= */
+
+html[data-theme="dark"] nav,
+html[data-theme="dark"] .navigation,
+html[data-theme="dark"] .sidebar {
+    border-color: var(--border-color);
+}
+
+/* =========================================
+   SECONDARY BUTTONS
+========================================= */
+
+html[data-theme="dark"] .btn-secondary,
+html[data-theme="dark"] .btn-outline,
+html[data-theme="dark"] .secondary-button,
+html[data-theme="dark"] .cancel-button {
+    background: var(--surface-secondary) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* =========================================
+   BADGES / STATUS
+========================================= */
+
+html[data-theme="dark"] .badge,
+html[data-theme="dark"] .status-badge,
+html[data-theme="dark"] .status {
+    border-color: var(--border-color);
+}
+
+/* =========================================
+   CHECKBOX / RADIO LABELS
+========================================= */
+
+html[data-theme="dark"] input[type="checkbox"] + label,
+html[data-theme="dark"] input[type="radio"] + label {
+    color: var(--text-secondary) !important;
+}
+
+/* =========================================
+   DJANGO MESSAGES
+========================================= */
+
+html[data-theme="dark"] .messages,
+html[data-theme="dark"] .message,
+html[data-theme="dark"] .alert {
+    border-color: var(--border-color);
+}
+
+/* =========================================
+   PAGE WRAPPERS
+========================================= */
+
+html[data-theme="dark"] .page-wrapper,
+html[data-theme="dark"] .dashboard-wrapper,
+html[data-theme="dark"] .content-wrapper,
+html[data-theme="dark"] .main-wrapper {
+    background: var(--bg-color) !important;
+    color: var(--text-color) !important;
+}
+
+/* =========================================================
+   END SBMS GLOBAL STYLES
+========================================================= */
+
+/* =========================================================
+   SBMS - FINAL DARK MODE TEXT COMPATIBILITY
+   ========================================================= */
+
+html[data-theme="dark"] .settings-page,
+html[data-theme="dark"] .payments-page,
+html[data-theme="dark"] .reservations-page,
+html[data-theme="dark"] .dashboard-page {
+    color: var(--text-color);
+}
+
+/* General page text */
+html[data-theme="dark"] .settings-page p,
+html[data-theme="dark"] .settings-page span,
+html[data-theme="dark"] .settings-page label,
+html[data-theme="dark"] .payments-page p,
+html[data-theme="dark"] .payments-page span,
+html[data-theme="dark"] .payments-page label,
+html[data-theme="dark"] .reservations-page p,
+html[data-theme="dark"] .reservations-page span,
+html[data-theme="dark"] .reservations-page label,
+html[data-theme="dark"] .dashboard-page p,
+html[data-theme="dark"] .dashboard-page span,
+html[data-theme="dark"] .dashboard-page label {
+    color: var(--text-secondary);
+}
+
+/* Headings */
+html[data-theme="dark"] .settings-page h1,
+html[data-theme="dark"] .settings-page h2,
+html[data-theme="dark"] .settings-page h3,
+html[data-theme="dark"] .settings-page h4,
+html[data-theme="dark"] .payments-page h1,
+html[data-theme="dark"] .payments-page h2,
+html[data-theme="dark"] .payments-page h3,
+html[data-theme="dark"] .payments-page h4,
+html[data-theme="dark"] .reservations-page h1,
+html[data-theme="dark"] .reservations-page h2,
+html[data-theme="dark"] .reservations-page h3,
+html[data-theme="dark"] .reservations-page h4,
+html[data-theme="dark"] .dashboard-page h1,
+html[data-theme="dark"] .dashboard-page h2,
+html[data-theme="dark"] .dashboard-page h3,
+html[data-theme="dark"] .dashboard-page h4 {
+    color: var(--text-color) !important;
+}
+
+/* Strong / important text */
+html[data-theme="dark"] .settings-page strong,
+html[data-theme="dark"] .settings-page b,
+html[data-theme="dark"] .payments-page strong,
+html[data-theme="dark"] .payments-page b,
+html[data-theme="dark"] .reservations-page strong,
+html[data-theme="dark"] .reservations-page b,
+html[data-theme="dark"] .dashboard-page strong,
+html[data-theme="dark"] .dashboard-page b {
+    color: var(--text-color);
+}
+
+/* Inputs */
+html[data-theme="dark"] input,
+html[data-theme="dark"] select,
+html[data-theme="dark"] textarea {
+    color: var(--text-color) !important;
+}
+
+/* Preserve intentionally white button text */
+html[data-theme="dark"] button,
+html[data-theme="dark"] .btn,
+html[data-theme="dark"] .button {
+    color: inherit;
+}
+

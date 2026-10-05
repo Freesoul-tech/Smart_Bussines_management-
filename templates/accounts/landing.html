@@ -1,0 +1,150 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Smart Business Management Suite</title>
+
+    <link rel="stylesheet" href="{% static 'css/landing.css' %}" />
+  </head>
+
+  <body>
+    <div class="auth-page">
+      <header class="auth-header">
+        <div class="brand-logo">SB</div>
+
+        <div class="brand-text">
+          <strong> Smart Business </strong>
+
+          <span> Management Suite </span>
+        </div>
+      </header>
+
+      <main class="auth-container">
+        <div class="auth-card">
+          <div class="auth-tabs">
+            <a
+              href="{% url 'accounts:login' %}"
+              class="auth-tab {% if mode != 'signup' %}active{% endif %}"
+            >
+              Log in
+            </a>
+
+            <a
+              href="{% url 'accounts:signup' %}"
+              class="auth-tab {% if mode == 'signup' %}active{% endif %}"
+            >
+              Create account
+            </a>
+          </div>
+
+          {% if mode == 'signup' %}
+
+          <h2>Create your account</h2>
+
+          <p class="auth-description">
+            Create an account to start managing your business.
+          </p>
+
+          {% if errors %}
+
+          <div class="error-box">
+            {% for error in errors %}
+            <p>{{ error }}</p>
+            {% endfor %}
+          </div>
+
+          {% endif %}
+
+          <form method="POST" action="{% url 'accounts:signup' %}">
+            {% csrf_token %}
+
+            <label> Username </label>
+
+            <input
+              type="text"
+              name="username"
+              value="{{ username|default:'' }}"
+              placeholder="Choose a username"
+              required
+            />
+
+            <label> Email </label>
+
+            <input
+              type="email"
+              name="email"
+              value="{{ email|default:'' }}"
+              placeholder="Enter your email"
+              required
+            />
+
+            <label> Password </label>
+
+            <input
+              type="password"
+              name="password"
+              placeholder="Create a password"
+              required
+            />
+
+            <label> Confirm Password </label>
+
+            <input
+              type="password"
+              name="confirm_password"
+              placeholder="Confirm your password"
+              required
+            />
+
+            <button type="submit">Create account</button>
+          </form>
+
+          {% else %}
+
+          <h2>Log in</h2>
+
+          <p class="auth-description">
+            Access your business management dashboard.
+          </p>
+
+          {% if error %}
+
+          <div class="error-box">{{ error }}</div>
+
+          {% endif %}
+
+          <form method="POST" action="{% url 'accounts:login' %}">
+            {% csrf_token %}
+
+            <label> Username </label>
+
+            <input
+              type="text"
+              name="username"
+              placeholder="Enter your username"
+              required
+            />
+
+            <label> Password </label>
+
+            <input
+              type="password"
+              name="password"
+              placeholder="Enter your password"
+              required
+            />
+
+            <button type="submit">Log in</button>
+          </form>
+
+          {% endif %}
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

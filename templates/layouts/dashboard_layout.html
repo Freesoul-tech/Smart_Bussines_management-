@@ -1,0 +1,33 @@
+{% extends "base.html" %} {% load static %} {% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}" />
+<link rel="stylesheet" href="{% static 'css/settings.css' %}" />
+{% block page_css %}{% endblock %} {% endblock %} {% block content %}
+<div class="dashboard-page">
+  <header class="dashboard-header">
+    <div class="dashboard-brand">
+      <div class="brand-logo">SB</div>
+      <div class="brand-text">
+        <h1>Smart Business</h1>
+        <p>Management Suite</p>
+      </div>
+    </div>
+
+    <div class="dashboard-user">
+      <div class="user-info">
+        <span class="user-name">{{ request.user.username }}</span>
+        <span class="business-type">{{ business_model_name }}</span>
+      </div>
+
+      <a href="{% url 'accounts:logout' %}" class="logout-button">Logout</a>
+    </div>
+  </header>
+
+  <div class="dashboard-layout">
+    {% include "components/dashboard_sidebar.html" %}
+
+    <main class="dashboard-main">
+      {% block dashboard_content %}{% endblock %}
+    </main>
+  </div>
+</div>
+{% endblock %}

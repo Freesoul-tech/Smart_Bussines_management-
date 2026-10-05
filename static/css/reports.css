@@ -1,0 +1,656 @@
+
+/* =========================================================
+   REPORTS PAGE
+   ========================================================= */
+
+.reports-page {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 42px 30px 70px;
+}
+
+
+/* =========================================================
+   PAGE HEADER
+   ========================================================= */
+
+.reports-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 34px;
+}
+
+.reports-header-content {
+    min-width: 0;
+}
+
+.reports-page .page-eyebrow {
+    margin: 0 0 7px;
+
+    color: #008f87;
+
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.reports-page h1 {
+    margin: 0 0 8px;
+
+    color: #073b68;
+
+    font-size: 36px;
+    line-height: 1.15;
+    font-weight: 800;
+    letter-spacing: -0.8px;
+}
+
+.reports-page .page-description {
+    margin: 0;
+
+    color: #718096;
+
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.reports-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.primary-button,
+.secondary-button,
+.filter-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 43px;
+    padding: 0 18px;
+
+    border-radius: 10px;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.primary-button {
+    border: 1px solid #008f87;
+
+    background: #008f87;
+    color: #ffffff;
+
+    box-shadow:
+        0 5px 14px rgba(0, 143, 135, 0.18);
+}
+
+.primary-button:hover {
+    background: #007b74;
+    border-color: #007b74;
+    color: #ffffff;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 7px 18px rgba(0, 143, 135, 0.24);
+}
+
+.secondary-button {
+    border: 1px solid #d9e3eb;
+
+    background: #ffffff;
+    color: #31556f;
+}
+
+.secondary-button:hover {
+    background: #f1faf9;
+    border-color: #008f87;
+    color: #007b74;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   FILTER CARD
+   ========================================================= */
+
+.report-filter-card {
+    margin-bottom: 34px;
+
+    padding: 27px 30px;
+
+    background: #ffffff;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+
+    box-shadow:
+        0 12px 35px rgba(15, 23, 42, 0.06);
+}
+
+.filter-heading {
+    margin-bottom: 22px;
+}
+
+.report-filter-card .panel-eyebrow,
+.report-section .panel-eyebrow {
+    margin: 0 0 6px;
+
+    color: #008f87;
+
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.3px;
+}
+
+.report-filter-card h2,
+.report-section h2 {
+    margin: 0;
+
+    color: #073b68;
+
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.report-filter-form {
+    display: flex;
+    align-items: flex-end;
+    gap: 14px;
+}
+
+.filter-group {
+    width: 280px;
+}
+
+.filter-group label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #183b56;
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.filter-group select {
+    width: 100%;
+    height: 45px;
+
+    padding: 0 13px;
+
+    border: 1px solid #d8e1e8;
+    border-radius: 10px;
+
+    background: #ffffff;
+    color: #17324d;
+
+    font-family: inherit;
+    font-size: 14px;
+
+    outline: none;
+
+    cursor: pointer;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.filter-group select:hover {
+    border-color: #c5d3dd;
+}
+
+.filter-group select:focus {
+    border-color: #008f87;
+
+    box-shadow:
+        0 0 0 3px rgba(0, 143, 135, 0.10);
+}
+
+.filter-button {
+    border: 1px solid #008f87;
+
+    background: #008f87;
+    color: #ffffff;
+}
+
+.filter-button:hover {
+    background: #007b74;
+    border-color: #007b74;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   REPORT SECTION
+   ========================================================= */
+
+.report-section {
+    margin-bottom: 34px;
+}
+
+.section-heading {
+    margin-bottom: 18px;
+}
+
+
+/* =========================================================
+   FINANCIAL CARDS
+   ========================================================= */
+
+.financial-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 18px;
+}
+
+.financial-card {
+    min-height: 155px;
+
+    padding: 22px;
+
+    background: #ffffff;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+
+    box-shadow:
+        0 8px 25px rgba(15, 23, 42, 0.05);
+}
+
+.financial-card-label {
+    margin-bottom: 12px;
+
+    color: #64748b;
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.financial-card-value {
+    margin-bottom: 9px;
+
+    color: #073b68;
+
+    font-size: 23px;
+    font-weight: 800;
+    letter-spacing: -0.4px;
+}
+
+.financial-card p {
+    margin: 0;
+
+    color: #94a3b8;
+
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.revenue-card {
+    border-top: 3px solid #008f87;
+}
+
+.paid-card {
+    border-top: 3px solid #2f7d5b;
+}
+
+.outstanding-card {
+    border-top: 3px solid #d89b32;
+}
+
+.refunded-card {
+    border-top: 3px solid #b65b62;
+}
+
+
+/* =========================================================
+   ACTIVITY
+   ========================================================= */
+
+.activity-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 18px;
+}
+
+.activity-card {
+    padding: 24px;
+
+    background: #ffffff;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+
+    box-shadow:
+        0 8px 25px rgba(15, 23, 42, 0.05);
+}
+
+.activity-label {
+    margin-bottom: 12px;
+
+    color: #64748b;
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.activity-card strong {
+    color: #073b68;
+
+    font-size: 30px;
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   RESERVATION STATUS
+   ========================================================= */
+
+.reservation-status-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, minmax(0, 1fr));
+
+    gap: 14px;
+}
+
+.status-report-card {
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+
+    padding: 20px;
+
+    background: #ffffff;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+
+    box-shadow:
+        0 7px 20px rgba(15, 23, 42, 0.04);
+}
+
+.status-report-card span {
+    color: #64748b;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.status-report-card strong {
+    color: #073b68;
+
+    font-size: 25px;
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   RESPONSIVE - TABLET
+   ========================================================= */
+
+@media (max-width: 950px) {
+
+    .reports-page {
+        padding: 32px 22px 55px;
+    }
+
+    .financial-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .reservation-status-grid {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE - MOBILE
+   ========================================================= */
+
+@media (max-width: 650px) {
+
+    .reports-page {
+        padding: 25px 16px 50px;
+    }
+
+    .reports-header {
+        flex-direction: column;
+        gap: 18px;
+        margin-bottom: 26px;
+    }
+
+    .reports-page h1 {
+        font-size: 29px;
+    }
+
+    .reports-header-actions {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .reports-header-actions button {
+        width: 100%;
+    }
+
+    .report-filter-card {
+        padding: 22px 19px;
+    }
+
+    .report-filter-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filter-group {
+        width: 100%;
+    }
+
+    .filter-button {
+        width: 100%;
+    }
+
+    .financial-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .activity-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .reservation-status-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+
+/* =========================================================
+   PRINT
+   ========================================================= */
+
+@media print {
+
+    .reports-page {
+        max-width: none;
+        padding: 0;
+    }
+
+    .reports-header-actions,
+    .report-filter-card {
+        display: none;
+    }
+
+    .reports-header {
+        margin-bottom: 25px;
+    }
+
+    .financial-card,
+    .activity-card,
+    .status-report-card {
+        box-shadow: none;
+        break-inside: avoid;
+    }
+
+    .report-section {
+        break-inside: avoid;
+    }
+}
+
+
+/* =========================================================
+   SBMS DARK THEME - REPORTS
+   ========================================================= */
+
+html[data-theme="dark"] .reports-page {
+    background: var(--bg-color);
+    color: var(--text-color);
+}
+
+html[data-theme="dark"] .reports-page * {
+    border-color: var(--border-color);
+}
+
+html[data-theme="dark"] .reports-page h1,
+html[data-theme="dark"] .reports-page h2,
+html[data-theme="dark"] .reports-page h3,
+html[data-theme="dark"] .reports-page h4,
+html[data-theme="dark"] .reports-page strong,
+html[data-theme="dark"] .reports-page label {
+    color: var(--text-color);
+}
+
+html[data-theme="dark"] .reports-page p,
+html[data-theme="dark"] .reports-page span,
+html[data-theme="dark"] .reports-page small {
+    color: var(--text-secondary);
+}
+
+html[data-theme="dark"] .reports-page .report-filter-card,
+html[data-theme="dark"] .reports-page .report-card,
+html[data-theme="dark"] .reports-page .summary-card,
+html[data-theme="dark"] .reports-page .table-container,
+html[data-theme="dark"] .reports-page .report-section {
+    background: var(--surface-color);
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+html[data-theme="dark"] .reports-page select,
+html[data-theme="dark"] .reports-page input,
+html[data-theme="dark"] .reports-page textarea {
+    background: var(--surface-secondary);
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+html[data-theme="dark"] .reports-page select:focus,
+html[data-theme="dark"] .reports-page input:focus,
+html[data-theme="dark"] .reports-page textarea:focus {
+    border-color: var(--primary-color);
+}
+
+html[data-theme="dark"] .reports-page table {
+    color: var(--text-color);
+}
+
+html[data-theme="dark"] .reports-page th {
+    background: var(--surface-secondary);
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+html[data-theme="dark"] .reports-page td {
+    background: var(--surface-color);
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+/* =========================================================
+   SBMS DARK THEME - COMPLETE REPORTS OVERRIDES
+   ========================================================= */
+
+html[data-theme="dark"] .reports-page .financial-card,
+html[data-theme="dark"] .reports-page .revenue-card,
+html[data-theme="dark"] .reports-page .paid-card,
+html[data-theme="dark"] .reports-page .outstanding-card,
+html[data-theme="dark"] .reports-page .refunded-card,
+html[data-theme="dark"] .reports-page .activity-card,
+html[data-theme="dark"] .reports-page .status-report-card,
+html[data-theme="dark"] .reports-page .report-section,
+html[data-theme="dark"] .reports-page .report-filter-card,
+html[data-theme="dark"] .reports-page .report-card,
+html[data-theme="dark"] .reports-page .summary-card,
+html[data-theme="dark"] .reports-page .table-container {
+    background: var(--surface-color) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+html[data-theme="dark"] .reports-page .financial-card *,
+html[data-theme="dark"] .reports-page .revenue-card *,
+html[data-theme="dark"] .reports-page .paid-card *,
+html[data-theme="dark"] .reports-page .outstanding-card *,
+html[data-theme="dark"] .reports-page .refunded-card *,
+html[data-theme="dark"] .reports-page .activity-card *,
+html[data-theme="dark"] .reports-page .status-report-card *,
+html[data-theme="dark"] .reports-page .report-section * {
+    border-color: var(--border-color);
+}
+
+/* =========================================================
+   SBMS DARK MODE - BUTTON VISIBILITY
+   ========================================================= */
+
+html[data-theme="dark"] .reports-page .primary-button,
+html[data-theme="dark"] .reports-page .secondary-button,
+html[data-theme="dark"] .reports-page .filter-button {
+    background: var(--surface-secondary) !important;
+    color: #ffffff !important;
+    border-color: var(--border-color) !important;
+}
+
+html[data-theme="dark"] .reports-page .primary-button:hover,
+html[data-theme="dark"] .reports-page .secondary-button:hover,
+html[data-theme="dark"] .reports-page .filter-button:hover {
+    background: var(--surface-color) !important;
+    color: #ffffff !important;
+    border-color: var(--primary-color) !important;
+}
+

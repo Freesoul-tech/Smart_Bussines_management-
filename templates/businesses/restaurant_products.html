@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" data-theme="{{ request.user.theme|default:'light' }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ business.name }} | Products</title>
+    <link rel="stylesheet" href="{% static 'css/global.css' %}">
+    <link rel="stylesheet" href="{% static 'css/restaurant.css' %}">
+</head>
+<body>
+<div class="restaurant-page">
+    {% include "businesses/restaurant_header.html" %}
+    <div class="restaurant-layout">
+        {% include "businesses/restaurant_navigation.html" %}
+        <main class="restaurant-main">
+            <section class="restaurant-welcome">
+                <p class="restaurant-eyebrow">MENU MANAGEMENT</p>
+                <h2>Products</h2>
+                <p class="restaurant-description">Manage the dishes and drinks shown on your restaurant menu.</p>
+            </section>
+            {% if messages %}{% for message in messages %}<div class="restaurant-panel"><strong>{{ message }}</strong></div>{% endfor %}{% endif %}
+            <section class="restaurant-panel">
+                <div class="restaurant-panel-header"><div><p class="panel-label">MENU ITEMS</p><h3>Products</h3></div><a class="restaurant-back-link" href="{% url 'businesses:restaurant_product_create' %}">Add product</a></div>
+                {% if items %}
+                <div class="menu-category-list">
+                    {% for item in items %}
+                    <div class="menu-category"><div class="menu-category-header"><strong>{{ item.name }}</strong><span>{{ item.price }}</span></div><p>{{ item.category.name }}{% if not item.is_available %} · Unavailable{% endif %}</p><div><a href="{% url 'businesses:restaurant_product_edit' item.id %}">Edit</a> <form method="post" action="{% url 'businesses:restaurant_product_delete' item.id %}" style="display:inline">{% csrf_token %}<button type="submit">Remove</button></form></div></div>
+                    {% endfor %}
+                </div>
+                {% else %}<p class="restaurant-empty">No products have been added yet.</p>{% endif %}
+            </section>
+            <section class="restaurant-panel">
+                <div class="restaurant-panel-header"><div><p class="panel-label">MENU STRUCTURE</p><h3>Add category</h3></div></div>
+                <form method="post">{% csrf_token %}<div class="restaurant-form-grid">{{ category_form.as_p }}</div><button class="restaurant-back-link" type="submit">Add category</button></form>
+            </section>
+        </main>
+    </div>
+</div>
+</body>
+</html>

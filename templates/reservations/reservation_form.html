@@ -1,0 +1,156 @@
+﻿{% extends "layouts/dashboard_layout.html" %}
+{% load static %}
+{% block title %}Add Reservation | SBMS{% endblock %}
+{% block page_css %}
+<link rel="stylesheet" href="{% static 'css/reservations.css' %}" />
+{% endblock %} {% block dashboard_content %}
+
+<div class="reservations-page">
+  <div class="reservations-header">
+    <div>
+      <p class="page-label">RESERVATIONS</p>
+
+      <h1>Add Reservation</h1>
+
+      {% if business %}
+      <p class="business-name">{{ business.name }}</p>
+      {% endif %}
+    </div>
+
+    <a href="{% url 'reservation_list' %}" class="back-button">
+      Back to Reservations
+    </a>
+  </div>
+
+  <div class="reservation-form-card">
+    <div class="reservation-form-header">
+      <h2>Reservation Information</h2>
+
+      <p>Create a new room reservation.</p>
+    </div>
+
+    <form method="post" class="reservation-form">
+      {% csrf_token %} {% if form.non_field_errors %}
+
+      <div class="form-errors">{{ form.non_field_errors }}</div>
+
+      {% endif %}
+
+      <div class="form-grid">
+        <!-- ROOM -->
+
+        <div class="form-group">
+          <label for="{{ form.room.id_for_label }}"> Room </label>
+
+          {{ form.room }} {% if form.room.errors %}
+          <div class="field-error">{{ form.room.errors }}</div>
+          {% endif %}
+        </div>
+
+        <!-- CUSTOMER NAME -->
+
+        <div class="form-group">
+          <label for="{{ form.customer_name.id_for_label }}">
+            Customer Name
+          </label>
+
+          {{ form.customer_name }} {% if form.customer_name.errors %}
+          <div class="field-error">{{ form.customer_name.errors }}</div>
+          {% endif %}
+        </div>
+
+        <!-- PHONE -->
+
+        <div class="form-group">
+          <label for="{{ form.customer_phone.id_for_label }}">
+            Phone Number
+          </label>
+
+          {{ form.customer_phone }} {% if form.customer_phone.errors %}
+          <div class="field-error">{{ form.customer_phone.errors }}</div>
+          {% endif %}
+        </div>
+
+        <!-- EMAIL -->
+
+        <div class="form-group">
+          <label for="{{ form.customer_email.id_for_label }}">
+            Email Address
+          </label>
+
+          {{ form.customer_email }} {% if form.customer_email.errors %}
+          <div class="field-error">{{ form.customer_email.errors }}</div>
+          {% endif %}
+        </div>
+
+        <!-- CHECK IN -->
+
+        <div class="form-group">
+          <label for="{{ form.check_in.id_for_label }}"> Check-in Date </label>
+
+          {{ form.check_in }} {% if form.check_in.errors %}
+          <div class="field-error">{{ form.check_in.errors }}</div>
+          {% endif %}
+        </div>
+
+        <!-- CHECK OUT -->
+
+        <div class="form-group">
+          <label for="{{ form.check_out.id_for_label }}">
+            Check-out Date
+          </label>
+
+          {{ form.check_out }} {% if form.check_out.errors %}
+          <div class="field-error">{{ form.check_out.errors }}</div>
+          {% endif %}
+        </div>
+
+        <!-- GUESTS -->
+
+        <div class="form-group">
+          <label for="{{ form.number_of_guests.id_for_label }}">
+            Number of Guests
+          </label>
+
+          {{ form.number_of_guests }} {% if form.number_of_guests.errors %}
+          <div class="field-error">{{ form.number_of_guests.errors }}</div>
+          {% endif %}
+        </div>
+
+        <!-- STATUS -->
+
+        <div class="form-group">
+          <label for="{{ form.status.id_for_label }}">
+            Reservation Status
+          </label>
+
+          {{ form.status }} {% if form.status.errors %}
+          <div class="field-error">{{ form.status.errors }}</div>
+          {% endif %}
+        </div>
+
+        <!-- NOTES -->
+
+        <div class="form-group form-group-full">
+          <label for="{{ form.notes.id_for_label }}"> Notes </label>
+
+          {{ form.notes }} {% if form.notes.errors %}
+          <div class="field-error">{{ form.notes.errors }}</div>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="reservation-form-actions">
+        <a href="{% url 'reservation_list' %}" class="cancel-button">
+          Cancel
+        </a>
+
+        <button type="submit" class="save-reservation-button">
+          Save Reservation
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

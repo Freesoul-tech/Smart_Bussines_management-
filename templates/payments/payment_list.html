@@ -1,0 +1,215 @@
+{% extends "layouts/dashboard_layout.html" %}
+{% load static %}
+{% block title %}Payments | SBMS{% endblock %}
+{% block page_css %}
+<link rel="stylesheet" href="{% static 'css/payments.css' %}" />
+{% endblock %} {% block dashboard_content %}
+<div class="payments-page">
+  <!-- PAGE HEADER -->
+  <header class="payments-header">
+    <div class="header-left">
+      <span class="eyebrow">PAYMENTS</span>
+
+      <h1>Payment Management</h1>
+
+      {% if business %}
+      <p class="business-name">{{ business.name }}</p>
+      {% endif %}
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 10px">
+      <a href="{% url 'payment_add' %}" class="add-payment-btn">
+        <span class="btn-icon">+</span>
+        <span>Add Payment</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- FINANCIAL SUMMARY -->
+  <section class="summary-grid">
+    <!-- REVENUE -->
+    <div class="summary-card revenue-card">
+      <div class="summary-top">
+        <span class="summary-label">TOTAL REVENUE</span>
+        <span class="summary-icon">$</span>
+      </div>
+
+      <div class="summary-value">MK {{ total_revenue|default:"0.00" }}</div>
+
+      <p class="summary-description">Value of reservations</p>
+    </div>
+
+    <!-- PAID -->
+    <div class="summary-card paid-card">
+      <div class="summary-top">
+        <span class="summary-label">TOTAL PAID</span>
+        <span class="summary-icon">✓</span>
+      </div>
+
+      <div class="summary-value">MK {{ total_paid|default:"0.00" }}</div>
+
+      <p class="summary-description">Payments received</p>
+    </div>
+
+    <!-- BALANCE -->
+    <div class="summary-card balance-card">
+      <div class="summary-top">
+        <span class="summary-label">BALANCE DUE</span>
+        <span class="summary-icon">!</span>
+      </div>
+
+      <div class="summary-value">MK {{ total_balance|default:"0.00" }}</div>
+
+      <p class="summary-description">Outstanding balances</p>
+    </div>
+
+    <!-- RECORDS -->
+    <div class="summary-card records-card">
+      <div class="summary-top">
+        <span class="summary-label">PAYMENTS</span>
+        <span class="summary-icon">#</span>
+      </div>
+
+      <div class="summary-value">{{ payment_count|default:"0" }}</div>
+
+      <p class="summary-description">Payment records</p>
+    </div>
+  </section>
+
+  <!-- PAYMENT RECORDS -->
+  <section class="payments-section">
+    <div class="section-header">
+      <div>
+        <span class="section-eyebrow">TRANSACTIONS</span>
+
+        <h2>Payment Records</h2>
+
+        <p>Track payments and outstanding reservation balances.</p>
+      </div>
+
+      <div class="record-count">{{ payment_count|default:"0" }}</div>
+    </div>
+
+    {% if payments %}
+
+    <div class="payment-list">
+      {% for payment in payments %}
+
+      <article class="payment-card">
+        <!-- CUSTOMER -->
+        <div class="customer-section">
+          <div class="customer-avatar">
+            {{ payment.reservation.customer_name|first|upper }}
+          </div>
+
+          <div class="customer-details">
+            <h3>{{ payment.reservation.customer_name }}</h3>
+
+            <span class="room-label">
+              Room {{ payment.reservation.room.room_number }}
+            </span>
+
+            <span class="date-range">
+              {{ payment.reservation.check_in|date:"M d, Y" }}
+
+              <span class="date-arrow">→</span>
+
+              {{ payment.reservation.check_out|date:"M d, Y" }}
+            </span>
+          </div>
+        </div>
+
+        <!-- FINANCIAL DETAILS -->
+        <div class="financial-details">
+          <div class="financial-item">
+            <span>TOTAL</span>
+
+            <strong>
+              MK {{ payment.reservation.total_amount|default:"0.00" }}
+            </strong>
+          </div>
+
+          <div class="financial-item">
+            <span>PAID</span>
+
+            <strong class="paid-text">
+              MK {{ payment.amount|default:"0.00" }}
+            </strong>
+          </div>
+
+          <div class="financial-item">
+            <span>BALANCE</span>
+
+            <strong class="balance-text">
+              MK {{ payment.balance|default:"0.00" }}
+            </strong>
+          </div>
+        </div>
+
+        <!-- CURRENT PAYMENT -->
+        <div class="current-payment">
+          <span>THIS PAYMENT</span>
+
+          <strong> MK {{ payment.amount|default:"0.00" }} </strong>
+        </div>
+
+        <!-- METHOD / STATUS -->
+        <div class="payment-meta">
+          <span class="method-badge">
+            {{ payment.get_payment_method_display }}
+          </span>
+
+          {% if payment.status == "paid" %}
+
+          <span class="status-badge status-paid"> Paid </span>
+
+          {% elif payment.status == "pending" %}
+
+          <span class="status-badge status-pending"> Pending </span>
+
+          {% elif payment.status == "refunded" %}
+
+          <span class="status-badge status-refunded"> Refunded </span>
+
+          {% else %}
+
+          <span class="status-badge"> {{ payment.get_status_display }} </span>
+
+          {% endif %}
+        </div>
+
+        <!-- EDIT -->
+        <div class="payment-actions">
+          <a
+            href="{% url 'payment_edit' payment.id %}"
+            class="edit-payment-btn"
+          >
+            Edit
+          </a>
+        </div>
+      </article>
+
+      {% endfor %}
+    </div>
+
+    {% else %}
+
+    <!-- EMPTY STATE -->
+    <div class="empty-state">
+      <div class="empty-icon">$</div>
+
+      <h3>No payments yet</h3>
+
+      <p>Record your first payment to start tracking customer transactions.</p>
+
+      <a href="{% url 'payment_add' %}" class="add-payment-btn empty-button">
+        <span class="btn-icon">+</span>
+        Add Payment
+      </a>
+    </div>
+
+    {% endif %}
+  </section>
+</div>
+
+{% endblock %}

@@ -1,0 +1,127 @@
+<aside class="dashboard-sidebar">
+  <nav class="sidebar-navigation">
+    <a
+      href="{% url 'dashboard:dashboard' %}"
+      class="sidebar-link {% if active_page == 'dashboard' %}active{% endif %}"
+    >
+      <span>Overview</span>
+    </a>
+
+    {% if is_accommodation and show_rooms %}
+    <a
+      href="{% url 'room_list' %}"
+      class="sidebar-link {% if active_page == 'rooms' %}active{% endif %}"
+    >
+      <span>Rooms</span>
+    </a>
+    {% endif %} {% if is_accommodation and show_reservations %}
+    <a
+      href="{% url 'reservation_list' %}"
+      class="sidebar-link {% if active_page == 'reservations' %}active{% endif %}"
+    >
+      <span>Reservations</span>
+    </a>
+    {% endif %} {% if is_accommodation and show_payments %}
+    <a
+      href="{% url 'payment_list' %}"
+      class="sidebar-link {% if active_page == 'payments' %}active{% endif %}"
+    >
+      <span>Payments</span>
+    </a>
+    {% endif %} {% if show_motel %}
+    <a
+      href="{% url 'motel:dashboard' %}"
+      class="sidebar-link {% if active_page == 'motel' %}active{% endif %}"
+    >
+      <span>Motel Operations</span>
+    </a>
+    {% endif %} {% if show_lodge %}
+    <a
+      href="{% url 'lodge:dashboard' %}"
+      class="sidebar-link {% if active_page == 'lodge' %}active{% endif %}"
+    >
+      <span>Lodge Operations</span>
+    </a>
+    {% endif %} {% if business_model == 'restaurant' and show_customers %}
+    <a href="{% url 'businesses:restaurant_products' %}" class="sidebar-link {% if active_page == 'products' %}active{% endif %}"><span>Products</span></a>
+    <a href="{% url 'businesses:restaurant_orders' %}" class="sidebar-link {% if active_page == 'orders' %}active{% endif %}"><span>Orders</span></a>
+    <a href="{% url 'businesses:restaurant_payments' %}" class="sidebar-link {% if active_page == 'payments' %}active{% endif %}"><span>Payments</span></a>
+    {% endif %} {% if business_model == 'bakery' and show_payments %}
+    <a href="{% url 'bakery:dashboard' %}" class="sidebar-link {% if active_page == 'bakery' %}active{% endif %}"><span>Bakery Overview</span></a>
+    <a href="{% url 'bakery:profile' %}" class="sidebar-link {% if active_page == 'bakery_profile' %}active{% endif %}"><span>Bakery Profile</span></a>
+    <a href="{% url 'bakery:products' %}" class="sidebar-link {% if active_page == 'bakery_products' %}active{% endif %}"><span>Products</span></a>
+    <a href="{% url 'bakery:ingredients' %}" class="sidebar-link {% if active_page == 'bakery_ingredients' %}active{% endif %}"><span>Ingredients</span></a>
+    <a href="{% url 'bakery:recipes' %}" class="sidebar-link {% if active_page == 'bakery_recipes' %}active{% endif %}"><span>Recipes</span></a>
+    <a href="{% url 'bakery:production' %}" class="sidebar-link {% if active_page == 'bakery_production' %}active{% endif %}"><span>Production</span></a>
+    <a href="{% url 'bakery:orders' %}" class="sidebar-link {% if active_page == 'bakery_orders' %}active{% endif %}"><span>Sales / Orders</span></a>
+    <a href="{% url 'payment_list' %}" class="sidebar-link {% if active_page == 'payments' %}active{% endif %}"><span>Payments</span></a>
+    <a href="{% url 'bakery:suppliers' %}" class="sidebar-link {% if active_page == 'bakery_suppliers' %}active{% endif %}"><span>Suppliers</span></a>
+    <a href="{% url 'bakery:expenses' %}" class="sidebar-link {% if active_page == 'bakery_expenses' %}active{% endif %}"><span>Expenses</span></a>
+    <a href="{% url 'bakery:inventory' %}" class="sidebar-link {% if active_page == 'bakery_inventory' %}active{% endif %}"><span>Inventory History</span></a>
+    <a href="{% url 'bakery:reports' %}" class="sidebar-link {% if active_page == 'bakery_reports' %}active{% endif %}"><span>Reports</span></a>
+    {% endif %} {% if is_pub_bar and show_customers %}
+    <a href="{% url 'pub_bar:dashboard' %}" class="sidebar-link"><span>Pub / Bar Overview</span></a>
+    <a href="{% url 'pub_bar:profile' %}" class="sidebar-link"><span>Business Profile</span></a>
+    <a href="{% url 'pub_bar:products' %}" class="sidebar-link"><span>Drinks</span></a>
+    <a href="{% url 'pub_bar:categories' %}" class="sidebar-link"><span>Categories</span></a>
+    <a href="{% url 'pub_bar:tables' %}" class="sidebar-link"><span>Tables</span></a>
+    <a href="{% url 'pub_bar:orders' %}" class="sidebar-link"><span>Orders</span></a>
+    <a href="{% url 'pub_bar:reservations' %}" class="sidebar-link"><span>Reservations</span></a>
+    <a href="{% url 'pub_bar:inventory' %}" class="sidebar-link"><span>Inventory</span></a>
+    <a href="{% url 'pub_bar:suppliers' %}" class="sidebar-link"><span>Suppliers</span></a>
+    <a href="{% url 'pub_bar:payments' %}" class="sidebar-link"><span>Payments</span></a>
+    <a href="{% url 'pub_bar:reports' %}" class="sidebar-link"><span>Reports</span></a>
+    {% endif %} {% if is_boutique and show_customers %}
+    <a href="{% url 'boutique:dashboard' %}" class="sidebar-link"><span>Boutique Overview</span></a>
+    <a href="{% url 'boutique:products' %}" class="sidebar-link"><span>Products</span></a>
+    <a href="{% url 'boutique:categories' %}" class="sidebar-link"><span>Categories</span></a>
+    <a href="{% url 'boutique:sales' %}" class="sidebar-link"><span>Sales</span></a>
+    <a href="{% url 'boutique:inventory' %}" class="sidebar-link"><span>Inventory</span></a>
+    <a href="{% url 'boutique:payments' %}" class="sidebar-link"><span>Payments</span></a>
+    <a href="{% url 'boutique:reports' %}" class="sidebar-link"><span>Reports</span></a>
+    {% endif %} {% if show_employees %}
+    <a
+      href="{% url 'employee_list' %}"
+      class="sidebar-link {% if active_page == 'employees' %}active{% endif %}"
+    >
+      <span>Employees</span>
+    </a>
+    {% endif %} {% if show_customers %}
+    <a
+      href="{% url 'customers:customer_list' %}"
+      class="sidebar-link {% if active_page == 'customers' %}active{% endif %}"
+    >
+      <span>Customers</span>
+    </a>
+    {% endif %} {% if show_reports %}
+    <a
+      href="{% url 'report_dashboard' %}"
+      class="sidebar-link {% if active_page == 'reports' %}active{% endif %}"
+    >
+      <span>Reports</span>
+    </a>
+    {% endif %} {% if show_settings %}
+    <a
+      href="{% url 'settings_app:settings' %}"
+      class="sidebar-link {% if active_page == 'settings' %}active{% endif %}"
+    >
+      <span>Settings</span>
+    </a>
+    {% endif %} {% if business.owner_id == request.user.id %}
+    <a
+      href="{% url 'settings_app:user_access' %}"
+      class="sidebar-link {% if active_page == 'user_access' %}active{% endif %}"
+    >
+      <span>User Access</span>
+    </a>
+    {% endif %}
+  </nav>
+
+  <div class="sidebar-bottom">
+    <div class="sidebar-business">
+      <span class="sidebar-business-label">BUSINESS</span>
+      <strong>{{ business.name }}</strong>
+    </div>
+    <a href="{% url 'accounts:logout' %}" class="sidebar-logout">Logout</a>
+  </div>
+</aside>

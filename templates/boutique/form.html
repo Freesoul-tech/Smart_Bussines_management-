@@ -1,0 +1,7 @@
+{% extends "layouts/dashboard_layout.html" %}
+{% load static %}
+{% block title %}{{ title }} | SBMS{% endblock %}
+{% block page_css %}<link rel="stylesheet" href="{% static 'css/boutique.css' %}" />{% endblock %}
+{% block dashboard_content %}
+<div class="boutique-page"><header class="boutique-header"><div><p class="page-label">BOUTIQUE</p><h1>{{ title }}</h1><p class="business-name">{{ business.name }}</p></div></header><div class="boutique-form-card"><form method="post">{% csrf_token %}{% if form.non_field_errors %}<div class="form-errors">{{ form.non_field_errors }}</div>{% endif %}<div class="form-grid">{% for field in form.visible_fields %}<div class="form-group{% if field.name == 'description' or field.name == 'notes' %} full-width{% endif %}"><label for="{{ field.id_for_label }}">{{ field.label }}</label>{{ field }}{% if field.errors %}<div class="field-error">{{ field.errors }}</div>{% endif %}</div>{% endfor %}</div><div class="form-actions"><a href="{% url back_url %}">Cancel</a><button type="submit">Save</button></div></form></div></div>
+{% endblock %}

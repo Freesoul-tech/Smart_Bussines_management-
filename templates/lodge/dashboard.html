@@ -1,0 +1,23 @@
+{% extends "layouts/dashboard_layout.html" %}
+{% block title %}Lodge Operations | SBMS{% endblock %}
+{% block dashboard_content %}
+<div class="sbms-dashboard-home-page">
+  <section class="dashboard-welcome">
+    <p class="dashboard-eyebrow">LODGE OPERATIONS</p>
+    <h2>{{ business.name }}</h2>
+    <p class="welcome-description">Manage cabins, chalets, stays, and experiences in one place.</p>
+  </section>
+  <section class="summary-section">
+    <div class="summary-card"><p class="summary-label">Accommodation Units</p><h3>{{ total_units }}</h3><p class="summary-note">{{ cabins }} cabins · {{ chalets }} chalets</p></div>
+    <div class="summary-card"><p class="summary-label">Available Units</p><h3>{{ available_units }}</h3><p class="summary-note">Ready for guests</p></div>
+    <div class="summary-card"><p class="summary-label">Occupied Units</p><h3>{{ occupied_units }}</h3><p class="summary-note">Current guests</p></div>
+    <div class="summary-card"><p class="summary-label">Arrivals Today</p><h3>{{ arrivals_today|length }}</h3><p class="summary-note">Upcoming stays</p></div>
+    <div class="summary-card"><p class="summary-label">Departures Today</p><h3>{{ departures_today|length }}</h3><p class="summary-note">Guests checking out</p></div>
+  </section>
+  <section class="dashboard-panels">
+    <div class="dashboard-panel"><div class="panel-header"><div><p class="panel-label">TODAY</p><h3>Arrivals</h3></div></div>{% for reservation in arrivals_today %}<div class="activity-item"><div class="activity-content"><strong>{{ reservation.customer_name }}</strong><span>Unit {{ reservation.room.room_number }}</span></div><div class="activity-meta"><span>{{ reservation.status|title }}</span></div></div>{% empty %}<div class="activity-placeholder"><p>No arrivals scheduled today.</p></div>{% endfor %}</div>
+    <div class="dashboard-panel"><div class="panel-header"><div><p class="panel-label">EXPERIENCES</p><h3>Activities</h3></div></div>{% for activity in activities %}<div class="activity-item"><div class="activity-content"><strong>{{ activity.name }}</strong><span>{{ activity.description|default:"Lodge experience" }}</span></div><div class="activity-meta"><span>MK {{ activity.price }}</span></div></div>{% empty %}<div class="activity-placeholder"><p>No activities have been added.</p></div>{% endfor %}</div>
+  </section>
+  <section class="report-section"><div class="report-card"><div><p class="panel-label">LODGE SERVICES</p><p>Create nature activities and package bookings for guests.</p></div><a href="{% url 'lodge:activities' %}" class="report-button">Manage activities</a><a href="{% url 'lodge:packages' %}" class="report-button">Manage packages</a></div></section>
+</div>
+{% endblock %}

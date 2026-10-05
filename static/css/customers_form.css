@@ -1,0 +1,548 @@
+/* =========================================================
+   SBMS - CUSTOMER FORM
+   Add Customer / Edit Customer
+   ========================================================= */
+
+.customer-form-page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 42px 30px 70px;
+}
+
+
+/* =========================================================
+   PAGE HEADER
+   ========================================================= */
+
+.customer-form-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 30px;
+    margin-bottom: 32px;
+}
+
+.customer-form-header-content {
+    min-width: 0;
+}
+
+.customer-form-eyebrow {
+    margin: 0 0 7px;
+
+    color: #008f87;
+
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.customer-form-header h1 {
+    margin: 0 0 8px;
+
+    color: #073b68;
+
+    font-size: 36px;
+    line-height: 1.15;
+    font-weight: 800;
+    letter-spacing: -0.8px;
+}
+
+.customer-form-description {
+    margin: 0;
+
+    color: #718096;
+
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   BACK BUTTON
+   ========================================================= */
+
+.customer-back-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 43px;
+    padding: 0 18px;
+
+    border: 1px solid #d9e3eb;
+    border-radius: 10px;
+
+    background: #ffffff;
+    color: #174563;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    text-decoration: none;
+    white-space: nowrap;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.customer-back-button:hover {
+    background: #f1faf9;
+    border-color: #008f87;
+    color: #007b74;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   FORM CARD
+   ========================================================= */
+
+.customer-form-card {
+    overflow: hidden;
+
+    background: #ffffff;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+
+    box-shadow: 0 12px 35px rgba(15, 23, 42, 0.07);
+}
+
+
+/* =========================================================
+   CARD HEADER
+   ========================================================= */
+
+.customer-form-card-header {
+    padding: 29px 34px 25px;
+
+    border-bottom: 1px solid #e8edf2;
+
+    background: linear-gradient(
+        180deg,
+        #ffffff 0%,
+        #fbfdfd 100%
+    );
+}
+
+.customer-form-card-header h2 {
+    margin: 0 0 7px;
+
+    color: #073b68;
+
+    font-size: 23px;
+    font-weight: 800;
+}
+
+.customer-form-card-header p {
+    margin: 0;
+
+    color: #718096;
+
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+.customer-form {
+    padding: 32px 34px;
+}
+
+.customer-form-group {
+    margin-bottom: 23px;
+}
+
+.customer-form-group:last-child {
+    margin-bottom: 0;
+}
+
+
+/* =========================================================
+   LABELS
+   ========================================================= */
+
+.customer-form-group label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #183b56;
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.required-mark {
+    color: #008f87;
+
+    margin-left: 3px;
+}
+
+.optional-label {
+    margin-left: 6px;
+
+    color: #94a3b8;
+
+    font-size: 12px;
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   INPUTS
+   ========================================================= */
+
+.customer-form input,
+.customer-form select,
+.customer-form textarea {
+    width: 100%;
+    box-sizing: border-box;
+
+    border: 1px solid #d8e1e8;
+    border-radius: 10px;
+
+    background: #ffffff;
+    color: #17324d;
+
+    font-family: inherit;
+    font-size: 14px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.customer-form input,
+.customer-form select {
+    height: 46px;
+    padding: 0 13px;
+}
+
+.customer-form textarea {
+    min-height: 125px;
+    padding: 13px;
+
+    resize: vertical;
+}
+
+.customer-form input:hover,
+.customer-form select:hover,
+.customer-form textarea:hover {
+    border-color: #c5d3dd;
+}
+
+.customer-form input:focus,
+.customer-form select:focus,
+.customer-form textarea:focus {
+    border-color: #008f87;
+
+    background: #fcffff;
+
+    box-shadow:
+        0 0 0 3px rgba(0, 143, 135, 0.10);
+}
+
+
+/* =========================================================
+   PLACEHOLDER
+   ========================================================= */
+
+.customer-form input::placeholder,
+.customer-form textarea::placeholder {
+    color: #a0aec0;
+}
+
+
+/* =========================================================
+   HELP TEXT
+   ========================================================= */
+
+.customer-form-help {
+    display: block;
+
+    margin-top: 7px;
+
+    color: #94a3b8;
+
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   FIELD ERRORS
+   ========================================================= */
+
+.customer-form-errors {
+    margin-bottom: 23px;
+    padding: 13px 15px;
+
+    border: 1px solid #f1c5c1;
+    border-radius: 10px;
+
+    background: #fff5f4;
+
+    color: #b42318;
+
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.customer-field-error {
+    margin-top: 7px;
+
+    color: #b42318;
+
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.customer-field-error ul {
+    margin: 0;
+    padding-left: 18px;
+}
+
+
+/* =========================================================
+   TWO-COLUMN FORM
+   ========================================================= */
+
+.customer-form-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 0 20px;
+}
+
+.customer-form-grid .full-width {
+    grid-column: 1 / -1;
+}
+
+
+/* =========================================================
+   FORM ACTIONS
+   ========================================================= */
+
+.customer-form-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 12px;
+
+    margin-top: 31px;
+    padding-top: 24px;
+
+    border-top: 1px solid #e8edf2;
+}
+
+
+/* =========================================================
+   CANCEL BUTTON
+   ========================================================= */
+
+.customer-cancel-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 44px;
+    padding: 0 21px;
+
+    border: 1px solid #d8e1e8;
+    border-radius: 10px;
+
+    background: #ffffff;
+    color: #52677a;
+
+    font-family: inherit;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.customer-cancel-button:hover {
+    background: #f8fafc;
+
+    border-color: #c4d0da;
+
+    color: #183b56;
+}
+
+
+/* =========================================================
+   SAVE BUTTON
+   ========================================================= */
+
+.customer-save-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 44px;
+    padding: 0 22px;
+
+    border: 1px solid #008f87;
+    border-radius: 10px;
+
+    background: #008f87;
+    color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow: 0 5px 14px rgba(0, 143, 135, 0.18);
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.customer-save-button:hover {
+    background: #007b74;
+
+    border-color: #007b74;
+
+    transform: translateY(-1px);
+
+    box-shadow: 0 7px 18px rgba(0, 143, 135, 0.24);
+}
+
+.customer-save-button:active,
+.customer-cancel-button:active,
+.customer-back-button:active {
+    transform: translateY(0);
+}
+
+
+/* =========================================================
+   CUSTOMER NAME / EDIT CONTEXT
+   ========================================================= */
+
+.customer-current-name {
+    display: inline-flex;
+    align-items: center;
+
+    margin-top: 5px;
+
+    color: #718096;
+
+    font-size: 14px;
+}
+
+.customer-current-name strong {
+    margin-left: 5px;
+
+    color: #31556f;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .customer-form-page {
+        padding: 30px 20px 50px;
+    }
+
+    .customer-form-header {
+        flex-direction: column;
+
+        gap: 18px;
+
+        margin-bottom: 25px;
+    }
+
+    .customer-form-header h1 {
+        font-size: 30px;
+    }
+
+    .customer-back-button {
+        width: 100%;
+    }
+
+    .customer-form-card {
+        border-radius: 14px;
+    }
+
+    .customer-form-card-header {
+        padding: 24px 20px;
+    }
+
+    .customer-form {
+        padding: 25px 20px;
+    }
+
+    .customer-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .customer-form-grid .full-width {
+        grid-column: auto;
+    }
+
+    .customer-form-actions {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+
+    .customer-cancel-button,
+    .customer-save-button {
+        width: 100%;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 450px) {
+
+    .customer-form-page {
+        padding: 24px 16px 45px;
+    }
+
+    .customer-form-header h1 {
+        font-size: 27px;
+    }
+
+    .customer-form-card-header h2 {
+        font-size: 20px;
+    }
+
+    .customer-form {
+        padding: 22px 17px;
+    }
+}

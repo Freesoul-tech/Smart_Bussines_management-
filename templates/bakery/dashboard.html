@@ -1,0 +1,18 @@
+{% extends "layouts/dashboard_layout.html" %}
+{% block title %}Bakery | SBMS{% endblock %}
+{% block dashboard_content %}
+<section class="dashboard-welcome">
+  <div>
+    <p class="dashboard-eyebrow">BAKERY OPERATIONS</p>
+    <h2>{{ business.name }}</h2>
+    <p class="welcome-description">Production, inventory, sales, and financial control.</p>
+    <a href="{% url 'bakery:profile' %}" class="report-button">Edit Bakery Profile</a>
+  </div>
+</section>
+<section class="summary-section">
+  <div class="summary-card"><p class="summary-label">Products</p><h3>{{ product_count }}</h3><p class="summary-note">Catalog products</p></div>
+  <div class="summary-card"><p class="summary-label">Low stock</p><h3>{{ low_stock_count }}</h3><p class="summary-note">Ingredients requiring attention</p></div>
+  <div class="summary-card"><p class="summary-label">Orders</p><h3>{{ order_count }}</h3><p class="summary-note">Bakery sales</p></div>
+  <div class="summary-card"><p class="summary-label">Expenses</p><h3>{{ expense_total }}</h3><p class="summary-note">Recorded expenses</p></div>
+</section>
+{% endblock %}

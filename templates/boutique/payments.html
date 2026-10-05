@@ -1,0 +1,7 @@
+{% extends "layouts/dashboard_layout.html" %}
+{% load static %}
+{% block title %}Payments | SBMS{% endblock %}
+{% block page_css %}<link rel="stylesheet" href="{% static 'css/boutique.css' %}" />{% endblock %}
+{% block dashboard_content %}
+<div class="boutique-page"><header class="boutique-header"><div><p class="page-label">BOUTIQUE PAYMENTS</p><h1>Payments</h1><p class="business-name">Paid total: {{ total_paid }}</p></div></header><div class="split-layout"><div class="boutique-form-card"><form method="post">{% csrf_token %}<div class="form-grid">{% for field in form.visible_fields %}<div class="form-group{% if field.name == 'notes' %} full-width{% endif %}"><label>{{ field.label }}</label>{{ field }}{{ field.errors }}</div>{% endfor %}</div><div class="form-actions"><button type="submit">Record payment</button></div></form></div><div class="record-list">{% for payment in payments %}<div class="record-row"><div><strong>{{ payment.boutique_order }}</strong><span>{{ payment.get_payment_method_display }} · {{ payment.get_status_display }}</span></div><b>{{ payment.amount }}</b></div>{% empty %}<div class="empty-state"><h3>No payments yet</h3><p>Payments linked to boutique sales will appear here.</p></div>{% endfor %}</div></div></div>
+{% endblock %}

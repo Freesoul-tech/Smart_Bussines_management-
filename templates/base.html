@@ -1,0 +1,50 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en" data-theme="{{ sbms_theme }}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}SBMS{% endblock %}</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="{% static 'css/global.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/home_button.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/loading.css' %}" />
+
+    {% block extra_css %}{% endblock %}
+  </head>
+
+  <body data-theme="{{ sbms_theme }}">
+    <div
+      class="loading-screen"
+      id="loading-screen"
+      role="status"
+      aria-live="polite"
+    >
+      <div class="loading-panel">
+        <div class="loading-mark" aria-hidden="true">SB</div>
+        <div class="loading-spinner" aria-hidden="true"></div>
+        <h1 class="loading-title">Loading SBMS</h1>
+        <p class="loading-message" id="loading-message">
+          Preparing your workspace...
+        </p>
+        <button class="loading-retry" id="loading-retry" type="button" hidden>
+          Try again
+        </button>
+      </div>
+    </div>
+    {% include "components/home_button.html" %}
+    <!-- Page content -->
+    {% block content %}{% endblock %}
+    <!-- Page scripts -->
+    {% block extra_js %}{% endblock %}
+    <script src="{% static 'js/loading.js' %}"></script>
+  </body>
+</html>

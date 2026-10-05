@@ -1,0 +1,245 @@
+﻿{% extends "layouts/dashboard_layout.html" %}
+{% load static %}
+{% block title %}Reports | SBMS{% endblock %}
+{% block page_css %}
+<link rel="stylesheet" href="{% static 'css/reports.css' %}" />
+{% endblock %} {% block dashboard_content %}
+
+<div class="reports-page">
+  <!-- =====================================================
+         PAGE HEADER
+         ===================================================== -->
+
+  <header class="reports-header">
+    <div class="reports-header-content">
+      <p class="page-eyebrow">BUSINESS REPORTS</p>
+
+      <h1>Reports</h1>
+
+      <p class="page-description">
+        View your business performance, financial activity, reservations, and
+        customer activity.
+      </p>
+    </div>
+
+    <div class="reports-header-actions">
+      <button type="button" class="secondary-button" onclick="window.print()">
+        Print Report
+      </button>
+
+      <a
+        href="{% url 'report_pdf_preview' %}?period={{ date_filter }}"
+        class="primary-button"
+        >Export PDF</a
+      >
+    </div>
+  </header>
+
+  <!-- =====================================================
+         REPORT FILTER
+         ===================================================== -->
+
+  <section class="report-filter-card">
+    <div class="filter-heading">
+      <div>
+        <p class="panel-eyebrow">REPORT PERIOD</p>
+
+        <h2>Filter Report</h2>
+      </div>
+    </div>
+
+    <form method="get" class="report-filter-form">
+      <div class="filter-group">
+        <label for="period"> Period </label>
+
+        <select id="period" name="period">
+          <option value="all" {% if date_filter == "all" %}selected{% endif %}>
+            All Time
+          </option>
+
+          <option
+            value="today"
+            {% if date_filter == "today" %}selected{% endif %}
+          >
+            Today
+          </option>
+
+          <option
+            value="week"
+            {% if date_filter == "week" %}selected{% endif %}
+          >
+            This Week
+          </option>
+
+          <option
+            value="month"
+            {% if date_filter == "month" %}selected{% endif %}
+          >
+            This Month
+          </option>
+
+          <option
+            value="year"
+            {% if date_filter == "year" %}selected{% endif %}
+          >
+            This Year
+          </option>
+        </select>
+      </div>
+
+      <button type="submit" class="filter-button">Apply Filter</button>
+    </form>
+  </section>
+
+  <!-- =====================================================
+         FINANCIAL SUMMARY
+         ===================================================== -->
+
+  <section class="report-section">
+    <div class="section-heading">
+      <div>
+        <p class="panel-eyebrow">FINANCIAL OVERVIEW</p>
+
+        <h2>Financial Summary</h2>
+      </div>
+    </div>
+
+    <div class="financial-grid">
+      <!-- REVENUE -->
+
+      <div class="financial-card revenue-card">
+        <div class="financial-card-label">Total Revenue</div>
+
+        <div class="financial-card-value">
+          MWK {{ total_revenue|floatformat:2 }}
+        </div>
+
+        <p>Revenue generated from reservations.</p>
+      </div>
+
+      <!-- PAID -->
+
+      <div class="financial-card paid-card">
+        <div class="financial-card-label">Total Paid</div>
+
+        <div class="financial-card-value">
+          MWK {{ total_paid|floatformat:2 }}
+        </div>
+
+        <p>Payments successfully received.</p>
+      </div>
+
+      <!-- OUTSTANDING -->
+
+      <div class="financial-card outstanding-card">
+        <div class="financial-card-label">Outstanding</div>
+
+        <div class="financial-card-value">
+          MWK {{ outstanding_balance|floatformat:2 }}
+        </div>
+
+        <p>Amount currently owed by customers.</p>
+      </div>
+
+      <!-- REFUNDED -->
+
+      <div class="financial-card refunded-card">
+        <div class="financial-card-label">Refunded</div>
+
+        <div class="financial-card-value">
+          MWK {{ total_refunded|floatformat:2 }}
+        </div>
+
+        <p>Payments returned to customers.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================
+         BUSINESS ACTIVITY
+         ===================================================== -->
+
+  <section class="report-section">
+    <div class="section-heading">
+      <div>
+        <p class="panel-eyebrow">BUSINESS ACTIVITY</p>
+
+        <h2>Activity Summary</h2>
+      </div>
+    </div>
+
+    <div class="activity-grid">
+      <!-- RESERVATIONS -->
+
+      <div class="activity-card">
+        <div class="activity-label">Total Reservations</div>
+
+        <strong> {{ total_reservations }} </strong>
+      </div>
+
+      <!-- CUSTOMERS -->
+
+      <div class="activity-card">
+        <div class="activity-label">Total Customers</div>
+
+        <strong> {{ total_customers }} </strong>
+      </div>
+
+      <!-- PAYMENTS -->
+
+      <div class="activity-card">
+        <div class="activity-label">Total Payments</div>
+
+        <strong> {{ total_payments }} </strong>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================
+         RESERVATION STATUS
+         ===================================================== -->
+
+  <section class="report-section">
+    <div class="section-heading">
+      <div>
+        <p class="panel-eyebrow">RESERVATIONS</p>
+
+        <h2>Reservation Status</h2>
+      </div>
+    </div>
+
+    <div class="reservation-status-grid">
+      <div class="status-report-card">
+        <span> Pending </span>
+
+        <strong> {{ pending_reservations }} </strong>
+      </div>
+
+      <div class="status-report-card">
+        <span> Confirmed </span>
+
+        <strong> {{ confirmed_reservations }} </strong>
+      </div>
+
+      <div class="status-report-card">
+        <span> Checked In </span>
+
+        <strong> {{ checked_in_reservations }} </strong>
+      </div>
+
+      <div class="status-report-card">
+        <span> Checked Out </span>
+
+        <strong> {{ checked_out_reservations }} </strong>
+      </div>
+
+      <div class="status-report-card">
+        <span> Cancelled </span>
+
+        <strong> {{ cancelled_reservations }} </strong>
+      </div>
+    </div>
+  </section>
+</div>
+
+{% endblock %}

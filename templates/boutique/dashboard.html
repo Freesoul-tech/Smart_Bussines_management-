@@ -1,0 +1,11 @@
+{% extends "layouts/dashboard_layout.html" %}
+{% load static %}
+{% block title %}Boutique | SBMS{% endblock %}
+{% block page_css %}<link rel="stylesheet" href="{% static 'css/boutique.css' %}" />{% endblock %}
+{% block dashboard_content %}
+<div class="boutique-page">
+  <header class="boutique-header"><div><p class="page-label">BOUTIQUE OPERATIONS</p><h1>{{ business.name }}</h1><p class="business-name">Products, stock, sales, customers, and payments</p></div><a href="{% url 'boutique:profile' %}" class="boutique-button">Business Profile</a></header>
+  <section class="boutique-summary"><div><span>Products</span><strong>{{ product_count }}</strong></div><div><span>Categories</span><strong>{{ category_count }}</strong></div><div><span>Sales</span><strong>{{ sale_count }}</strong></div><div><span>Stock value</span><strong>{{ stock_value }}</strong></div><div><span>Low stock</span><strong>{{ low_stock_count }}</strong></div></section>
+  <section class="boutique-actions"><a href="{% url 'boutique:products_add' %}">Add product</a><a href="{% url 'boutique:sales' %}">Record sale</a><a href="{% url 'boutique:inventory_add' %}">Adjust inventory</a><a href="{% url 'employee_list' %}">Manage staff</a></section>
+</div>
+{% endblock %}

@@ -1,0 +1,224 @@
+{% extends "layouts/dashboard_layout.html" %}
+{% load static %}
+{% block title %}Reservations | SBMS{% endblock %}
+{% block page_css %}
+<link rel="stylesheet" href="{% static 'css/reservations.css' %}" />
+{% endblock %} {% block dashboard_content %}
+
+<div class="reservations-page">
+  <div class="reservations-header">
+    <div>
+      <p class="page-label">RESERVATIONS</p>
+
+      <h1>Reservation Management</h1>
+
+      {% if business %}
+      <p class="business-name">{{ business.name }}</p>
+      {% endif %}
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 10px">
+      <a href="{% url 'reservation_add' %}" class="add-reservation-button">
+        Add Reservation
+      </a>
+    </div>
+  </div>
+
+  <div class="reservation-card">
+    <div class="reservation-card-header">
+      <div>
+        <h2>Reservations</h2>
+
+        <p>Manage room reservations for your business.</p>
+      </div>
+
+      <div class="reservation-count">{{ reservations|length }}</div>
+    </div>
+
+    {% if reservations %}
+
+    <div class="reservation-list">
+      {% for reservation in reservations %}
+
+      <div class="reservation-row">
+        <!-- CUSTOMER -->
+
+        <div class="reservation-info">
+          <strong> {{ reservation.customer_name }} </strong>
+
+          <span> Room {{ reservation.room.room_number }} </span>
+        </div>
+
+        <!-- DATES -->
+
+        <div class="reservation-contact">
+          <span>
+            {{ reservation.check_in }} — {{ reservation.check_out }}
+          </span>
+
+          {% if reservation.customer_phone %}
+
+          <span> {{ reservation.customer_phone }} </span>
+
+          {% endif %}
+        </div>
+
+        <!-- STATUS -->
+
+        <div class="reservation-status">
+          {% if reservation.status == "confirmed" %}
+
+          <span class="status-active"> Confirmed </span>
+
+          {% elif reservation.status == "checked_in" %}
+
+          <span class="status-active"> Checked In </span>
+
+          {% elif reservation.status == "checked_out" %}
+
+          <span class="status-inactive"> Checked Out </span>
+
+          {% elif reservation.status == "cancelled" %}
+
+          <span class="status-inactive"> Cancelled </span>
+
+          {% else %}
+
+          <span class="status-inactive"> Pending </span>
+
+          {% endif %}
+        </div>
+
+        <!-- ACTIONS -->
+
+        <div class="reservation-actions">
+          {% if reservation.status == "pending" %}
+
+          <!-- CONFIRM -->
+
+          <form
+            method="post"
+            action="{% url 'reservation_confirm' reservation.id %}"
+          >
+            {% csrf_token %}
+
+            <button type="submit" class="reservation-action check-in">
+              Confirm
+            </button>
+          </form>
+
+          <!-- EDIT -->
+
+          <a
+            href="{% url 'reservation_edit' reservation.id %}"
+            class="reservation-action"
+          >
+            Edit
+          </a>
+
+          <!-- CANCEL -->
+
+          <form
+            method="post"
+            action="{% url 'reservation_cancel' reservation.id %}"
+          >
+            {% csrf_token %}
+
+            <button type="submit" class="reservation-action cancel">
+              Cancel
+            </button>
+          </form>
+
+          {% elif reservation.status == "confirmed" %}
+
+          <!-- CHECK IN -->
+
+          <form
+            method="post"
+            action="{% url 'reservation_check_in' reservation.id %}"
+          >
+            {% csrf_token %}
+
+            <button type="submit" class="reservation-action check-in">
+              Check In
+            </button>
+          </form>
+
+          <!-- EDIT -->
+
+          <a
+            href="{% url 'reservation_edit' reservation.id %}"
+            class="reservation-action"
+          >
+            Edit
+          </a>
+
+          <!-- CANCEL -->
+
+          <form
+            method="post"
+            action="{% url 'reservation_cancel' reservation.id %}"
+          >
+            {% csrf_token %}
+
+            <button type="submit" class="reservation-action cancel">
+              Cancel
+            </button>
+          </form>
+
+          {% elif reservation.status == "checked_in" %}
+
+          <!-- CHECK OUT -->
+
+          <form
+            method="post"
+            action="{% url 'reservation_check_out' reservation.id %}"
+          >
+            {% csrf_token %}
+
+            <button type="submit" class="reservation-action check-in">
+              Check Out
+            </button>
+          </form>
+
+          <!-- EDIT -->
+
+          <a
+            href="{% url 'reservation_edit' reservation.id %}"
+            class="reservation-action"
+          >
+            Edit
+          </a>
+
+          {% elif reservation.status == "cancelled" %}
+
+          <span class="reservation-completed"> Cancelled </span>
+
+          {% elif reservation.status == "checked_out" %}
+
+          <span class="reservation-completed"> Completed </span>
+
+          {% endif %}
+        </div>
+      </div>
+
+      {% endfor %}
+    </div>
+
+    {% else %}
+
+    <div class="empty-reservations">
+      <h3>No reservations yet</h3>
+
+      <p>Add your first reservation to start managing bookings.</p>
+
+      <a href="{% url 'reservation_add' %}" class="empty-add-button">
+        Add Reservation
+      </a>
+    </div>
+
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}

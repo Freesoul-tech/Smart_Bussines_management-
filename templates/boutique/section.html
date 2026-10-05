@@ -1,0 +1,7 @@
+{% extends "layouts/dashboard_layout.html" %}
+{% load static %}
+{% block title %}{{ title }} | SBMS{% endblock %}
+{% block page_css %}<link rel="stylesheet" href="{% static 'css/boutique.css' %}" />{% endblock %}
+{% block dashboard_content %}
+<div class="boutique-page"><header class="boutique-header"><div><p class="page-label">BOUTIQUE OPERATIONS</p><h1>{{ title }}</h1><p class="business-name">{{ business.name }}</p></div><a href="{% url add_url %}" class="boutique-button">Add {{ title|slice:":-1" }}</a></header><div class="record-list">{% for record in records %}<div class="record-row"><div><strong>{{ record }}</strong><span>{% if name == 'products' %}{{ record.category|default:'Uncategorised' }}{% elif name == 'inventory' %}{{ record.get_movement_type_display }}{% else %}{{ record.get_status_display|default:'Active' }}{% endif %}</span></div><b>{% if name == 'products' %}{{ record.selling_price }}{% elif name == 'inventory' %}{{ record.quantity }}{% endif %}</b></div>{% empty %}<div class="empty-state"><h3>No {{ title|lower }} yet</h3><p>Records added to this section will appear here.</p><a href="{% url add_url %}">Add {{ title|slice:":-1" }}</a></div>{% endfor %}</div></div>
+{% endblock %}

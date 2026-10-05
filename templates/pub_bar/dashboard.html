@@ -1,0 +1,8 @@
+{% extends "layouts/dashboard_layout.html" %}
+{% load static %}
+{% block title %}Pub / Bar | SBMS{% endblock %}
+{% block page_css %}<link rel="stylesheet" href="{% static 'css/employees.css' %}" />{% endblock %}
+{% block dashboard_content %}
+<div class="employee-page"><div class="employee-header"><div><p class="page-label">PUB / BAR OPERATIONS</p><h1>{{ business.name }}</h1><p class="business-name">Drinks, tables, stock, orders, and payments</p></div><a href="{% url 'pub_bar:profile' %}" class="add-employee-button">Business Profile</a></div>
+<div class="summary-section"><div class="summary-card"><p class="summary-label">Drinks</p><h3>{{ product_count }}</h3><p class="summary-note">Products</p></div><div class="summary-card"><p class="summary-label">Tables</p><h3>{{ table_count }}</h3><p class="summary-note">Active tables</p></div><div class="summary-card"><p class="summary-label">Orders</p><h3>{{ order_count }}</h3><p class="summary-note">Orders recorded</p></div><div class="summary-card"><p class="summary-label">Stock value</p><h3>{{ stock_value }}</h3><p class="summary-note">Current drink stock</p></div></div></div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "layouts/dashboard_layout.html" %}
+{% block title %}{{ page_title }} | SBMS{% endblock %}
+{% load static %}
+{% block page_css %}
+<link rel="stylesheet" href="{% static 'css/employees.css' %}" />
+{% endblock %}
+{% block dashboard_content %}
+<div class="employee-page">
+  <div class="employee-header">
+    <div>
+      <p class="page-label">BAKERY OPERATIONS</p>
+      <h1>{{ page_title }}</h1>
+      <p class="business-name">{{ business.name }}</p>
+    </div>
+  </div>
+  <div class="employee-form-card">
+    <div class="employee-form-header">
+      <h2>{{ page_title }}</h2>
+      <p>Manage this Bakery record for your business.</p>
+    </div>
+
+    <form method="post" class="employee-form">
+      {% csrf_token %}
+      {% if form.non_field_errors %}
+      <div class="form-errors">{{ form.non_field_errors }}</div>
+      {% endif %}
+
+      <div class="form-grid">
+        {% for field in form.visible_fields %}
+        <div class="form-group{% if field.name == 'description' or field.name == 'notes' or field.name == 'instructions' %} full-width{% endif %}">
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }}
+          {% if field.help_text %}<div class="form-help">{{ field.help_text }}</div>{% endif %}
+          {% if field.errors %}<div class="field-error">{{ field.errors }}</div>{% endif %}
+        </div>
+        {% endfor %}
+      </div>
+
+      <div class="employee-form-actions">
+        <a href="{% url 'bakery:'|add:section %}" class="cancel-button">Cancel</a>
+        <button type="submit" class="save-employee-button">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

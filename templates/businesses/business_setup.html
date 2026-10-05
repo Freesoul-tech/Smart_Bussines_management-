@@ -1,0 +1,307 @@
+﻿{% extends "base.html" %} {% load static %} {% block title %}Business Setup |
+SBMS{% endblock %} {% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/business_setup.css' %}" />
+
+<!-- Leaflet Map -->
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  crossorigin=""
+/>
+{% endblock %} {% block content %}
+
+<div class="setup-page">
+  <!-- =========================
+         HEADER
+    ========================== -->
+
+  <header class="setup-header">
+    <div class="brand">
+      <div class="brand-logo">SB</div>
+
+      <div class="brand-text">
+        <h1>Smart Business</h1>
+        <p>Management Suite</p>
+      </div>
+    </div>
+
+    <div class="step-indicator">
+      <div class="step-item active">
+        <span class="step-number">1</span>
+        <span class="step-label">Business</span>
+      </div>
+
+      <div class="step-line"></div>
+
+      <div class="step-item">
+        <span class="step-number">2</span>
+        <span class="step-label">Dashboard</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================
+         MAIN
+    ========================== -->
+
+  <main class="setup-container">
+    <div class="page-intro">
+      <span class="intro-label"> BUSINESS SETUP </span>
+
+      <h2>Set up your business</h2>
+
+      <p>
+        Tell us about your business and choose the management model that best
+        fits your operations.
+      </p>
+    </div>
+
+    <!-- =========================
+             FORM
+        ========================== -->
+
+    <form method="POST" enctype="multipart/form-data" id="businessSetupForm">
+      {% csrf_token %}
+
+      <div class="setup-grid">
+        <!-- =========================
+                     BUSINESS DETAILS
+                ========================== -->
+
+        <section class="details-card">
+          <div class="section-heading">
+            <div class="heading-number">01</div>
+
+            <div>
+              <h3>Business Details</h3>
+
+              <p>Enter your business information</p>
+            </div>
+          </div>
+
+          <!-- USER NAME -->
+
+          <div class="form-group">
+            <label for="id_user_name">
+              Your Name
+              <span>*</span>
+            </label>
+
+            {{ form.user_name }} {% if form.user_name.errors %}
+            <div class="field-error">{{ form.user_name.errors }}</div>
+            {% endif %}
+          </div>
+
+          <!-- POSITION -->
+
+          <div class="form-group">
+            <label for="id_position">
+              Your Position
+              <span>*</span>
+            </label>
+
+            {{ form.position }} {% if form.position.errors %}
+            <div class="field-error">{{ form.position.errors }}</div>
+            {% endif %}
+          </div>
+
+          <!-- BUSINESS NAME -->
+
+          <div class="form-group">
+            <label for="id_name">
+              Business Name
+              <span>*</span>
+            </label>
+
+            {{ form.name }} {% if form.name.errors %}
+            <div class="field-error">{{ form.name.errors }}</div>
+            {% endif %}
+          </div>
+
+          <!-- =========================
+                         LOCATION
+                    ========================== -->
+
+          <div class="form-group location-group">
+            <label for="id_location">
+              Business Location
+              <small> Optional </small>
+            </label>
+
+            <div class="location-input-row">
+              {{ form.location }}
+
+              <button
+                type="button"
+                id="locateBusinessButton"
+                class="location-action-button"
+                title="Use my current location"
+              >
+                ◎
+              </button>
+            </div>
+
+            <div class="location-help">
+              Drag the map until the pin is over your business, or click the map
+              to choose a point.
+            </div>
+
+            <!-- MAP -->
+
+            <div id="businessLocationMap" class="business-location-map">
+              <div class="map-center-pin" aria-hidden="true"></div>
+            </div>
+
+            <!-- MAP CONTROLS -->
+
+            <div class="location-controls">
+              <div id="locationStatus" class="location-status">
+                Location is optional.
+              </div>
+
+              <button
+                type="button"
+                id="clearLocationButton"
+                class="clear-location-button"
+              >
+                Clear location
+              </button>
+            </div>
+
+            {% if form.location.errors %}
+
+            <div class="field-error">{{ form.location.errors }}</div>
+
+            {% endif %}
+          </div>
+
+          <!-- =========================
+                         CERTIFICATE
+                    ========================== -->
+
+          <div class="form-group">
+            <label for="id_certificate">
+              Certificate of Operation
+
+              <small> Optional </small>
+            </label>
+
+            <div class="file-input-wrapper">
+              {{ form.certificate }}
+
+              <div class="file-display">
+                <span class="file-upload-icon"> ↑ </span>
+
+                <span id="fileName"> Choose certificate </span>
+              </div>
+            </div>
+
+            {% if form.certificate.errors %}
+
+            <div class="field-error">{{ form.certificate.errors }}</div>
+
+            {% endif %}
+          </div>
+
+          <!-- HIDDEN BUSINESS MODEL -->
+
+          <div class="hidden-model-field">{{ form.business_model }}</div>
+
+          <!-- INFORMATION NOTE -->
+
+          <div class="details-note">
+            <div class="note-check">✓</div>
+
+            <p>
+              Your information is securely stored and linked to your account.
+            </p>
+          </div>
+        </section>
+
+        <!-- =========================
+                     BUSINESS MODELS
+                ========================== -->
+
+        <section class="models-card">
+          <div class="section-heading">
+            <div class="heading-number">02</div>
+
+            <div>
+              <h3>Choose your business model</h3>
+
+              <p>Select the model that matches your business.</p>
+            </div>
+          </div>
+
+          <div class="model-selection">
+            <div class="model-tabs">
+              <button type="button" class="model-card" data-model="hotel">
+                <span>Hotel</span>
+              </button>
+
+              <button type="button" class="model-card" data-model="motel">
+                <span>Motel</span>
+              </button>
+
+              <button type="button" class="model-card" data-model="lodge">
+                <span>Lodge</span>
+              </button>
+
+              <button type="button" class="model-card" data-model="guest_house">
+                <span>Guest House</span>
+              </button>
+
+              <button type="button" class="model-card" data-model="restaurant">
+                <span>Restaurant</span>
+              </button>
+
+              <button type="button" class="model-card" data-model="bakery">
+                <span>Bakery</span>
+              </button>
+
+              <button type="button" class="model-card" data-model="pub_bar">
+                <span>Pub / Bar</span>
+              </button>
+
+              <button type="button" class="model-card" data-model="boutique">
+                <span>Boutique</span>
+              </button>
+            </div>
+
+            <div class="selection-message" id="selectionMessage">
+              Select a business model to continue.
+            </div>
+          </div>
+
+          <!-- CONTINUE -->
+
+          <div class="continue-area">
+            <button
+              type="submit"
+              id="continueButton"
+              class="continue-button"
+              disabled
+            >
+              <span> Continue to Dashboard </span>
+
+              <span class="continue-arrow"> → </span>
+            </button>
+          </div>
+        </section>
+      </div>
+    </form>
+  </main>
+</div>
+
+{% endblock %} {% block extra_js %}
+
+<!-- Leaflet Map -->
+<script
+  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+  crossorigin=""
+></script>
+
+<script src="{% static 'js/business_setup.js' %}"></script>
+
+{% endblock %}

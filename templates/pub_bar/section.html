@@ -1,0 +1,7 @@
+{% extends "layouts/dashboard_layout.html" %}
+{% load static %}
+{% block title %}{{ title }} | SBMS{% endblock %}
+{% block page_css %}<link rel="stylesheet" href="{% static 'css/employees.css' %}" />{% endblock %}
+{% block dashboard_content %}
+<div class="employee-page"><div class="employee-header"><div><p class="page-label">PUB / BAR OPERATIONS</p><h1>{{ title }}</h1><p class="business-name">{{ business.name }}</p></div><a href="{% url add_url %}" class="add-employee-button">Add {{ title|slice:":-1" }}</a></div><div class="employee-card">{% for record in records %}<div class="employee-row"><div class="employee-info"><strong>{{ record }}</strong><span>{{ record.get_status_display|default:"Active record" }}</span></div>{% if name == "orders" %}<div class="employee-contact"><span>{{ record.total_amount }}</span></div>{% endif %}</div>{% empty %}<div class="empty-employees"><h3>No {{ title|lower }} yet</h3><p>Records added to this section will appear here.</p><a href="{% url add_url %}" class="empty-add-button">Add {{ title|slice:":-1" }}</a></div>{% endfor %}</div></div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "layouts/dashboard_layout.html" %}
+{% block title %}{{ section_title }} | SBMS{% endblock %}
+{% block dashboard_content %}
+<section class="dashboard-welcome">
+  <div>
+    <p class="dashboard-eyebrow">BAKERY OPERATIONS</p>
+    <h2>{{ section_title }}</h2>
+    <p class="welcome-description">{{ description }}</p>
+  </div>
+  {% if add_url %}<a href="{% url add_url %}" class="add-employee-button">Add {{ section_title|slice:":-1" }}</a>{% endif %}
+</section>
+<section class="dashboard-panel">
+  {% if records %}
+  <div class="payment-list">
+    {% for record in records %}
+    <article class="payment-card">
+    {% for value in record.values %}<div class="financial-item"><span>{{ columns|slice:forloop.counter0|first }}</span><strong>{{ value }}</strong></div>{% endfor %}
+    {% if edit_url %}<a href="{% url edit_url record.id %}" class="edit-payment-btn">Edit</a>{% endif %}
+    </article>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="empty-state"><h3>No {{ section_title|lower }} yet</h3><p>Records added to this Bakery section will appear here.</p></div>
+  {% endif %}
+</section>
+{% endblock %}

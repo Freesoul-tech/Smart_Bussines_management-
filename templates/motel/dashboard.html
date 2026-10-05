@@ -1,0 +1,39 @@
+{% extends "layouts/dashboard_layout.html" %}
+
+{% block title %}Motel Operations | SBMS{% endblock %}
+
+{% block dashboard_content %}
+<div class="sbms-dashboard-home-page">
+  <section class="dashboard-welcome">
+    <p class="dashboard-eyebrow">MOTEL OPERATIONS</p>
+    <h2>{{ business.name }}</h2>
+    <p class="welcome-description">Fast room turnover, arrivals, departures, and parking at a glance.</p>
+  </section>
+
+  <section class="summary-section">
+    <div class="summary-card"><p class="summary-label">Available Rooms</p><h3>{{ available_rooms }}</h3><p class="summary-note">Ready for guests</p></div>
+    <div class="summary-card"><p class="summary-label">Occupied Rooms</p><h3>{{ occupied_rooms }}</h3><p class="summary-note">Currently occupied</p></div>
+    <div class="summary-card"><p class="summary-label">Arrivals Today</p><h3>{{ arrivals_today|length }}</h3><p class="summary-note">Pending or confirmed</p></div>
+    <div class="summary-card"><p class="summary-label">Departures Today</p><h3>{{ departures_today|length }}</h3><p class="summary-note">Checked-in guests</p></div>
+    <div class="summary-card"><p class="summary-label">Parking Available</p><h3>{{ parking_available }}</h3><p class="summary-note">Open spaces</p></div>
+    <div class="summary-card"><p class="summary-label">Vehicles Checked In</p><h3>{{ vehicles_checked_in }}</h3><p class="summary-note">On property now</p></div>
+  </section>
+
+  <section class="dashboard-panels">
+    <div class="dashboard-panel">
+      <div class="panel-header"><div><p class="panel-label">TODAY</p><h3>Arrivals</h3></div></div>
+      {% for reservation in arrivals_today %}
+      <div class="activity-item"><div class="activity-content"><strong>{{ reservation.customer_name }}</strong><span>Room {{ reservation.room.room_number }}</span></div><div class="activity-meta"><span>{{ reservation.status|title }}</span><form method="post" action="{% url 'motel:quick_check_in' reservation.id %}">{% csrf_token %}<button type="submit">Check in</button></form></div></div>
+      {% empty %}<div class="activity-placeholder"><p>No arrivals scheduled today.</p></div>{% endfor %}
+    </div>
+    <div class="dashboard-panel">
+      <div class="panel-header"><div><p class="panel-label">TODAY</p><h3>Departures</h3></div></div>
+      {% for reservation in departures_today %}
+      <div class="activity-item"><div class="activity-content"><strong>{{ reservation.customer_name }}</strong><span>Room {{ reservation.room.room_number }}</span></div><div class="activity-meta"><form method="post" action="{% url 'motel:quick_check_out' reservation.id %}">{% csrf_token %}<button type="submit">Check out</button></form></div></div>
+      {% empty %}<div class="activity-placeholder"><p>No departures scheduled today.</p></div>{% endfor %}
+    </div>
+  </section>
+
+  <section class="report-section"><div class="report-card"><div><p class="panel-label">PARKING</p><p>Track spaces and vehicles staying on the property.</p></div><a href="{% url 'motel:parking' %}" class="report-button">Manage parking</a><a href="{% url 'motel:vehicles' %}" class="report-button">View vehicles</a></div></section>
+</div>
+{% endblock %}

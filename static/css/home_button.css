@@ -1,0 +1,62 @@
+.sbms-home-button {
+    position: fixed;
+
+    top: 20px;
+    right: 24px;
+
+    width: 38px;
+    height: 38px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--text-color, #31556f);
+    background: var(--surface-color, #ffffff);
+
+    border: 1px solid var(--border-color, #d9e3eb);
+    border-radius: 10px;
+
+    text-decoration: none;
+
+    z-index: 9999;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.sbms-home-button svg {
+    width: 20px;
+    height: 20px;
+    display: block;
+}
+
+.sbms-home-button:hover {
+    background: var(--surface-secondary, #f1f5f9);
+    color: var(--primary-color, #073b68);
+    border-color: var(--primary-color, #073b68);
+
+    transform: translateY(-1px);
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+html[data-theme="dark"] .sbms-home-button {
+    color: var(--text-color);
+    background: var(--surface-color);
+    border-color: var(--border-color);
+}
+
+html[data-theme="dark"] .sbms-home-button:hover {
+    background: var(--surface-secondary);
+    color: var(--text-color);
+}
+
+ /* Hide the global home button when already on the dashboard */
+body:has(.sbms-dashboard-home-page) .sbms-home-button {
+    display: none;
+}

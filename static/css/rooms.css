@@ -1,0 +1,507 @@
+/* ================================
+   EMPLOYEE PAGES
+================================ */
+
+.employee-page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 70px 30px;
+    color: #062b49;
+}
+
+/* Header */
+
+.employee-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 35px;
+}
+
+.page-label {
+    margin: 0 0 12px;
+    color: #087f78;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.employee-header h1 {
+    margin: 0;
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.business-name {
+    margin: 10px 0 0;
+    color: #718096;
+    font-size: 15px;
+}
+
+/* Buttons */
+
+.add-employee-button,
+.save-employee-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    background: #087f78;
+    color: white;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.add-employee-button:hover,
+.save-employee-button:hover {
+    background: #066c66;
+}
+
+.cancel-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 22px;
+    border-radius: 10px;
+    color: #4a5568;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    background: #f7fafc;
+    border: 1px solid #dbe4ea;
+}
+
+/* ================================
+   FORM CARD
+================================ */
+
+.employee-form-card {
+    background: white;
+    border: 1px solid #dbe4ea;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(6, 43, 73, 0.06);
+    overflow: hidden;
+}
+
+.employee-form-header {
+    padding: 28px 32px;
+    border-bottom: 1px solid #e7edf1;
+}
+
+.employee-form-header h2 {
+    margin: 0 0 6px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.employee-form-header p {
+    margin: 0;
+    color: #718096;
+    font-size: 14px;
+}
+
+.employee-form-body {
+    padding: 32px;
+}
+
+/* ================================
+   FORM FIELDS
+================================ */
+
+.employee-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px 24px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    margin-bottom: 8px;
+    color: #243b53;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 14px;
+    border: 1px solid #d5e0e7;
+    border-radius: 9px;
+    background: white;
+    color: #243b53;
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #087f78;
+    box-shadow: 0 0 0 3px rgba(8, 127, 120, 0.10);
+}
+
+.form-group input::placeholder {
+    color: #a0aec0;
+}
+
+/* Errors */
+
+.form-error {
+    margin-top: 6px;
+    color: #c53030;
+    font-size: 12px;
+}
+
+.form-help {
+    margin-top: 6px;
+    color: #718096;
+    font-size: 12px;
+}
+
+/* ================================
+   FORM FOOTER
+================================ */
+
+.employee-form-footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+    padding: 24px 32px;
+    border-top: 1px solid #e7edf1;
+    background: #fbfcfd;
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 700px) {
+
+    .employee-page {
+        padding: 40px 18px;
+    }
+
+    .employee-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .employee-header h1 {
+        font-size: 27px;
+    }
+
+    .employee-form-body {
+        padding: 22px;
+    }
+
+    .employee-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-group.full-width {
+        grid-column: auto;
+    }
+
+    .employee-form-footer {
+        padding: 20px 22px;
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+
+    .employee-form-footer a,
+    .employee-form-footer button {
+        width: 100%;
+    }
+}
+
+/* =========================================================
+   EMPLOYEE ACTIONS
+   ========================================================= */
+
+.employee-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-left: auto;
+}
+
+.employee-edit-button,
+.employee-deactivate-button {
+    border: none;
+    background: transparent;
+
+    padding: 7px 10px;
+
+    border-radius: 7px;
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+
+/* EDIT */
+
+.employee-edit-button {
+    color: #334155;
+}
+
+.employee-edit-button:hover {
+    background: #f1f5f9;
+}
+
+
+/* DEACTIVATE */
+
+.employee-deactivate-button {
+    color: #b91c1c;
+}
+
+.employee-deactivate-button:hover {
+    background: #fef2f2;
+}
+
+
+/* DEACTIVATE FORM */
+
+.employee-deactivate-form {
+    margin: 0;
+}
+
+
+/* =========================================================
+   RESPONSIVE EMPLOYEE ACTIONS
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .employee-row {
+        flex-wrap: wrap;
+    }
+
+    .employee-actions {
+        width: 100%;
+        justify-content: flex-start;
+        margin-left: 0;
+        padding-top: 8px;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .employee-actions {
+        gap: 6px;
+    }
+
+    .employee-edit-button,
+    .employee-deactivate-button {
+        padding: 8px 10px;
+    }
+
+}
+.status-active,
+.status-reserved,
+.status-occupied,
+.status-maintenance,
+.status-inactive {
+    display: inline-flex;
+    align-items: center;
+    padding: 7px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.status-active {
+    background: #e8f7f3;
+    color: #078b82;
+}
+
+.status-reserved {
+    background: #fff4df;
+    color: #b77900;
+}
+
+.status-occupied {
+    background: #e8eef8;
+    color: #315b91;
+}
+
+.status-maintenance {
+    background: #fff0e8;
+    color: #b85c28;
+}
+
+.status-inactive {
+    background: #f0f1f3;
+    color: #68707a;
+}
+/* =========================================================
+   SBMS DARK MODE - ROOMS
+========================================================= */
+
+html[data-theme="dark"] .rooms-page {
+    background: var(--bg-color);
+    color: var(--text-color);
+}
+
+html[data-theme="dark"] .rooms-page * {
+    border-color: var(--border-color);
+}
+
+html[data-theme="dark"] .rooms-page .card,
+html[data-theme="dark"] .rooms-page .room-card,
+html[data-theme="dark"] .rooms-page .summary-card,
+html[data-theme="dark"] .rooms-page .table-container,
+html[data-theme="dark"] .rooms-page .room-form-card {
+    background: var(--surface-color);
+    color: var(--text-color);
+}
+
+html[data-theme="dark"] .rooms-page h1,
+html[data-theme="dark"] .rooms-page h2,
+html[data-theme="dark"] .rooms-page h3,
+html[data-theme="dark"] .rooms-page h4,
+html[data-theme="dark"] .rooms-page strong,
+html[data-theme="dark"] .rooms-page label {
+    color: var(--text-color);
+}
+
+html[data-theme="dark"] .rooms-page p,
+html[data-theme="dark"] .rooms-page span,
+html[data-theme="dark"] .rooms-page small {
+    color: var(--text-secondary);
+}
+
+html[data-theme="dark"] .rooms-page input,
+html[data-theme="dark"] .rooms-page select,
+html[data-theme="dark"] .rooms-page textarea {
+    background: var(--surface-secondary);
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+html[data-theme="dark"] .rooms-page th {
+    background: var(--surface-secondary);
+    color: var(--text-color);
+}
+
+html[data-theme="dark"] .rooms-page td {
+    background: var(--surface-color);
+    color: var(--text-color);
+}
+
+/* =========================================================
+   SBMS DARK THEME - ROOMS
+   ========================================================= */
+
+html[data-theme="dark"] .employee-page {
+    background: var(--bg-color);
+    color: var(--text-color);
+}
+
+html[data-theme="dark"] .employee-page h1,
+html[data-theme="dark"] .employee-page h2,
+html[data-theme="dark"] .employee-page h3,
+html[data-theme="dark"] .employee-page h4,
+html[data-theme="dark"] .employee-page strong {
+    color: var(--text-color);
+}
+
+html[data-theme="dark"] .employee-page p,
+html[data-theme="dark"] .employee-page span {
+    color: var(--text-secondary);
+}
+
+html[data-theme="dark"] .employee-form-card {
+    background: var(--surface-color);
+    border-color: var(--border-color);
+}
+
+html[data-theme="dark"] .employee-form-header {
+    border-color: var(--border-color);
+}
+
+html[data-theme="dark"] .form-group input,
+html[data-theme="dark"] .form-group select {
+    background: var(--surface-secondary);
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+html[data-theme="dark"] .employee-form-footer {
+    background: var(--surface-secondary);
+    border-color: var(--border-color);
+}
+
+
+html[data-theme="dark"] body .rooms-page .status-active {
+    background: #263b3f !important;
+    color: #5ee7df !important;
+    border: 1px solid #3d5c60 !important;
+}
+
+/* =========================================================
+   FINAL DARK MODE - ROOM STATUS BADGES
+   ========================================================= */
+
+html[data-theme="dark"] body .employee-page .status-active {
+    background: #263b3f !important;
+    color: #5ee7df !important;
+    border: 1px solid #3d5c60 !important;
+}
+
+html[data-theme="dark"] body .employee-page .status-reserved {
+    background: #40351f !important;
+    color: #f5c76a !important;
+    border: 1px solid #66552d !important;
+}
+
+html[data-theme="dark"] body .employee-page .status-occupied {
+    background: #29374a !important;
+    color: #8eb9f0 !important;
+    border: 1px solid #405572 !important;
+}
+
+html[data-theme="dark"] body .employee-page .status-maintenance {
+    background: #432f25 !important;
+    color: #f0a875 !important;
+    border: 1px solid #674635 !important;
+}
+
+html[data-theme="dark"] body .employee-page .status-inactive {
+    background: #30343a !important;
+    color: #c5cbd3 !important;
+    border: 1px solid #484e57 !important;
+}

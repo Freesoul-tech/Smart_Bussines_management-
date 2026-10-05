@@ -1,0 +1,353 @@
+{% extends "layouts/dashboard_layout.html" %} {% block dashboard_content %}
+
+<div
+  class="settings-page"
+  id="settingsPage"
+  data-theme="{{ settings.theme|default:'light' }}"
+>
+  <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+  <header class="settings-header">
+    <div class="settings-brand">
+      <div class="brand-logo">SB</div>
+
+      <div class="brand-text">
+        <h1>Smart Business Management Suite</h1>
+        <p>Business Management System</p>
+      </div>
+    </div>
+
+    <div class="settings-user">
+      {% if request.user.is_authenticated %}
+
+      <div class="user-info">
+        <span class="user-name"> {{ request.user.username }} </span>
+
+        {% if business %}
+        <span class="business-type">
+          {{ business.get_business_model_display }}
+        </span>
+        {% endif %}
+      </div>
+
+      <a href="{% url 'accounts:logout' %}" class="logout-button"> Logout </a>
+
+      {% endif %}
+    </div>
+  </header>
+
+  <!-- =====================================================
+         LAYOUT
+    ====================================================== -->
+
+  <main class="settings-main">
+    {% if business %}
+
+    <!-- PAGE HEADER -->
+
+    <div class="settings-page-header">
+      <div class="settings-page-header-content">
+        <p class="settings-eyebrow">SYSTEM</p>
+
+        <h2>Settings</h2>
+
+        <p>Manage your business preferences and system configuration.</p>
+      </div>
+
+      <!-- THEME TOGGLE -->
+
+      <div class="theme-toggle-wrapper">
+        <span class="theme-label"> Theme </span>
+
+        <button
+          type="button"
+          class="theme-toggle"
+          id="themeToggle"
+          aria-label="Toggle dark mode"
+          aria-pressed="false"
+        >
+          <span>☀</span>
+          <span>◐</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- =================================================
+                     GENERAL SETTINGS FORM
+                ================================================== -->
+
+    <form method="POST" class="settings-form" id="generalSettingsForm">
+      {% csrf_token %}
+
+      <input type="hidden" name="form_type" value="general" />
+
+      <div class="settings-grid">
+        <!-- =============================================
+                             GENERAL SETTINGS
+                        ============================================== -->
+
+        <section class="settings-card">
+          <div class="settings-card-header">
+            <p class="settings-card-label">PREFERENCES</p>
+
+            <h3>General Settings</h3>
+          </div>
+
+          <div class="settings-fields">
+            <!-- Currency -->
+
+            <div class="setting-field">
+              <label for="{{ general_form.currency.id_for_label }}">
+                Currency
+              </label>
+
+              {{ general_form.currency }}
+
+              <small> Currency used throughout the system. </small>
+            </div>
+
+            <!-- Date Format -->
+
+            <div class="setting-field">
+              <label for="{{ general_form.date_format.id_for_label }}">
+                Date Format
+              </label>
+
+              {{ general_form.date_format }}
+
+              <small> Choose how dates are displayed. </small>
+            </div>
+
+            <!-- Time Format -->
+
+            <div class="setting-field">
+              <label for="{{ general_form.time_format.id_for_label }}">
+                Time Format
+              </label>
+
+              {{ general_form.time_format }}
+
+              <small> Choose how time is displayed. </small>
+            </div>
+
+            <!-- Language -->
+
+            <div class="setting-field">
+              <label for="{{ general_form.language.id_for_label }}">
+                Language
+              </label>
+
+              {{ general_form.language }}
+
+              <small> Language used throughout the system. </small>
+            </div>
+          </div>
+
+          {% if general_form.errors %}
+
+          <div class="settings-note">
+            Please check the general settings fields above. {{
+            general_form.non_field_errors }}
+          </div>
+
+          {% endif %}
+        </section>
+
+        <!-- =============================================
+                             BUSINESS INFORMATION
+                        ============================================== -->
+
+        <section class="settings-card">
+          <div class="settings-card-header">
+            <p class="settings-card-label">BUSINESS</p>
+
+            <h3>Business Information</h3>
+          </div>
+
+          <div class="business-summary">
+            <div class="business-summary-item">
+              <span> Business Name </span>
+
+              <strong> {{ business.name }} </strong>
+            </div>
+
+            <div class="business-summary-item">
+              <span> Location </span>
+
+              <strong> {{ business.location }} </strong>
+            </div>
+
+            <div class="business-summary-item">
+              <span> Business Type </span>
+
+              <strong> {{ business.get_business_model_display }} </strong>
+            </div>
+
+            {% if business.user_name %}
+
+            <div class="business-summary-item">
+              <span> User Name </span>
+
+              <strong> {{ business.user_name }} </strong>
+            </div>
+
+            {% endif %} {% if business.position %}
+
+            <div class="business-summary-item">
+              <span> Position </span>
+
+              <strong> {{ business.position }} </strong>
+            </div>
+
+            {% endif %}
+          </div>
+        </section>
+      </div>
+
+      <!-- GENERAL SAVE -->
+
+      <div class="settings-actions">
+        <button type="submit" class="save-settings-button">
+          Save General Settings
+        </button>
+      </div>
+    </form>
+
+    <!-- =================================================
+                     NOTIFICATIONS FORM
+                ================================================== -->
+
+    <form method="POST" class="settings-form" id="notificationSettingsForm">
+      {% csrf_token %}
+
+      <input type="hidden" name="form_type" value="notifications" />
+
+      <section class="settings-card notifications-card">
+        <div class="settings-card-header">
+          <p class="settings-card-label">ALERTS</p>
+
+          <h3>Notifications</h3>
+        </div>
+
+        <div class="toggle-list">
+          <!-- EMAIL -->
+
+          <label class="toggle-row">
+            <div class="toggle-row-content">
+              <strong> Email Notifications </strong>
+
+              <span> Receive important system updates. </span>
+            </div>
+
+            <span class="notification-switch">
+              {{ notification_form.email_notifications }}
+
+              <span class="notification-slider"></span>
+            </span>
+          </label>
+
+          <!-- LOW STOCK -->
+
+          <label class="toggle-row">
+            <div class="toggle-row-content">
+              <strong> Low Stock Alerts </strong>
+
+              <span> Get notified when stock is running low. </span>
+            </div>
+
+            <span class="notification-switch">
+              {{ notification_form.low_stock_alerts }}
+
+              <span class="notification-slider"></span>
+            </span>
+          </label>
+
+          <!-- SALES -->
+
+          <label class="toggle-row">
+            <div class="toggle-row-content">
+              <strong> Sales Notifications </strong>
+
+              <span> Receive notifications about new sales. </span>
+            </div>
+
+            <span class="notification-switch">
+              {{ notification_form.sales_notifications }}
+
+              <span class="notification-slider"></span>
+            </span>
+          </label>
+
+          <!-- PAYMENTS -->
+
+          <label class="toggle-row">
+            <div class="toggle-row-content">
+              <strong> Payment Notifications </strong>
+
+              <span> Receive payment-related notifications. </span>
+            </div>
+
+            <span class="notification-switch">
+              {{ notification_form.payment_notifications }}
+
+              <span class="notification-slider"></span>
+            </span>
+          </label>
+
+          <!-- REPORTS -->
+
+          <label class="toggle-row">
+            <div class="toggle-row-content">
+              <strong> Report Notifications </strong>
+
+              <span> Receive notifications about reports. </span>
+            </div>
+
+            <span class="notification-switch">
+              {{ notification_form.report_notifications }}
+
+              <span class="notification-slider"></span>
+            </span>
+          </label>
+        </div>
+
+        {% if notification_form.errors %}
+
+        <div class="settings-note">
+          Please check the notification settings. {{
+          notification_form.non_field_errors }}
+        </div>
+
+        {% endif %}
+      </section>
+
+      <!-- NOTIFICATION SAVE -->
+
+      <div class="settings-actions">
+        <button type="submit" class="save-settings-button">
+          Save Notifications
+        </button>
+      </div>
+    </form>
+
+    {% else %}
+
+    <!-- EMPTY STATE -->
+
+    <div class="settings-empty">
+      <h3>Business not found</h3>
+
+      <p>Please complete your business setup before accessing settings.</p>
+    </div>
+
+    {% endif %}
+  </main>
+</div>
+
+{% endblock %} {% block extra_js %}
+
+<script src="/static/js/settings.js"></script>
+
+{% endblock %}

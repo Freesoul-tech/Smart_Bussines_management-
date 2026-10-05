@@ -1,0 +1,115 @@
+{% extends "layouts/dashboard_layout.html" %}
+{% load static %}
+{% block title %}Customers | SBMS{% endblock %}
+{% block page_css %}
+<link rel="stylesheet" href="{% static 'css/customers.css' %}" />
+{% endblock %} {% block dashboard_content %}
+
+<div class="customers-page">
+  <header class="page-header">
+    <div class="page-header-content">
+      <p class="page-eyebrow">CUSTOMERS</p>
+
+      <h1>Customers</h1>
+
+      <p class="page-description">
+        Manage your business customers and view their reservation history.
+      </p>
+    </div>
+
+    <div class="page-header-actions">
+      <a href="{% url 'customers:customer_add' %}" class="primary-button">
+        Add Customer
+      </a>
+    </div>
+  </header>
+
+  <section class="customers-summary">
+    <div class="summary-card">
+      <span class="summary-label"> Total Customers </span>
+
+      <strong class="summary-value"> {{ customers|length }} </strong>
+    </div>
+  </section>
+
+  <section class="customers-panel">
+    <div class="panel-header">
+      <div>
+        <p class="panel-eyebrow">CUSTOMER DIRECTORY</p>
+
+        <h2>All Customers</h2>
+      </div>
+    </div>
+
+    {% if customers %}
+
+    <div class="customers-table-wrapper">
+      <table class="customers-table">
+        <thead>
+          <tr>
+            <th>Customer</th>
+
+            <th>Phone</th>
+
+            <th>Email</th>
+
+            <th>Reservations</th>
+
+            <th>Added</th>
+
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for customer in customers %}
+
+          <tr>
+            <td>
+              <div class="customer-name">{{ customer.name }}</div>
+            </td>
+
+            <td>{{ customer.phone|default:"—" }}</td>
+
+            <td>{{ customer.email|default:"—" }}</td>
+
+            <td>
+              <span class="reservation-count">
+                {{ customer.reservations.count }}
+              </span>
+            </td>
+
+            <td>{{ customer.created_at|date:"d M Y" }}</td>
+
+            <td class="customer-actions">
+              <a
+                href="{% url 'customers:customer_detail' customer.id %}"
+                class="view-button"
+              >
+                View
+              </a>
+            </td>
+          </tr>
+
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    {% else %}
+
+    <div class="empty-state">
+      <h3>No customers yet</h3>
+
+      <p>Customers will appear here when they are added to your business.</p>
+
+      <a href="{% url 'customers:customer_add' %}" class="primary-button">
+        Add Your First Customer
+      </a>
+    </div>
+
+    {% endif %}
+  </section>
+</div>
+
+{% endblock %}

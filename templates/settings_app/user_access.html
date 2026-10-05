@@ -1,0 +1,105 @@
+{% extends "layouts/dashboard_layout.html" %} {% block dashboard_content %}
+<section class="settings-page">
+  <header class="settings-page-header">
+    <div class="settings-page-header-content">
+      <p class="settings-eyebrow">TEAM ACCESS</p>
+      <h2>User Access</h2>
+      <p>Create staff logins and choose exactly what each person can access.</p>
+    </div>
+  </header>
+
+  <section class="settings-card">
+    <div class="settings-card-header">
+      <p class="settings-card-label">NEW STAFF ACCOUNT</p>
+      <h3>Add a user</h3>
+    </div>
+    <form method="post" class="settings-form">
+      <div class="access-setup-grid">
+        <div class="access-account-fields">
+          {% csrf_token %}
+          <div class="setting-field">
+            {{ form.username.label_tag }} {{ form.username }}
+          </div>
+          <div class="setting-field">
+            {{ form.email.label_tag }} {{ form.email }} {{ form.email.errors }}
+          </div>
+          <div class="setting-field">
+            {{ form.password.label_tag }} {{ form.password }}
+          </div>
+          <div class="setting-field">
+            {{ form.password_confirm.label_tag }} {{ form.password_confirm }}
+          </div>
+          <div class="setting-field">
+            {{ form.first_name.label_tag }} {{ form.first_name }}
+          </div>
+          <div class="setting-field">
+            {{ form.last_name.label_tag }} {{ form.last_name }}
+          </div>
+          <div class="setting-field">
+            {{ form.position.label_tag }} {{ form.position }}
+          </div>
+        </div>
+        <div class="access-permissions">
+          <p class="settings-card-label">DASHBOARD ACCESS</p>
+          {% for section, options in permission_options.items %}
+          <fieldset class="permission-group">
+            <legend>{{ section }}</legend>
+            {% for permission, label in options %}
+            <label class="permission-option">
+              <input
+                type="checkbox"
+                name="permissions"
+                value="{{ permission }}"
+              />
+              <span>{{ label }}</span>
+            </label>
+            {% endfor %}
+          </fieldset>
+          {% endfor %} {{ form.permissions.errors }}
+        </div>
+      </div>
+      <div class="settings-actions">
+        <button type="submit" class="save-settings-button">
+          Create Account
+        </button>
+      </div>
+    </form>
+  </section>
+
+  <section class="settings-card">
+    <div class="settings-card-header">
+      <p class="settings-card-label">CURRENT TEAM</p>
+      <h3>Business users</h3>
+    </div>
+    {% for employee in employees %}
+    <div class="access-user-row">
+      <div>
+        <strong>{{ employee.first_name }} {{ employee.last_name }}</strong>
+        <span
+          >{% if employee.user %}{{ employee.user.username }}{% else %}No
+          login{% endif %} · {{ employee.position }}</span
+        >
+      </div>
+      {% if employee.user and employee.user_id != request.user.id %}
+      <div class="access-user-actions">
+        <a
+          href="{% url 'settings_app:edit_user_permissions' employee.id %}"
+          class="edit-user-button"
+          >Permissions</a
+        >
+        <form
+          method="post"
+          action="{% url 'settings_app:remove_user' employee.id %}"
+        >
+          {% csrf_token %}
+          <button type="submit" class="remove-user-button">Remove</button>
+        </form>
+      </div>
+      {% endif %}
+    </div>
+    {% empty %}
+    <p>No staff accounts yet.</p>
+    {% endfor %}
+  </section>
+</section>
+{% endblock %}

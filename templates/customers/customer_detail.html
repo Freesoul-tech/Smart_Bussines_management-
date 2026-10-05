@@ -1,0 +1,337 @@
+﻿{% extends "base.html" %} {% load static %} {% block title %} {{ customer.name
+}} | Customers | SBMS {% endblock %} {% block extra_css %}
+
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}" />
+
+{% endblock %} {% block content %}
+
+<div class="dashboard-page">
+  <!-- =================================================
+         HEADER
+    ================================================== -->
+
+  <header class="dashboard-header">
+    <div class="dashboard-brand">
+      <div class="brand-logo">SB</div>
+
+      <div class="brand-text">
+        <h1>Smart Business</h1>
+        <p>Management Suite</p>
+      </div>
+    </div>
+
+    <div class="dashboard-user">
+      <div class="user-info">
+        <span class="user-name"> {{ request.user.username }} </span>
+
+        <span class="business-type">
+          {{ business.business_model|default:"Business" }}
+        </span>
+      </div>
+
+      <a href="{% url 'accounts:logout' %}" class="logout-button"> Logout </a>
+    </div>
+  </header>
+
+  <!-- =================================================
+         LAYOUT
+    ================================================== -->
+
+  <div class="dashboard-layout">
+    <!-- =================================================
+             SIDEBAR
+        ================================================== -->
+
+    <aside class="dashboard-sidebar">
+      <nav class="sidebar-navigation">
+        <a href="{% url 'dashboard:dashboard' %}" class="sidebar-link">
+          <span>Overview</span>
+        </a>
+
+        <a href="{% url 'room_list' %}" class="sidebar-link">
+          <span>Rooms</span>
+        </a>
+
+        <a href="{% url 'reservation_list' %}" class="sidebar-link">
+          <span>Reservations</span>
+        </a>
+
+        <a href="{% url 'payment_list' %}" class="sidebar-link">
+          <span>Payments</span>
+        </a>
+
+        <a href="{% url 'employee_list' %}" class="sidebar-link">
+          <span>Employees</span>
+        </a>
+
+        <a
+          href="{% url 'customers:customer_list' %}"
+          class="sidebar-link active"
+        >
+          <span>Customers</span>
+        </a>
+
+        <a href="#" class="sidebar-link">
+          <span>Reports</span>
+        </a>
+
+        <a href="#" class="sidebar-link">
+          <span>Settings</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <a href="{% url 'accounts:logout' %}" class="sidebar-logout">
+          Logout
+        </a>
+      </div>
+    </aside>
+
+    <!-- =================================================
+             MAIN CONTENT
+        ================================================== -->
+
+    <main class="dashboard-main">
+      <!-- =================================================
+                 PAGE HEADER
+            ================================================== -->
+
+      <section class="dashboard-welcome">
+        <p class="dashboard-eyebrow">CUSTOMER</p>
+
+        <h2>{{ customer.name }}</h2>
+
+        <p class="welcome-description">
+          Customer information and reservation history.
+        </p>
+      </section>
+
+      <!-- =================================================
+                 CUSTOMER ACTIONS
+            ================================================== -->
+
+      <div
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 12px;
+          margin-bottom: 24px;
+          flex-wrap: wrap;
+        "
+      >
+        <a href="{% url 'customers:customer_list' %}" class="report-button">
+          Back to Customers
+        </a>
+
+        <a
+          href="{% url 'customers:customer_edit' customer.id %}"
+          class="report-button"
+        >
+          Edit Customer
+        </a>
+      </div>
+
+      <!-- =================================================
+                 CUSTOMER INFORMATION
+            ================================================== -->
+
+      <section class="dashboard-panels">
+        <div class="dashboard-panel">
+          <div class="panel-header">
+            <div>
+              <p class="panel-label">CUSTOMER</p>
+
+              <h3>Customer information</h3>
+            </div>
+          </div>
+
+          <div class="customer-information">
+            <p>
+              <strong>Name:</strong>
+              {{ customer.name }}
+            </p>
+
+            <p>
+              <strong>Phone:</strong>
+
+              {% if customer.phone %} {{ customer.phone }} {% else %} Not
+              provided {% endif %}
+            </p>
+
+            <p>
+              <strong>Email:</strong>
+
+              {% if customer.email %} {{ customer.email }} {% else %} Not
+              provided {% endif %}
+            </p>
+
+            <p>
+              <strong>Address:</strong>
+
+              {% if customer.address %} {{ customer.address }} {% else %} Not
+              provided {% endif %}
+            </p>
+
+            {% if customer.notes %}
+
+            <p>
+              <strong>Notes:</strong>
+              {{ customer.notes }}
+            </p>
+
+            {% endif %}
+          </div>
+        </div>
+
+        <!-- =================================================
+                     CUSTOMER SUMMARY
+                ================================================== -->
+
+        <div class="dashboard-panel">
+          <div class="panel-header">
+            <div>
+              <p class="panel-label">SUMMARY</p>
+
+              <h3>Reservation summary</h3>
+            </div>
+          </div>
+
+          <div class="summary-section">
+            <div class="summary-card">
+              <p class="summary-label">Reservations</p>
+
+              <h3>{{ total_reservations }}</h3>
+
+              <p class="summary-note">Total reservations</p>
+            </div>
+
+            <div class="summary-card">
+              <p class="summary-label">Active</p>
+
+              <h3>{{ active_reservations }}</h3>
+
+              <p class="summary-note">Current reservations</p>
+            </div>
+
+            <div class="summary-card">
+              <p class="summary-label">Completed</p>
+
+              <h3>{{ completed_reservations }}</h3>
+
+              <p class="summary-note">Checked out</p>
+            </div>
+
+            <div class="summary-card">
+              <p class="summary-label">Cancelled</p>
+
+              <h3>{{ cancelled_reservations }}</h3>
+
+              <p class="summary-note">Cancelled reservations</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================
+                 RESERVATION HISTORY
+            ================================================== -->
+
+      <section class="dashboard-panel" style="margin-top: 24px">
+        <div class="panel-header">
+          <div>
+            <p class="panel-label">HISTORY</p>
+
+            <h3>Reservation history</h3>
+          </div>
+        </div>
+
+        {% if reservations %}
+
+        <div style="overflow-x: auto">
+          <table style="width: 100%; border-collapse: collapse">
+            <thead>
+              <tr>
+                <th style="text-align: left; padding: 14px">Room</th>
+
+                <th style="text-align: left; padding: 14px">Check-in</th>
+
+                <th style="text-align: left; padding: 14px">Check-out</th>
+
+                <th style="text-align: left; padding: 14px">Guests</th>
+
+                <th style="text-align: left; padding: 14px">Status</th>
+
+                <th style="text-align: left; padding: 14px">Amount</th>
+
+                <th style="text-align: left; padding: 14px">Action</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {% for reservation in reservations %}
+
+              <tr>
+                <td style="padding: 14px">
+                  Room {{ reservation.room.room_number }}
+                </td>
+
+                <td style="padding: 14px">
+                  {{ reservation.check_in|date:"d M Y" }}
+                </td>
+
+                <td style="padding: 14px">
+                  {{ reservation.check_out|date:"d M Y" }}
+                </td>
+
+                <td style="padding: 14px">
+                  {{ reservation.number_of_guests }}
+                </td>
+
+                <td style="padding: 14px">
+                  {{ reservation.get_status_display }}
+                </td>
+
+                <td style="padding: 14px">{{ reservation.total_amount }}</td>
+
+                <td style="padding: 14px">
+                  <a href="{% url 'reservation_edit' reservation.id %}">
+                    View
+                  </a>
+                </td>
+              </tr>
+
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+        {% else %}
+
+        <div class="activity-placeholder">
+          <p>This customer has no reservations yet.</p>
+        </div>
+
+        {% endif %}
+      </section>
+
+      <!-- =================================================
+                 TOTAL VALUE
+            ================================================== -->
+
+      <section class="report-section" style="margin-top: 24px">
+        <div class="report-card">
+          <div>
+            <p class="panel-label">RESERVATION VALUE</p>
+
+            <p>Total value of this customer's reservations</p>
+          </div>
+
+          <strong> {{ total_value }} </strong>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,132 @@
+{% extends "layouts/dashboard_layout.html" %}
+{% load static %}
+{% block title %}Employees | SBMS{% endblock %}
+{% block page_css %}
+<link rel="stylesheet" href="{% static 'css/employees.css' %}" />
+{% endblock %} {% block dashboard_content %}
+
+<div class="employee-page">
+  <!-- HEADER -->
+
+  <div class="employee-header">
+    <div>
+      <p class="page-label">EMPLOYEES</p>
+
+      <h1>Employee Management</h1>
+
+      {% if business %}
+      <p class="business-name">{{ business.name }}</p>
+      {% endif %}
+    </div>
+
+    <a href="{% url 'employee_add' %}" class="add-employee-button">
+      Add Employee
+    </a>
+  </div>
+
+  <!-- EMPLOYEE CARD -->
+
+  <div class="employee-card">
+    <div class="employee-card-header">
+      <div>
+        <h2>Employees</h2>
+
+        <p>Manage the people working in your business.</p>
+      </div>
+
+      <div class="employee-count">{{ employees|length }}</div>
+    </div>
+
+    {% if employees %}
+
+    <div class="employee-list">
+      {% for employee in employees %}
+
+      <div class="employee-row">
+        <!-- EMPLOYEE INFORMATION -->
+
+        <div class="employee-info">
+          <strong> {{ employee.first_name }} {{ employee.last_name }} </strong>
+
+          <span> {{ employee.position }} </span>
+        </div>
+
+        <!-- CONTACT -->
+
+        <div class="employee-contact">
+          {% if employee.phone %}
+          <span> {{ employee.phone }} </span>
+          {% endif %} {% if employee.email %}
+          <span> {{ employee.email }} </span>
+          {% endif %}
+        </div>
+
+        <!-- STATUS -->
+
+        <div class="employee-status">
+          {% if employee.employment_status == "active" %}
+
+          <span class="status-active"> Active </span>
+
+          {% else %}
+
+          <span class="status-inactive"> Inactive </span>
+
+          {% endif %}
+        </div>
+
+        <!-- ACTIONS -->
+
+        <div class="employee-actions">
+          <a
+            href="{% url 'employee_edit' employee.id %}"
+            class="employee-edit-button"
+          >
+            Edit
+          </a>
+
+          {% if employee.employment_status == "active" %}
+
+          <form
+            method="post"
+            action="{% url 'employee_deactivate' employee.id %}"
+            class="employee-deactivate-form"
+            onsubmit="
+              return confirm(
+                'Are you sure you want to deactivate this employee?',
+              );
+            "
+          >
+            {% csrf_token %}
+
+            <button type="submit" class="employee-deactivate-button">
+              Deactivate
+            </button>
+          </form>
+
+          {% endif %}
+        </div>
+      </div>
+
+      {% endfor %}
+    </div>
+
+    {% else %}
+
+    <!-- EMPTY STATE -->
+
+    <div class="empty-employees">
+      <h3>No employees yet</h3>
+
+      <p>Add your first employee to start managing your team.</p>
+
+      <a href="{% url 'employee_add' %}" class="empty-add-button">
+        Add Employee
+      </a>
+    </div>
+
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}

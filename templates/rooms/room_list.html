@@ -1,0 +1,205 @@
+{% extends "layouts/dashboard_layout.html" %}
+{% load static %}
+
+{% block title %}
+    Rooms | SBMS
+{% endblock %}
+
+
+{% block page_css %}
+
+<link
+    rel="stylesheet"
+    href="{% static 'css/rooms.css' %}"
+>
+
+{% endblock %}
+
+
+{% block dashboard_content %}
+
+<div class="employee-page">
+
+    <!-- HEADER -->
+
+    <div class="employee-header">
+
+        <div>
+
+            <p class="page-label">
+                ROOMS
+            </p>
+
+            <h1>
+                Room Management
+            </h1>
+
+            {% if business %}
+
+                <p class="business-name">
+                    {{ business.name }}
+                </p>
+
+            {% endif %}
+
+        </div>
+
+
+        <div style="display: flex; align-items: center; gap: 10px;">
+
+            <a
+                href="{% url 'room_add' %}"
+                class="add-employee-button"
+            >
+                Add Room
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- ROOMS CARD -->
+
+    <div class="employee-card">
+
+        <div class="employee-card-header">
+
+            <div>
+
+                <h2>
+                    Rooms
+                </h2>
+
+                <p>
+                    Manage the rooms in your business.
+                </p>
+
+            </div>
+
+
+            <div class="employee-count">
+                {{ rooms|length }}
+            </div>
+
+        </div>
+
+
+        {% if rooms %}
+
+            <div class="employee-list">
+
+                {% for room in rooms %}
+
+                    <div class="employee-row">
+
+                        <!-- ROOM INFO -->
+
+                        <div class="employee-info">
+
+                            <strong>
+                                Room {{ room.room_number }}
+                            </strong>
+
+                            <span>
+                                {{ room.get_room_type_display }}
+                            </span>
+
+                        </div>
+
+
+                        <!-- ROOM DETAILS -->
+
+                        <div class="employee-contact">
+
+                            {% if room.floor %}
+
+                                <span>
+                                    {{ room.floor }}
+                                </span>
+
+                            {% endif %}
+
+
+                            <span>
+                                MK {{ room.price_per_night }}
+                            </span>
+
+                        </div>
+
+
+                        <!-- STATUS -->
+
+                        <div class="employee-status">
+
+                            {% if room.status == "available" %}
+
+                                <span class="status-active">
+                                    Available
+                                </span>
+
+                            {% elif room.status == "reserved" %}
+
+                                <span class="status-reserved">
+                                    Reserved
+                                </span>
+
+                            {% elif room.status == "occupied" %}
+
+                                <span class="status-occupied">
+                                    Occupied
+                                </span>
+
+                            {% elif room.status == "maintenance" %}
+
+                                <span class="status-maintenance">
+                                    Maintenance
+                                </span>
+
+                            {% elif room.status == "inactive" %}
+
+                                <span class="status-inactive">
+                                    Inactive
+                                </span>
+
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+
+        {% else %}
+
+            <!-- EMPTY STATE -->
+
+            <div class="empty-employees">
+
+                <h3>
+                    No rooms yet
+                </h3>
+
+                <p>
+                    Add your first room to start managing your hotel rooms.
+                </p>
+
+                <a
+                    href="{% url 'room_add' %}"
+                    class="empty-add-button"
+                >
+                    Add Room
+                </a>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

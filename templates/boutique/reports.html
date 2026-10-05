@@ -1,0 +1,7 @@
+{% extends "layouts/dashboard_layout.html" %}
+{% load static %}
+{% block title %}Reports | SBMS{% endblock %}
+{% block page_css %}<link rel="stylesheet" href="{% static 'css/boutique.css' %}" />{% endblock %}
+{% block dashboard_content %}
+<div class="boutique-page"><header class="boutique-header"><div><p class="page-label">BOUTIQUE REPORTS</p><h1>Reports</h1><p class="business-name">Sales performance snapshot for {{ business.name }}</p></div></header><section class="boutique-summary report-summary"><div><span>Total sales</span><strong>{{ sales_total }}</strong></div><div><span>Payments received</span><strong>{{ paid_total }}</strong></div><div><span>Sales recorded</span><strong>{{ sale_count }}</strong></div><div><span>Products listed</span><strong>{{ product_count }}</strong></div></section></div>
+{% endblock %}

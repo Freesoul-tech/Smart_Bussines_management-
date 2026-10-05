@@ -1,0 +1,1793 @@
+/* =========================================================
+   RESERVATIONS
+   ========================================================= */
+
+.reservations-page {
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 55px 30px 80px;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.reservations-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 30px;
+    margin-bottom: 48px;
+}
+
+.page-label {
+    margin: 0 0 12px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #078b87;
+}
+
+.reservations-header h1 {
+    margin: 0;
+    color: #063b68;
+    font-size: 34px;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.business-name {
+    margin: 12px 0 0;
+    color: #718096;
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   HEADER BUTTONS
+   ========================================================= */
+
+.add-reservation-button,
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 46px;
+    padding: 0 24px;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.add-reservation-button {
+    background: #078b87;
+    color: #ffffff;
+}
+
+.add-reservation-button:hover {
+    background: #06736f;
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px rgba(7, 139, 135, 0.18);
+}
+
+.back-button {
+    background: transparent;
+    color: #078b87;
+    padding-right: 0;
+}
+
+.back-button:hover {
+    color: #056b68;
+}
+
+
+/* =========================================================
+   CARD
+   ========================================================= */
+
+.reservation-card {
+    background: #ffffff;
+    border: 1px solid #e7edf2;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(15, 42, 67, 0.05);
+    overflow: hidden;
+}
+
+.reservation-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 28px 30px;
+
+    border-bottom: 1px solid #edf1f4;
+}
+
+.reservation-card-header h2 {
+    margin: 0 0 6px;
+    color: #063b68;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.reservation-card-header p {
+    margin: 0;
+    color: #718096;
+    font-size: 14px;
+}
+
+.reservation-count {
+    min-width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #eef8f7;
+    color: #078b87;
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   RESERVATION LIST
+   ========================================================= */
+
+.reservation-list {
+    width: 100%;
+}
+
+.reservation-row {
+    display: grid;
+    grid-template-columns: 1.4fr 1.5fr auto auto;
+    align-items: center;
+    gap: 25px;
+
+    padding: 22px 30px;
+
+    border-bottom: 1px solid #edf1f4;
+
+    transition: background-color 0.2s ease;
+}
+
+.reservation-row:last-child {
+    border-bottom: none;
+}
+
+.reservation-row:hover {
+    background: #fafcfc;
+}
+
+
+/* =========================================================
+   RESERVATION INFORMATION
+   ========================================================= */
+
+.reservation-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.reservation-info strong {
+    color: #063b68;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.reservation-info span {
+    color: #718096;
+    font-size: 13px;
+}
+
+.reservation-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.reservation-contact span {
+    color: #52677d;
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.reservation-status {
+    white-space: nowrap;
+}
+
+.status-active,
+.status-inactive {
+    display: inline-flex;
+    align-items: center;
+
+    min-height: 30px;
+    padding: 0 12px;
+
+    border-radius: 999px;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status-active {
+    background: #e8f7f4;
+    color: #078b87;
+}
+
+.status-inactive {
+    background: #f1f3f5;
+    color: #6b7280;
+}
+
+
+/* =========================================================
+   RESERVATION ACTIONS
+   ========================================================= */
+
+.reservation-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+.reservation-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 34px;
+    padding: 0 13px;
+
+    border-radius: 8px;
+
+    border: 1px solid #dce5ea;
+
+    background: #ffffff;
+    color: #31536f;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.reservation-action:hover {
+    background: #f2f8f8;
+    border-color: #078b87;
+    color: #078b87;
+    transform: translateY(-1px);
+}
+
+.reservation-action.check-in {
+    background: #078b87;
+    border-color: #078b87;
+    color: #ffffff;
+}
+
+.reservation-action.check-in:hover {
+    background: #06736f;
+    border-color: #06736f;
+    color: #ffffff;
+}
+
+.reservation-action.cancel {
+    color: #b54747;
+    border-color: #ead4d4;
+}
+
+.reservation-action.cancel:hover {
+    background: #fff5f5;
+    border-color: #c95c5c;
+    color: #a83f3f;
+}
+
+
+/* =========================================================
+   FORM CARD
+   ========================================================= */
+
+.reservation-form-card {
+    background: #ffffff;
+
+    border: 1px solid #e7edf2;
+    border-radius: 16px;
+
+    padding: 34px;
+
+    box-shadow: 0 8px 30px rgba(15, 42, 67, 0.05);
+}
+
+.reservation-form-header {
+    margin-bottom: 30px;
+}
+
+.reservation-form-header h2 {
+    margin: 0 0 6px;
+
+    color: #063b68;
+
+    font-size: 21px;
+    font-weight: 600;
+}
+
+.reservation-form-header p {
+    margin: 0;
+
+    color: #718096;
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+.reservation-form {
+    width: 100%;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px 24px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.form-group-full {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    color: #24435d;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    box-sizing: border-box;
+
+    min-height: 44px;
+
+    padding: 10px 13px;
+
+    border: 1px solid #d9e2e8;
+    border-radius: 8px;
+
+    background: #ffffff;
+
+    color: #243b53;
+
+    font-family: "Poppins", sans-serif;
+    font-size: 13px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.form-group textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #078b87;
+    box-shadow: 0 0 0 3px rgba(7, 139, 135, 0.10);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #a0aec0;
+}
+
+
+/* =========================================================
+   ERRORS
+   ========================================================= */
+
+.form-errors {
+    margin-bottom: 20px;
+
+    padding: 13px 15px;
+
+    border: 1px solid #f0caca;
+    border-radius: 8px;
+
+    background: #fff5f5;
+    color: #a83f3f;
+
+    font-size: 13px;
+}
+
+.field-error {
+    color: #b54747;
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   FORM ACTIONS
+   ========================================================= */
+
+.reservation-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+
+    margin-top: 30px;
+
+    padding-top: 24px;
+
+    border-top: 1px solid #edf1f4;
+}
+
+.cancel-button,
+.save-reservation-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 44px;
+
+    padding: 0 22px;
+
+    border-radius: 9px;
+
+    font-family: "Poppins", sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.cancel-button {
+    background: #ffffff;
+
+    border: 1px solid #dce5ea;
+
+    color: #52677d;
+}
+
+.cancel-button:hover {
+    background: #f7f9fa;
+    border-color: #bfcbd3;
+    color: #334e68;
+}
+
+.save-reservation-button {
+    border: 1px solid #078b87;
+
+    background: #078b87;
+    color: #ffffff;
+}
+
+.save-reservation-button:hover {
+    background: #06736f;
+    border-color: #06736f;
+
+    transform: translateY(-1px);
+
+    box-shadow: 0 7px 16px rgba(7, 139, 135, 0.18);
+}
+
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+.empty-reservations {
+    padding: 60px 30px;
+    text-align: center;
+}
+
+.empty-reservations h3 {
+    margin: 0 0 8px;
+
+    color: #063b68;
+
+    font-size: 18px;
+}
+
+.empty-reservations p {
+    margin: 0 0 22px;
+
+    color: #718096;
+
+    font-size: 14px;
+}
+
+.empty-add-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 42px;
+    padding: 0 20px;
+
+    border-radius: 8px;
+
+    background: #078b87;
+    color: #ffffff;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    text-decoration: none;
+}
+
+.empty-add-button:hover {
+    background: #06736f;
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .reservation-row {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .reservation-status {
+        justify-self: start;
+    }
+
+    .reservation-actions {
+        justify-self: start;
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    .reservations-page {
+        padding: 35px 18px 60px;
+    }
+
+    .reservations-header {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .reservations-header h1 {
+        font-size: 28px;
+    }
+
+    .add-reservation-button {
+        width: 100%;
+    }
+
+    .reservation-card-header {
+        padding: 22px 20px;
+    }
+
+    .reservation-row {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding: 20px;
+    }
+
+    .reservation-status,
+    .reservation-actions {
+        justify-self: start;
+    }
+
+    .reservation-actions {
+        flex-wrap: wrap;
+    }
+
+    .reservation-form-card {
+        padding: 22px 18px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .form-group-full {
+        grid-column: auto;
+    }
+
+    .reservation-form-actions {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+
+    .cancel-button,
+    .save-reservation-button {
+        width: 100%;
+    }
+}
+
+/* =========================================================
+   COMPLETED ACTION TEXT
+   ========================================================= */
+
+.reservation-completed {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 34px;
+    padding: 0 13px;
+
+    border-radius: 8px;
+
+    background: var(--surface-secondary);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+
+    font-size: 12px;
+    font-weight: 600;
+}
+/* =========================================================
+   RESERVATION ACTION FORMS
+   ========================================================= */
+
+.reservation-actions form {
+    margin: 0;
+    padding: 0;
+}
+
+.reservation-action {
+    font-family: "Poppins", sans-serif;
+    cursor: pointer;
+}
+
+.reservation-actions form {
+    display: inline-flex;
+}
+/* =========================================================
+   SBMS DARK MODE - RESERVATIONS
+========================================================= */
+
+html[data-theme="dark"] .reservations-page {
+    background: var(--bg-color);
+    color: var(--text-color);
+}
+
+html[data-theme="dark"] .reservations-page * {
+    border-color: var(--border-color);
+}
+
+html[data-theme="dark"] .reservations-page .card,
+html[data-theme="dark"] .reservations-page .reservation-card,
+html[data-theme="dark"] .reservations-page .summary-card,
+html[data-theme="dark"] .reservations-page .table-container,
+html[data-theme="dark"] .reservations-page .reservation-form-card {
+    background: var(--surface-color);
+    color: var(--text-color);
+}
+
+html[data-theme="dark"] .reservations-page h1,
+html[data-theme="dark"] .reservations-page h2,
+html[data-theme="dark"] .reservations-page h3,
+html[data-theme="dark"] .reservations-page h4,
+html[data-theme="dark"] .reservations-page strong,
+html[data-theme="dark"] .reservations-page label {
+    color: var(--text-color);
+}
+
+html[data-theme="dark"] .reservations-page p,
+html[data-theme="dark"] .reservations-page span,
+html[data-theme="dark"] .reservations-page small {
+    color: var(--text-secondary);
+}
+
+html[data-theme="dark"] .reservations-page input,
+html[data-theme="dark"] .reservations-page select,
+html[data-theme="dark"] .reservations-page textarea {
+    background: var(--surface-secondary);
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+html[data-theme="dark"] .reservations-page th {
+    background: var(--surface-secondary);
+    color: var(--text-color);
+}
+
+html[data-theme="dark"] .reservations-page td {
+    background: var(--surface-color);
+    color: var(--text-color);
+}
+
+/* =========================================================
+   SBMS DARK THEME - RESERVATIONS
+   ========================================================= */
+
+html[data-theme="dark"] .reservations-page,
+html[data-theme="dark"] .reservations-page {
+    background: var(--bg-color);
+    color: var(--text-color);
+}
+
+html[data-theme="dark"] .reservations-page h1,
+html[data-theme="dark"] .reservations-page h2,
+html[data-theme="dark"] .reservations-page h3,
+html[data-theme="dark"] .reservations-page h4,
+html[data-theme="dark"] .reservations-page h1,
+html[data-theme="dark"] .reservations-page h2,
+html[data-theme="dark"] .reservations-page h3,
+html[data-theme="dark"] .reservations-page h4 {
+    color: var(--text-color);
+}
+
+html[data-theme="dark"] .reservations-page p,
+html[data-theme="dark"] .reservations-page span,
+html[data-theme="dark"] .reservations-page p,
+html[data-theme="dark"] .reservations-page span {
+    color: var(--text-secondary);
+}
+
+html[data-theme="dark"] .reservation-form-card,
+html[data-theme="dark"] .reservation-card {
+    background: var(--surface-color);
+    border-color: var(--border-color);
+}
+
+html[data-theme="dark"] input,
+html[data-theme="dark"] select,
+html[data-theme="dark"] textarea {
+    background: var(--surface-secondary);
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+/* =========================================================
+   SBMS DARK THEME - RESERVATIONS FINAL OVERRIDE
+   ========================================================= */
+
+html[data-theme="dark"] .reservations-page {
+    background: var(--bg-color) !important;
+    color: var(--text-color) !important;
+}
+
+html[data-theme="dark"] .reservations-page .card,
+html[data-theme="dark"] .reservations-page .reservation-card,
+html[data-theme="dark"] .reservations-page .summary-card,
+html[data-theme="dark"] .reservations-page .table-container,
+html[data-theme="dark"] .reservations-page .reservation-form-card,
+html[data-theme="dark"] .reservations-page .form-card {
+    background: var(--surface-color) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+html[data-theme="dark"] .reservations-page h1,
+html[data-theme="dark"] .reservations-page h2,
+html[data-theme="dark"] .reservations-page h3,
+html[data-theme="dark"] .reservations-page h4,
+html[data-theme="dark"] .reservations-page h5,
+html[data-theme="dark"] .reservations-page strong,
+html[data-theme="dark"] .reservations-page label,
+html[data-theme="dark"] .reservations-page th,
+html[data-theme="dark"] .reservations-page td {
+    color: var(--text-color) !important;
+}
+
+html[data-theme="dark"] .reservations-page p,
+html[data-theme="dark"] .reservations-page span,
+html[data-theme="dark"] .reservations-page small {
+    color: var(--text-secondary) !important;
+}
+
+html[data-theme="dark"] .reservations-page input,
+html[data-theme="dark"] .reservations-page select,
+html[data-theme="dark"] .reservations-page textarea {
+    background: var(--surface-secondary) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+html[data-theme="dark"] .reservations-page input::placeholder,
+html[data-theme="dark"] .reservations-page textarea::placeholder {
+    color: var(--text-muted) !important;
+}
+
+html[data-theme="dark"] .reservations-page table {
+    background: var(--surface-color) !important;
+    color: var(--text-color) !important;
+}
+
+html[data-theme="dark"] .reservations-page th {
+    background: var(--surface-secondary) !important;
+}
+
+html[data-theme="dark"] .reservations-page td {
+    background: var(--surface-color) !important;
+}
+
+html[data-theme="dark"] .reservations-page tr:hover td {
+    background: var(--surface-secondary) !important;
+}
+
+/* =========================================================
+   SBMS DARK THEME - COMPLETE CARD OVERRIDES
+   ========================================================= */
+
+/* =========================
+   RESERVATIONS
+   ========================= */
+
+html[data-theme="dark"] .reservations-page .reservation-card,
+html[data-theme="dark"] .reservations-page .reservation-form-card,
+html[data-theme="dark"] .reservations-page .reservation-card,
+html[data-theme="dark"] .reservations-page .reservation-form-card,
+html[data-theme="dark"] .reservations-page .summary-card,
+html[data-theme="dark"] .reservations-page .form-card,
+html[data-theme="dark"] .reservations-page .table-container {
+    background: var(--surface-color) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+html[data-theme="dark"] .reservations-page .reservation-card *,
+html[data-theme="dark"] .reservations-page .reservation-form-card *,
+html[data-theme="dark"] .reservations-page .reservation-card *,
+html[data-theme="dark"] .reservations-page .reservation-form-card *,
+html[data-theme="dark"] .reservations-page .summary-card *,
+html[data-theme="dark"] .reservations-page .form-card * {
+    color: inherit;
+}
+
+
+/* =========================
+   PAYMENTS
+   ========================= */
+
+html[data-theme="dark"] .payments-page .summary-card,
+html[data-theme="dark"] .payments-page .payments-section,
+html[data-theme="dark"] .payments-page .section-header,
+html[data-theme="dark"] .payments-page .payment-card,
+html[data-theme="dark"] .payments-page .customer-section,
+html[data-theme="dark"] .payments-page .payment-form-card,
+html[data-theme="dark"] .payments-page .form-error-box,
+html[data-theme="dark"] .payments-page .table-container,
+html[data-theme="dark"] .payment-form-page .payment-form-card,
+html[data-theme="dark"] .payment-form-page .payment-card,
+html[data-theme="dark"] .payment-form-page .customer-section {
+    background: var(--surface-color) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+html[data-theme="dark"] .payments-page .summary-card *,
+html[data-theme="dark"] .payments-page .payments-section *,
+html[data-theme="dark"] .payments-page .section-header *,
+html[data-theme="dark"] .payments-page .payment-card *,
+html[data-theme="dark"] .payments-page .customer-section *,
+html[data-theme="dark"] .payments-page .payment-form-card *,
+html[data-theme="dark"] .payment-form-page .payment-form-card *,
+html[data-theme="dark"] .payment-form-page .payment-card *,
+html[data-theme="dark"] .payment-form-page .customer-section * {
+    border-color: var(--border-color);
+}
+
+
+/* =========================
+   CUSTOMERS
+   ========================= */
+
+html[data-theme="dark"] .customers-page .summary-card,
+html[data-theme="dark"] .customers-page .customers-panel,
+html[data-theme="dark"] .customers-page .customers-table-wrapper,
+html[data-theme="dark"] .customers-page .customers-table-container,
+html[data-theme="dark"] .customers-page .customer-card,
+html[data-theme="dark"] .customers-page .table-container {
+    background: var(--surface-color) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+html[data-theme="dark"] .customers-page .summary-card *,
+html[data-theme="dark"] .customers-page .customers-panel *,
+html[data-theme="dark"] .customers-page .customer-card * {
+    border-color: var(--border-color);
+}
+
+
+/* =========================
+   REPORTS
+   ========================= */
+
+html[data-theme="dark"] .reports-page .report-filter-card,
+html[data-theme="dark"] .reports-page .report-section,
+html[data-theme="dark"] .reports-page .financial-card,
+html[data-theme="dark"] .reports-page .revenue-card,
+html[data-theme="dark"] .reports-page .paid-card,
+html[data-theme="dark"] .reports-page .outstanding-card,
+html[data-theme="dark"] .reports-page .refunded-card,
+html[data-theme="dark"] .reports-page .activity-card,
+html[data-theme="dark"] .reports-page .status-report-card,
+html[data-theme="dark"] .reports-page .report-card,
+html[data-theme="dark"] .reports-page .summary-card,
+html[data-theme="dark"] .reports-page .table-container {
+    background: var(--surface-color) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+html[data-theme="dark"] .reports-page .financial-card *,
+html[data-theme="dark"] .reports-page .revenue-card *,
+html[data-theme="dark"] .reports-page .paid-card *,
+html[data-theme="dark"] .reports-page .outstanding-card *,
+html[data-theme="dark"] .reports-page .refunded-card *,
+html[data-theme="dark"] .reports-page .activity-card *,
+html[data-theme="dark"] .reports-page .status-report-card *,
+html[data-theme="dark"] .reports-page .report-section * {
+    border-color: var(--border-color);
+}
+
+
+/* =========================
+   COMMON TEXT PROTECTION
+   ========================= */
+
+html[data-theme="dark"] .reservations-page h1,
+html[data-theme="dark"] .reservations-page h2,
+html[data-theme="dark"] .reservations-page h3,
+html[data-theme="dark"] .reservations-page h4,
+html[data-theme="dark"] .reservations-page h5,
+html[data-theme="dark"] .reservations-page h6,
+html[data-theme="dark"] .payments-page h1,
+html[data-theme="dark"] .payments-page h2,
+html[data-theme="dark"] .payments-page h3,
+html[data-theme="dark"] .payments-page h4,
+html[data-theme="dark"] .payments-page h5,
+html[data-theme="dark"] .payments-page h6,
+html[data-theme="dark"] .customers-page h1,
+html[data-theme="dark"] .customers-page h2,
+html[data-theme="dark"] .customers-page h3,
+html[data-theme="dark"] .customers-page h4,
+html[data-theme="dark"] .customers-page h5,
+html[data-theme="dark"] .customers-page h6,
+html[data-theme="dark"] .reports-page h1,
+html[data-theme="dark"] .reports-page h2,
+html[data-theme="dark"] .reports-page h3,
+html[data-theme="dark"] .reports-page h4,
+html[data-theme="dark"] .reports-page h5,
+html[data-theme="dark"] .reports-page h6 {
+    color: var(--text-color) !important;
+}
+
+html[data-theme="dark"] .reservations-page label,
+html[data-theme="dark"] .payments-page label,
+html[data-theme="dark"] .customers-page label,
+html[data-theme="dark"] .reports-page label {
+    color: var(--text-color) !important;
+}
+
+html[data-theme="dark"] .reservations-page p,
+html[data-theme="dark"] .reservations-page small,
+html[data-theme="dark"] .payments-page p,
+html[data-theme="dark"] .payments-page small,
+html[data-theme="dark"] .customers-page p,
+html[data-theme="dark"] .customers-page small,
+html[data-theme="dark"] .reports-page p,
+html[data-theme="dark"] .reports-page small {
+    color: var(--text-secondary) !important;
+}
+
+
+/* =========================================================
+   SBMS DARK MODE - BUTTON VISIBILITY
+   Final button-only override
+   ========================================================= */
+
+html[data-theme="dark"] .reservations-page .add-reservation-button,
+html[data-theme="dark"] .reservations-page .reservation-action:not(.check-in):not(.cancel),
+html[data-theme="dark"] .reservations-page .cancel-button {
+    background: var(--surface-secondary) !important;
+    color: #ffffff !important;
+    border-color: var(--border-color) !important;
+}
+
+html[data-theme="dark"] .reservations-page .add-reservation-button:hover,
+html[data-theme="dark"] .reservations-page .reservation-action:not(.check-in):not(.cancel):hover,
+html[data-theme="dark"] .reservations-page .cancel-button:hover {
+    background: var(--surface-color) !important;
+    color: #ffffff !important;
+    border-color: var(--primary-color) !important;
+}
+
+html[data-theme="dark"] .reservations-page .reservation-action.check-in,
+html[data-theme="dark"] .reservations-page .save-reservation-button {
+    background: var(--primary-color) !important;
+    color: #ffffff !important;
+    border-color: var(--primary-color) !important;
+}
+
+html[data-theme="dark"] .reservations-page .reservation-action.cancel {
+    background: #3a2424 !important;
+    color: #ffffff !important;
+    border-color: #6b3b3b !important;
+}
+
+
+/* =========================================================
+   PAYMENTS
+   ========================================================= */
+
+html[data-theme="dark"] .payments-page .add-payment-btn,
+html[data-theme="dark"] .payments-page .payment-actions a,
+html[data-theme="dark"] .payments-page .payment-actions button,
+html[data-theme="dark"] .payment-form-page .back-button,
+html[data-theme="dark"] .payment-form-page .cancel-button {
+    background: var(--surface-secondary) !important;
+    color: #ffffff !important;
+    border-color: var(--border-color) !important;
+}
+
+html[data-theme="dark"] .payments-page .add-payment-btn:hover,
+html[data-theme="dark"] .payments-page .payment-actions a:hover,
+html[data-theme="dark"] .payments-page .payment-actions button:hover,
+html[data-theme="dark"] .payment-form-page .back-button:hover,
+html[data-theme="dark"] .payment-form-page .cancel-button:hover {
+    background: var(--surface-color) !important;
+    color: #ffffff !important;
+    border-color: var(--primary-color) !important;
+}
+
+html[data-theme="dark"] .payment-form-page .save-payment-button {
+    background: var(--primary-color) !important;
+    color: #ffffff !important;
+    border-color: var(--primary-color) !important;
+}
+
+
+/* =========================================================
+   CUSTOMERS
+   ========================================================= */
+
+html[data-theme="dark"] .customers-page .primary-button,
+html[data-theme="dark"] .customers-page .view-button {
+    background: var(--surface-secondary) !important;
+    color: #ffffff !important;
+    border-color: var(--border-color) !important;
+}
+
+html[data-theme="dark"] .customers-page .primary-button:hover,
+html[data-theme="dark"] .customers-page .view-button:hover {
+    background: var(--surface-color) !important;
+    color: #ffffff !important;
+    border-color: var(--primary-color) !important;
+}
+
+
+/* =========================================================
+   REPORTS
+   ========================================================= */
+
+html[data-theme="dark"] .reports-page .primary-button,
+html[data-theme="dark"] .reports-page .secondary-button,
+html[data-theme="dark"] .reports-page .filter-button {
+    background: var(--surface-secondary) !important;
+    color: #ffffff !important;
+    border-color: var(--border-color) !important;
+}
+
+html[data-theme="dark"] .reports-page .primary-button:hover,
+html[data-theme="dark"] .reports-page .secondary-button:hover,
+html[data-theme="dark"] .reports-page .filter-button:hover {
+    background: var(--surface-color) !important;
+    color: #ffffff !important;
+    border-color: var(--primary-color) !important;
+}
+
+
+
+/* =========================================================
+   SBMS DARK MODE - RESERVATIONS FINAL OVERRIDES
+   ========================================================= */
+
+html[data-theme="dark"] .reservations-page {
+    background: var(--bg-color) !important;
+    color: var(--text-color) !important;
+}
+
+/* Main reservation cards */
+html[data-theme="dark"] .reservations-page .reservation-card,
+html[data-theme="dark"] .reservations-page .reservation-form-card,
+html[data-theme="dark"] .reservations-page .card {
+    background: var(--surface-color) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Headings and normal text */
+html[data-theme="dark"] .reservations-page h1,
+html[data-theme="dark"] .reservations-page h2,
+html[data-theme="dark"] .reservations-page h3,
+html[data-theme="dark"] .reservations-page h4,
+html[data-theme="dark"] .reservations-page p,
+html[data-theme="dark"] .reservations-page label,
+html[data-theme="dark"] .reservations-page span,
+html[data-theme="dark"] .reservations-page .reservation-info,
+html[data-theme="dark"] .reservations-page .reservation-info span {
+    color: var(--text-color) !important;
+}
+
+/* Secondary / muted text */
+html[data-theme="dark"] .reservations-page .page-subtitle,
+html[data-theme="dark"] .reservations-page .reservation-meta,
+html[data-theme="dark"] .reservations-page .reservation-info small,
+html[data-theme="dark"] .reservations-page .muted {
+    color: var(--text-secondary) !important;
+}
+
+/* Form fields */
+html[data-theme="dark"] .reservations-page input,
+html[data-theme="dark"] .reservations-page select,
+html[data-theme="dark"] .reservations-page textarea {
+    background: var(--surface-secondary) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+html[data-theme="dark"] .reservations-page input::placeholder,
+html[data-theme="dark"] .reservations-page textarea::placeholder {
+    color: var(--text-secondary) !important;
+}
+
+/* Select dropdown */
+html[data-theme="dark"] .reservations-page select option {
+    background: var(--surface-color) !important;
+    color: var(--text-color) !important;
+}
+
+/* Completed / already processed actions */
+html[data-theme="dark"] .reservations-page .reservation-completed {
+    background: var(--surface-secondary) !important;
+    color: var(--text-secondary) !important;
+    border: 1px solid var(--border-color) !important;
+}
+
+/* Status badges / neutral status areas */
+html[data-theme="dark"] .reservations-page .status,
+html[data-theme="dark"] .reservations-page .reservation-status {
+    background: var(--surface-secondary) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Cancel buttons */
+html[data-theme="dark"] .reservations-page .cancel-button {
+    background: var(--surface-color) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+html[data-theme="dark"] .reservations-page .cancel-button:hover {
+    background: var(--surface-secondary) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Reservation action areas */
+html[data-theme="dark"] .reservations-page .reservation-actions {
+    color: var(--text-color) !important;
+}
+
+/* Tables */
+html[data-theme="dark"] .reservations-page table {
+    color: var(--text-color) !important;
+}
+
+html[data-theme="dark"] .reservations-page th {
+    background: var(--surface-secondary) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+html[data-theme="dark"] .reservations-page td {
+    background: var(--surface-color) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Table row hover */
+html[data-theme="dark"] .reservations-page tr:hover td {
+    background: var(--surface-secondary) !important;
+}
+
+/* Date / filter controls */
+html[data-theme="dark"] .reservations-page .filter,
+html[data-theme="dark"] .reservations-page .filters,
+html[data-theme="dark"] .reservations-page .filter-group {
+    color: var(--text-color) !important;
+}
+
+/* Any light containers inside reservations */
+html[data-theme="dark"] .reservations-page .reservation-details,
+html[data-theme="dark"] .reservations-page .reservation-summary,
+html[data-theme="dark"] .reservations-page .reservation-section,
+html[data-theme="dark"] .reservations-page .reservation-item {
+    background: var(--surface-color) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Links */
+html[data-theme="dark"] .reservations-page a:not(.reservation-action) {
+    color: var(--primary-color) !important;
+}
+
+/* Focus states */
+html[data-theme="dark"] .reservations-page input:focus,
+html[data-theme="dark"] .reservations-page select:focus,
+html[data-theme="dark"] .reservations-page textarea:focus {
+    border-color: var(--primary-color) !important;
+    outline-color: var(--primary-color) !important;
+}
+
+/* =========================================================
+   SBMS DARK MODE - RESERVATION COMPLETED / CHECKOUT FIX
+   ========================================================= */
+
+html[data-theme="dark"] .reservations-page .reservation-completed {
+    background: var(--surface-secondary) !important;
+    color: var(--text-color) !important;
+    border: 1px solid var(--border-color) !important;
+}
+
+/* Keep completed/cancelled text clearly visible */
+html[data-theme="dark"] .reservations-page .reservation-completed {
+    text-shadow: none !important;
+}
+
+/* =========================================================
+   SBMS DARK MODE - RESERVATION ROW HOVER
+   Prevent white/light hover backgrounds
+   ========================================================= */
+
+html[data-theme="dark"] .reservations-page .reservation-row:hover,
+html[data-theme="dark"] .reservations-page tr:hover {
+    background: var(--surface-secondary) !important;
+}
+
+html[data-theme="dark"] .reservations-page .reservation-row:hover td,
+html[data-theme="dark"] .reservations-page tr:hover td {
+    background: var(--surface-secondary) !important;
+    color: var(--text-color) !important;
+}
+
+/* Keep all reservation text visible while hovering */
+html[data-theme="dark"] .reservations-page .reservation-row:hover *,
+html[data-theme="dark"] .reservations-page tr:hover td * {
+    color: inherit;
+}
+
+/* =========================================================
+   DARK MODE - CHECKOUT / COMPLETED ACTION AREA
+   ========================================================= */
+
+html[data-theme="dark"] .reservations-page .reservation-actions {
+    color: var(--text-color) !important;
+}
+
+html[data-theme="dark"] .reservations-page .reservation-actions .reservation-completed {
+    background: var(--surface-secondary) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Never allow the completed badge to become white on hover */
+html[data-theme="dark"] .reservations-page .reservation-completed:hover {
+    background: var(--surface-secondary) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+    box-shadow: none !important;
+}
+
+/* =========================================================
+   DARK MODE - REMOVE WHITE HOVER SHADOWS
+   ========================================================= */
+
+html[data-theme="dark"] .reservations-page .reservation-action:hover,
+html[data-theme="dark"] .reservations-page .cancel-button:hover,
+html[data-theme="dark"] .reservations-page .add-reservation-button:hover {
+    box-shadow: none !important;
+}
+
+/* Normal reservation action buttons */
+html[data-theme="dark"] .reservations-page .reservation-action:not(.check-in):not(.cancel):hover {
+    background: var(--surface-secondary) !important;
+    color: var(--text-color) !important;
+    border-color: var(--primary-color) !important;
+}
+
+/* Check-in button keeps its dark-mode primary appearance */
+html[data-theme="dark"] .reservations-page .reservation-action.check-in:hover {
+    background: var(--primary-hover) !important;
+    color: #ffffff !important;
+    border-color: var(--primary-hover) !important;
+}
+
+/* Cancel button */
+html[data-theme="dark"] .reservations-page .reservation-action.cancel:hover,
+html[data-theme="dark"] .reservations-page .cancel-button:hover {
+    background: var(--surface-secondary) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* =========================================================
+   DARK MODE - RESERVATION TABLE CELLS
+   ========================================================= */
+
+html[data-theme="dark"] .reservations-page table,
+html[data-theme="dark"] .reservations-page tbody,
+html[data-theme="dark"] .reservations-page tr,
+html[data-theme="dark"] .reservations-page td {
+    background-color: transparent;
+    color: var(--text-color);
+}
+
+html[data-theme="dark"] .reservations-page tbody tr:hover td {
+    background-color: var(--surface-secondary) !important;
+}
+
+/* =========================================================
+   DARK MODE - STATUS / SECONDARY TEXT
+   ========================================================= */
+
+html[data-theme="dark"] .reservations-page .reservation-info span,
+html[data-theme="dark"] .reservations-page .reservation-subtitle,
+html[data-theme="dark"] .reservations-page .reservation-meta {
+    color: var(--text-secondary) !important;
+}
+
+
+/* =========================================================
+   SBMS DARK MODE - REMOVE REMAINING LIGHT BACKGROUNDS
+   ========================================================= */
+
+/* Reservation cards and form cards */
+html[data-theme="dark"] .reservations-page .reservation-card,
+html[data-theme="dark"] .reservations-page .reservation-form-card {
+    background: var(--surface-color) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Reservation card contents */
+html[data-theme="dark"] .reservations-page .reservation-card-header,
+html[data-theme="dark"] .reservations-page .reservation-card-body,
+html[data-theme="dark"] .reservations-page .reservation-card-footer {
+    background: var(--surface-color) !important;
+    color: var(--text-color) !important;
+}
+
+/* Reservation completed / checkout status */
+html[data-theme="dark"] .reservations-page .reservation-completed {
+    background: var(--surface-secondary) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Cancelled / completed status area */
+html[data-theme="dark"] .reservations-page .reservation-status,
+html[data-theme="dark"] .reservations-page .status-badge {
+    background: var(--surface-secondary) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Light secondary backgrounds */
+html[data-theme="dark"] .reservations-page .reservation-info,
+html[data-theme="dark"] .reservations-page .reservation-details,
+html[data-theme="dark"] .reservations-page .reservation-meta {
+    background: transparent !important;
+}
+
+/* Form controls */
+html[data-theme="dark"] .reservations-page input,
+html[data-theme="dark"] .reservations-page textarea,
+html[data-theme="dark"] .reservations-page select {
+    background: var(--surface-secondary) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Placeholder text */
+html[data-theme="dark"] .reservations-page input::placeholder,
+html[data-theme="dark"] .reservations-page textarea::placeholder {
+    color: var(--text-secondary) !important;
+}
+
+/* Table header */
+html[data-theme="dark"] .reservations-page thead,
+html[data-theme="dark"] .reservations-page thead tr,
+html[data-theme="dark"] .reservations-page thead th {
+    background: var(--surface-secondary) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Table body */
+html[data-theme="dark"] .reservations-page tbody,
+html[data-theme="dark"] .reservations-page tbody tr,
+html[data-theme="dark"] .reservations-page tbody td {
+    background: var(--surface-color) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Make secondary text readable */
+html[data-theme="dark"] .reservations-page .reservation-info span,
+html[data-theme="dark"] .reservations-page small {
+    color: var(--text-secondary) !important;
+}
+
+/* Keep action area dark */
+html[data-theme="dark"] .reservations-page .reservation-actions {
+    background: transparent !important;
+    color: var(--text-color) !important;
+}
+
+/* Cancel button */
+html[data-theme="dark"] .reservations-page .cancel-button {
+    background: var(--surface-secondary) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Never allow completed badge to become light */
+html[data-theme="dark"] .reservations-page .reservation-completed:hover {
+    background: var(--surface-secondary) !important;
+    color: var(--text-color) !important;
+}
+
+/* Pagination / filter controls if present */
+html[data-theme="dark"] .reservations-page .filter-control,
+html[data-theme="dark"] .reservations-page .pagination,
+html[data-theme="dark"] .reservations-page .page-link {
+    background: var(--surface-secondary) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+
+/* =========================================================
+   SBMS DARK MODE - FINAL RESERVATION LIGHT BACKGROUND FIX
+   ========================================================= */
+
+/* Main reservation container/card */
+html[data-theme="dark"] .reservations-page .reservation-card,
+html[data-theme="dark"] .reservations-page .reservation-form-card {
+    background: var(--surface-color) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Reservation table/card content */
+html[data-theme="dark"] .reservations-page .reservation-card-header,
+html[data-theme="dark"] .reservations-page .reservation-card-body,
+html[data-theme="dark"] .reservations-page .reservation-card-footer {
+    background: var(--surface-color) !important;
+    color: var(--text-color) !important;
+}
+
+/* Reservation status badges */
+html[data-theme="dark"] .reservations-page .status-active {
+    background: rgba(7, 139, 135, 0.18) !important;
+    color: #5eead4 !important;
+    border-color: rgba(7, 139, 135, 0.35) !important;
+}
+
+html[data-theme="dark"] .reservations-page .status-inactive {
+    background: var(--surface-secondary) !important;
+    color: var(--text-secondary) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Completed / checkout badge */
+html[data-theme="dark"] .reservations-page .reservation-completed {
+    background: var(--surface-secondary) !important;
+    color: var(--text-color) !important;
+    border: 1px solid var(--border-color) !important;
+}
+
+/* Form inputs */
+html[data-theme="dark"] .reservations-page .form-group input,
+html[data-theme="dark"] .reservations-page .form-group textarea,
+html[data-theme="dark"] .reservations-page .form-group select {
+    background: var(--surface-secondary) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Input focus */
+html[data-theme="dark"] .reservations-page .form-group input:focus,
+html[data-theme="dark"] .reservations-page .form-group textarea:focus,
+html[data-theme="dark"] .reservations-page .form-group select:focus {
+    background: var(--surface-secondary) !important;
+    color: var(--text-color) !important;
+    border-color: var(--primary-color) !important;
+}
+
+/* Cancel button */
+html[data-theme="dark"] .reservations-page .cancel-button {
+    background: var(--surface-secondary) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Error / warning panels */
+html[data-theme="dark"] .reservations-page .form-error,
+html[data-theme="dark"] .reservations-page .error-message,
+html[data-theme="dark"] .reservations-page .alert-error {
+    background: rgba(127, 29, 29, 0.28) !important;
+    color: #fecaca !important;
+    border-color: #7f1d1d !important;
+}
+
+/* Reservation information areas */
+html[data-theme="dark"] .reservations-page .reservation-info,
+html[data-theme="dark"] .reservations-page .reservation-details {
+    background: transparent !important;
+    color: var(--text-color) !important;
+}
+
+/* Secondary text */
+html[data-theme="dark"] .reservations-page .reservation-info span,
+html[data-theme="dark"] .reservations-page .reservation-meta,
+html[data-theme="dark"] .reservations-page .reservation-subtitle {
+    color: var(--text-secondary) !important;
+}
+
+/* Table itself */
+html[data-theme="dark"] .reservations-page table {
+    background: var(--surface-color) !important;
+    color: var(--text-color) !important;
+}
+
+/* Table header */
+html[data-theme="dark"] .reservations-page thead,
+html[data-theme="dark"] .reservations-page thead tr,
+html[data-theme="dark"] .reservations-page thead th {
+    background: var(--surface-secondary) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Table cells */
+html[data-theme="dark"] .reservations-page tbody td {
+    background: var(--surface-color) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Checkout/action column */
+html[data-theme="dark"] .reservations-page td:last-child,
+html[data-theme="dark"] .reservations-page th:last-child {
+    background: var(--surface-color) !important;
+    color: var(--text-color) !important;
+}
+
+/* Keep checkout completed badge dark */
+html[data-theme="dark"] .reservations-page td:last-child .reservation-completed {
+    background: var(--surface-secondary) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Prevent accidental white backgrounds from nested elements */
+html[data-theme="dark"] .reservations-page .reservation-card *,
+html[data-theme="dark"] .reservations-page .reservation-form-card * {
+    scrollbar-color: var(--border-color) var(--surface-color);
+}
+
+
+/* =========================================================
+   SBMS DARK MODE - RESERVATION / CUSTOMER COUNT NUMBERS
+   ========================================================= */
+
+/* Reservations page summary/count numbers */
+html[data-theme="dark"] .reservations-page .summary-card,
+html[data-theme="dark"] .reservations-page .stat-card,
+html[data-theme="dark"] .reservations-page .count-card {
+    background: var(--surface-color) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+html[data-theme="dark"] .reservations-page .summary-card h3,
+html[data-theme="dark"] .reservations-page .summary-card h2,
+html[data-theme="dark"] .reservations-page .stat-card h3,
+html[data-theme="dark"] .reservations-page .stat-card h2,
+html[data-theme="dark"] .reservations-page .count-card h3,
+html[data-theme="dark"] .reservations-page .count-card h2 {
+    color: var(--text-color) !important;
+}
+
+/* Summary labels */
+html[data-theme="dark"] .reservations-page .summary-card .summary-label,
+html[data-theme="dark"] .reservations-page .stat-card .stat-label,
+html[data-theme="dark"] .reservations-page .count-card .count-label {
+    color: var(--text-secondary) !important;
+}
+
+/* =========================================================
+   CUSTOMERS PAGE - SUMMARY / COUNT CARDS
+   ========================================================= */
+
+html[data-theme="dark"] .customers-page .summary-card,
+html[data-theme="dark"] .customers-page .stat-card,
+html[data-theme="dark"] .customers-page .count-card {
+    background: var(--surface-color) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+html[data-theme="dark"] .customers-page .summary-card h3,
+html[data-theme="dark"] .customers-page .summary-card h2,
+html[data-theme="dark"] .customers-page .stat-card h3,
+html[data-theme="dark"] .customers-page .stat-card h2,
+html[data-theme="dark"] .customers-page .count-card h3,
+html[data-theme="dark"] .customers-page .count-card h2 {
+    color: var(--text-color) !important;
+}
+
+html[data-theme="dark"] .customers-page .summary-card .summary-label,
+html[data-theme="dark"] .customers-page .stat-card .stat-label,
+html[data-theme="dark"] .customers-page .count-card .count-label {
+    color: var(--text-secondary) !important;
+}
+
+
+/* =========================================================
+   FINAL DARK MODE - RESERVATION & CUSTOMER COUNT CARDS
+   ========================================================= */
+
+/* RESERVATIONS */
+html[data-theme="dark"] .reservations-page .summary-card,
+html[data-theme="dark"] .reservations-page .stat-card,
+html[data-theme="dark"] .reservations-page .count-card {
+    background: var(--surface-color) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+html[data-theme="dark"] .reservations-page .summary-card h1,
+html[data-theme="dark"] .reservations-page .summary-card h2,
+html[data-theme="dark"] .reservations-page .summary-card h3,
+html[data-theme="dark"] .reservations-page .summary-card .count,
+html[data-theme="dark"] .reservations-page .stat-card h1,
+html[data-theme="dark"] .reservations-page .stat-card h2,
+html[data-theme="dark"] .reservations-page .stat-card h3,
+html[data-theme="dark"] .reservations-page .stat-card .count,
+html[data-theme="dark"] .reservations-page .count-card h1,
+html[data-theme="dark"] .reservations-page .count-card h2,
+html[data-theme="dark"] .reservations-page .count-card h3,
+html[data-theme="dark"] .reservations-page .count-card .count {
+    color: var(--text-color) !important;
+}
+
+html[data-theme="dark"] .reservations-page .summary-label,
+html[data-theme="dark"] .reservations-page .stat-label,
+html[data-theme="dark"] .reservations-page .count-label,
+html[data-theme="dark"] .reservations-page .summary-card p,
+html[data-theme="dark"] .reservations-page .stat-card p,
+html[data-theme="dark"] .reservations-page .count-card p {
+    color: var(--text-secondary) !important;
+}
+
+
+/* CUSTOMERS */
+html[data-theme="dark"] .customers-page .summary-card,
+html[data-theme="dark"] .customers-page .stat-card,
+html[data-theme="dark"] .customers-page .count-card {
+    background: var(--surface-color) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+html[data-theme="dark"] .customers-page .summary-card h1,
+html[data-theme="dark"] .customers-page .summary-card h2,
+html[data-theme="dark"] .customers-page .summary-card h3,
+html[data-theme="dark"] .customers-page .summary-card .count,
+html[data-theme="dark"] .customers-page .stat-card h1,
+html[data-theme="dark"] .customers-page .stat-card h2,
+html[data-theme="dark"] .customers-page .stat-card h3,
+html[data-theme="dark"] .customers-page .stat-card .count,
+html[data-theme="dark"] .customers-page .count-card h1,
+html[data-theme="dark"] .customers-page .count-card h2,
+html[data-theme="dark"] .customers-page .count-card h3,
+html[data-theme="dark"] .customers-page .count-card .count {
+    color: var(--text-color) !important;
+}
+
+html[data-theme="dark"] .customers-page .summary-label,
+html[data-theme="dark"] .customers-page .stat-label,
+html[data-theme="dark"] .customers-page .count-label,
+html[data-theme="dark"] .customers-page .summary-card p,
+html[data-theme="dark"] .customers-page .stat-card p,
+html[data-theme="dark"] .customers-page .count-card p {
+    color: var(--text-secondary) !important;
+}
+
+
+/* =========================================================
+   RESERVATION COUNT - DARK MODE
+   ========================================================= */
+
+html[data-theme="dark"] .reservations-page .reservation-count {
+    background: var(--surface-secondary) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+
+/* =========================================================
+   RESERVATION COUNT - FINAL DARK MODE
+   ========================================================= */
+
+html[data-theme="dark"] .reservations-page .reservation-count {
+    background: var(--surface-secondary) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+html[data-theme="dark"] .reservations-page .reservation-count * {
+    color: var(--text-color) !important;
+}
+

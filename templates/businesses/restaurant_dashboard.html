@@ -1,0 +1,629 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" data-theme="{{ request.user.theme|default:'light' }}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ business.name }} | Restaurant</title>
+
+    <link rel="stylesheet" href="{% static 'css/global.css' %}">
+    <link rel="stylesheet" href="{% static 'css/restaurant.css' %}">
+</head>
+
+<body>
+
+<div class="restaurant-page">
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="restaurant-header">
+
+        <div class="restaurant-brand">
+
+            <div class="restaurant-logo">
+                SB
+            </div>
+
+            <div class="restaurant-brand-text">
+                <h1>Smart Business Management Suite</h1>
+                <p>Restaurant Management</p>
+            </div>
+
+        </div>
+
+        <div class="restaurant-user">
+
+            <div class="restaurant-user-info">
+                <strong>{{ request.user.username }}</strong>
+                <span>{{ business.name }}</span>
+            </div>
+
+            <a href="{% url 'accounts:logout' %}" class="restaurant-logout">
+                Logout
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         LAYOUT
+    ====================================================== -->
+
+    <div class="restaurant-layout">
+
+        <!-- =================================================
+             SIDEBAR
+        ================================================== -->
+
+        <aside class="restaurant-sidebar">
+
+            <div class="restaurant-sidebar-title">
+                RESTAURANT
+            </div>
+
+            <nav class="restaurant-navigation">
+
+                <a href="{% url 'businesses:restaurant_dashboard' %}"
+                   class="restaurant-nav-link active">
+                    Overview
+                </a>
+
+                <a href="{% url 'businesses:restaurant_orders' %}"
+                   class="restaurant-nav-link">
+                    Orders
+                </a>
+
+                <a href="{% url 'businesses:restaurant_products' %}"
+                   class="restaurant-nav-link">
+                    Menu
+                </a>
+
+                <a href="#tables"
+                   class="restaurant-nav-link">
+                    Tables
+                </a>
+
+                <a href="#reservations"
+                   class="restaurant-nav-link">
+                    Reservations
+                </a>
+
+                <a href="#customers"
+                   class="restaurant-nav-link">
+                    Customers
+                </a>
+
+            </nav>
+
+            <div class="restaurant-sidebar-bottom">
+
+                <a href="{% url 'dashboard:dashboard' %}"
+                   class="restaurant-back-link">
+                    Business Dashboard
+                </a>
+
+            </div>
+
+        </aside>
+
+
+        <!-- =================================================
+             MAIN
+        ================================================== -->
+
+        <main class="restaurant-main">
+
+            <!-- WELCOME -->
+
+            <section class="restaurant-welcome">
+
+                <div>
+                    <p class="restaurant-eyebrow">
+                        RESTAURANT OVERVIEW
+                    </p>
+
+                    <h2>
+                        Welcome, {{ request.user.username }}
+                    </h2>
+
+                    <p class="restaurant-description">
+                        Manage your restaurant, menu, tables, orders and reservations from one place.
+                    </p>
+
+                    <span class="restaurant-location">
+                        {{ business.location }}
+                    </span>
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 SUMMARY
+            ================================================== -->
+
+            <section class="restaurant-summary">
+
+                <div class="restaurant-summary-card">
+
+                    <span class="summary-label">
+                        ORDERS
+                    </span>
+
+                    <strong>
+                        {{ total_orders }}
+                    </strong>
+
+                    <small>
+                        Total orders
+                    </small>
+
+                </div>
+
+
+                <div class="restaurant-summary-card">
+
+                    <span class="summary-label">
+                        TABLES
+                    </span>
+
+                    <strong>
+                        {{ total_tables }}
+                    </strong>
+
+                    <small>
+                        {{ available_tables }} available
+                    </small>
+
+                </div>
+
+
+                <div class="restaurant-summary-card">
+
+                    <span class="summary-label">
+                        MENU ITEMS
+                    </span>
+
+                    <strong>
+                        {{ menu_items|length }}
+                    </strong>
+
+                    <small>
+                        Currently available
+                    </small>
+
+                </div>
+
+
+                <div class="restaurant-summary-card">
+
+                    <span class="summary-label">
+                        REVENUE
+                    </span>
+
+                    <strong>
+                        {{ total_revenue|floatformat:2 }}
+                    </strong>
+
+                    <small>
+                        From saved orders
+                    </small>
+
+                </div>
+
+
+                <div class="restaurant-summary-card">
+
+                    <span class="summary-label">
+                        CUSTOMERS
+                    </span>
+
+                    <strong>
+                        {{ total_customers }}
+                    </strong>
+
+                    <small>
+                        Registered customers
+                    </small>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 ORDER STATUS
+            ================================================== -->
+
+            <section class="restaurant-panel" id="orders">
+
+                <div class="restaurant-panel-header">
+
+                    <div>
+                        <p class="panel-label">
+                            ORDER MANAGEMENT
+                        </p>
+
+                        <h3>
+                            Order Status
+                        </h3>
+                    </div>
+
+                </div>
+
+                <div class="restaurant-stat-grid">
+
+                    <div class="restaurant-stat">
+                        <span>Pending</span>
+                        <strong>{{ pending_orders }}</strong>
+                    </div>
+
+                    <div class="restaurant-stat">
+                        <span>Preparing</span>
+                        <strong>{{ preparing_orders }}</strong>
+                    </div>
+
+                    <div class="restaurant-stat">
+                        <span>Ready</span>
+                        <strong>{{ ready_orders }}</strong>
+                    </div>
+
+                    <div class="restaurant-stat">
+                        <span>Served</span>
+                        <strong>{{ served_orders }}</strong>
+                    </div>
+
+                    <div class="restaurant-stat">
+                        <span>Completed</span>
+                        <strong>{{ completed_orders }}</strong>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 TABLE STATUS
+            ================================================== -->
+
+            <section class="restaurant-panel" id="tables">
+
+                <div class="restaurant-panel-header">
+
+                    <div>
+                        <p class="panel-label">
+                            TABLE MANAGEMENT
+                        </p>
+
+                        <h3>
+                            Table Status
+                        </h3>
+                    </div>
+
+                </div>
+
+                <div class="table-status-grid">
+
+                    <div class="table-status">
+                        <span class="status-dot available"></span>
+                        <span>Available</span>
+                        <strong>{{ available_tables }}</strong>
+                    </div>
+
+                    <div class="table-status">
+                        <span class="status-dot occupied"></span>
+                        <span>Occupied</span>
+                        <strong>{{ occupied_tables }}</strong>
+                    </div>
+
+                    <div class="table-status">
+                        <span class="status-dot reserved"></span>
+                        <span>Reserved</span>
+                        <strong>{{ reserved_tables }}</strong>
+                    </div>
+
+                    <div class="table-status">
+                        <span class="status-dot maintenance"></span>
+                        <span>Maintenance</span>
+                        <strong>{{ maintenance_tables }}</strong>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 MENU
+            ================================================== -->
+
+            <section class="restaurant-panel" id="menu">
+
+                <div class="restaurant-panel-header">
+
+                    <div>
+                        <p class="panel-label">
+                            MENU
+                        </p>
+
+                        <h3>
+                            Menu Categories
+                        </h3>
+                    </div>
+
+                </div>
+
+                {% if menu_categories %}
+
+                    <div class="menu-category-list">
+
+                        {% for category in menu_categories %}
+
+                            <div class="menu-category">
+
+                                <div class="menu-category-header">
+
+                                    <strong>
+                                        {{ category.name }}
+                                    </strong>
+
+                                    <span>
+                                        {{ category.items.all|length }} items
+                                    </span>
+
+                                </div>
+
+                                {% for item in category.items.all %}
+
+                                    {% if item.is_available %}
+
+                                        <div class="menu-item">
+
+                                            <div>
+                                                <strong>
+                                                    {{ item.name }}
+                                                </strong>
+
+                                                {% if item.description %}
+                                                    <span>
+                                                        {{ item.description }}
+                                                    </span>
+                                                {% endif %}
+                                            </div>
+
+                                            <strong>
+                                                {{ item.price }}
+                                            </strong>
+
+                                        </div>
+
+                                    {% endif %}
+
+                                {% endfor %}
+
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                {% else %}
+
+                    <div class="restaurant-empty">
+                        <p>
+                            No menu categories have been created yet.
+                        </p>
+                    </div>
+
+                {% endif %}
+
+            </section>
+
+
+            <!-- =================================================
+                 RECENT ORDERS
+            ================================================== -->
+
+            <section class="restaurant-panel" id="recent-orders">
+
+                <div class="restaurant-panel-header">
+
+                    <div>
+                        <p class="panel-label">
+                            RECENT ACTIVITY
+                        </p>
+
+                        <h3>
+                            Recent Orders
+                        </h3>
+                    </div>
+
+                </div>
+
+                {% if recent_orders %}
+
+                    <div class="restaurant-list">
+
+                        {% for order in recent_orders %}
+
+                            <div class="restaurant-list-row">
+
+                                <div>
+                                    <strong>
+                                        Order #{{ order.id }}
+                                    </strong>
+
+                                    {% if order.customer %}
+                                        <span>
+                                            {{ order.customer }}
+                                        </span>
+                                    {% else %}
+                                        <span>
+                                            Walk-in customer
+                                        </span>
+                                    {% endif %}
+                                </div>
+
+                                <span>
+                                    {{ order.created_at|date:"d M Y H:i" }}
+                                </span>
+
+                                <strong class="restaurant-status">
+                                    {{ order.status|title }}
+                                </strong>
+
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                {% else %}
+
+                    <div class="restaurant-empty">
+                        <p>
+                            No orders have been recorded yet.
+                        </p>
+                    </div>
+
+                {% endif %}
+
+            </section>
+
+
+            <!-- =================================================
+                 RESERVATIONS
+            ================================================== -->
+
+            <section class="restaurant-panel" id="reservations">
+
+                <div class="restaurant-panel-header">
+
+                    <div>
+                        <p class="panel-label">
+                            RESERVATIONS
+                        </p>
+
+                        <h3>
+                            Reservation Overview
+                        </h3>
+                    </div>
+
+                </div>
+
+                <div class="restaurant-stat-grid">
+
+                    <div class="restaurant-stat">
+                        <span>Total</span>
+                        <strong>{{ total_reservations }}</strong>
+                    </div>
+
+                    <div class="restaurant-stat">
+                        <span>Pending</span>
+                        <strong>{{ pending_reservations }}</strong>
+                    </div>
+
+                    <div class="restaurant-stat">
+                        <span>Confirmed</span>
+                        <strong>{{ confirmed_reservations }}</strong>
+                    </div>
+
+                    <div class="restaurant-stat">
+                        <span>Seated</span>
+                        <strong>{{ seated_reservations }}</strong>
+                    </div>
+
+                </div>
+
+                {% if recent_reservations %}
+
+                    <div class="restaurant-list">
+
+                        {% for reservation in recent_reservations %}
+
+                            <div class="restaurant-list-row">
+
+                                <div>
+                                    <strong>
+                                        {{ reservation.customer }}
+                                    </strong>
+
+                                    <span>
+                                        {{ reservation.reservation_date }}
+                                        {{ reservation.reservation_time }}
+                                    </span>
+                                </div>
+
+                                <span>
+                                    {% if reservation.table %}
+                                        Table {{ reservation.table.table_number }}
+                                    {% else %}
+                                        No table
+                                    {% endif %}
+                                </span>
+
+                                <strong class="restaurant-status">
+                                    {{ reservation.status|title }}
+                                </strong>
+
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                {% endif %}
+
+            </section>
+
+
+            <!-- =================================================
+                 CUSTOMERS
+            ================================================== -->
+
+            <section class="restaurant-panel" id="customers">
+
+                <div class="restaurant-panel-header">
+
+                    <div>
+                        <p class="panel-label">
+                            CUSTOMER MANAGEMENT
+                        </p>
+
+                        <h3>
+                            Customers
+                        </h3>
+                    </div>
+
+                </div>
+
+                <div class="restaurant-customer-summary">
+
+                    <strong>
+                        {{ total_customers }}
+                    </strong>
+
+                    <span>
+                        registered customers
+                    </span>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+</div>
+
+</body>
+</html>

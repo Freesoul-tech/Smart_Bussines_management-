@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Welcome | SBMS{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/landing.css' %}" />
+{% endblock %} {% block content %}
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>SBMS | Smart Business Management Suite</title>
+
+  <link rel="stylesheet" href="{% static 'css/landing.css' %}" />
+</head>
+
+<body>
+  <!-- Background Decorations -->
+  <div class="background-shape shape-top-right"></div>
+  <div class="background-shape shape-bottom-left"></div>
+  <div class="background-shape shape-bottom-right"></div>
+
+  <!-- Main Page -->
+  <main class="landing-page">
+    <!-- Branding -->
+    <header class="brand">
+      <div class="brand-logo">
+        <div class="logo-icon">
+          <span class="bar bar-one"></span>
+          <span class="bar bar-two"></span>
+          <span class="bar bar-three"></span>
+          <span class="growth-line"></span>
+        </div>
+
+        <div class="brand-name">
+          <strong>SBMS</strong>
+        </div>
+      </div>
+
+      <h1>Smart Business Management Suite</h1>
+    </header>
+
+    <!-- Authentication Card -->
+    <section class="auth-card">
+      <!-- Tabs -->
+      <div class="auth-tabs">
+        <button type="button" class="auth-tab active" id="loginTab">
+          Log in
+        </button>
+
+        <button type="button" class="auth-tab" id="signupTab">
+          Create account
+        </button>
+      </div>
+
+      <!-- Login Form -->
+      <form class="auth-form" id="loginForm" method="POST">
+        {% csrf_token %}
+
+        <!-- Username -->
+        <div class="form-group">
+          <label for="username"> Username </label>
+
+          <div class="input-wrapper">
+            <span class="input-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="8" r="4"></circle>
+
+                <path d="M4 20c0-4 3.5-6 8-6s8 2 8 6"></path>
+              </svg>
+            </span>
+
+            <input
+              type="text"
+              id="username"
+              name="username"
+              placeholder="Enter your username"
+              autocomplete="username"
+            />
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+          <label for="password"> Password </label>
+
+          <div class="input-wrapper">
+            <span class="input-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="5" y="10" width="14" height="10" rx="2"></rect>
+
+                <path d="M8 10V7a4 4 0 0 1 8 0v3"></path>
+
+                <circle cx="12" cy="15" r="1"></circle>
+              </svg>
+            </span>
+
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Enter your password"
+              autocomplete="current-password"
+            />
+          </div>
+        </div>
+
+        <!-- Login Button -->
+        <button type="submit" class="submit-button">Log in</button>
+      </form>
+
+      <!-- Signup Form Placeholder -->
+      <div class="signup-message" id="signupMessage">
+        <h2>Create your account</h2>
+
+        <p>Create an account to start managing your business with SBMS.</p>
+
+        <button type="button" class="submit-button" id="continueSignup">
+          Continue
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const loginTab = document.getElementById("loginTab");
+    const signupTab = document.getElementById("signupTab");
+
+    const loginForm = document.getElementById("loginForm");
+    const signupMessage = document.getElementById("signupMessage");
+
+    loginTab.addEventListener("click", function () {
+      loginTab.classList.add("active");
+      signupTab.classList.remove("active");
+
+      loginForm.style.display = "flex";
+      signupMessage.style.display = "none";
+    });
+
+    signupTab.addEventListener("click", function () {
+      signupTab.classList.add("active");
+      loginTab.classList.remove("active");
+
+      loginForm.style.display = "none";
+      signupMessage.style.display = "flex";
+    });
+  </script>
+  {% endblock %}
+</body>

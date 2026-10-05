@@ -1,0 +1,5 @@
+{% extends "layouts/dashboard_layout.html" %}
+{% block title %}Pub / Bar Payments | SBMS{% endblock %}
+{% block dashboard_content %}
+<div class="employee-page"><div class="employee-header"><div><p class="page-label">PUB / BAR PAYMENTS</p><h1>Payments</h1><p class="business-name">{{ business.name }}</p></div><a href="{% url 'pub_bar:payment_add' %}" class="add-employee-button">Record Payment</a></div><div class="employee-card"><div class="employee-card-header"><h2>Total paid: {{ total_paid }}</h2></div>{% for payment in payments %}<div class="employee-row"><div class="employee-info"><strong>Order #{{ payment.pub_bar_order_id }}</strong><span>{{ payment.pub_bar_order.customer|default:"Walk-in" }}</span></div><div class="employee-contact"><span>{{ payment.amount }}</span><span>{{ payment.get_payment_method_display }}</span></div><div class="employee-status"><span class="status-active">{{ payment.get_status_display }}</span></div></div>{% empty %}<div class="empty-employees"><h3>No payments yet</h3><p>Pub / Bar order payments will appear here.</p></div>{% endfor %}</div></div>
+{% endblock %}
